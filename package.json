@@ -1,0 +1,20 @@
+{
+  "name": "it-project",
+  "version": "1.0.0",
+  "description": "READ ME: PUT INformation here",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dylanste/IT-project.git"
+  },
+  "author": "Aneesh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dylanste/IT-project/issues"
+  },
+  "homepage": "https://github.com/Dylanste/IT-project#readme"
+}
