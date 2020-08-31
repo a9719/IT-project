@@ -1,11 +1,13 @@
 {
   "name": "it-project",
   "version": "1.0.0",
-  "description": "READ ME: PUT INformation here",
+  "description": "",
   "main": "server.js",
   "scripts": {
+    "client": "npm start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "concurrently \"npm start\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,15 @@
   "bugs": {
     "url": "https://github.com/Dylanste/IT-project/issues"
   },
-  "homepage": "https://github.com/Dylanste/IT-project#readme"
+  "homepage": "https://github.com/Dylanste/IT-project#readme",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
+    "classnames": "^2.2.6",
+    "cors": "^2.8.5",
+    "ejs": "*",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  }
 }
