@@ -35,9 +35,9 @@ const Styles = styled.div`
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    <Dropdown.Item href="#/action-1">English</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Chinese</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Japanese</Dropdown.Item>
                 </Dropdown.Menu>
           </Dropdown>
         </Nav>
