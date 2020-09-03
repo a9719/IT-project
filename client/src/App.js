@@ -4,6 +4,9 @@ import Landing from './components/landing.js'
 
 import Register from './components/register'
 import Login from './components/login.js'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 class App extends Component {
   render() {
     return (
