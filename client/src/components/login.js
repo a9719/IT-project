@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
 import icon from './loginImage.svg';
+
 class Login extends Component {
   constructor() {
     super();
@@ -51,9 +53,9 @@ class Login extends Component {
             </div>
             <div className="col align-self-center pl-1">
               <div className="col-md-12 m-auto">
-                <h4 className="small-1 text-center">
+                <p className="display-4 text-center">
                   Login with
-                </h4>
+                </p>
                 {/*<form onSubmit={this.onSubmit}>
                   <div className="form-group">
                     <input
@@ -97,10 +99,10 @@ class Login extends Component {
                       <Col>
                         <Button variant="primary" type="submit" size="lg" block>
                           Login
-                        </Button>
+                        </Button>  
                       </Col>
                       <Col>
-                        <Button variant="light" type="submit" size="lg" block>
+                        <Button href="/register" variant="light" type="submit" size="lg" block>
                           Sign up
                         </Button>
                       </Col>
@@ -110,7 +112,6 @@ class Login extends Component {
 
               </div>
             </div>
-            
           </div>
         </div>
       </div>
