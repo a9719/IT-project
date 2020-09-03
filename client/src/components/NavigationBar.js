@@ -45,3 +45,5 @@ const Styles = styled.div`
     </Navbar>
   </Styles>
 )
+
+export default NavigationBar;
