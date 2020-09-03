@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
-import { Form, Button, Image} from 'react-bootstrap';
+import { Col, Button, Image, Row} from 'react-bootstrap';
 import icon from './registerImage.svg';
 
 class Register extends Component {
@@ -123,7 +123,14 @@ class Register extends Component {
                   </div>
                   <Button variant="info" type="submit" size="lg" block>
                     Submit
-                    </Button>  
+                    </Button>
+                    
+                    <Row>
+                      <a href="/login" className="small mx-auto mt-2">
+                        Already have an account?
+                      </a>
+                    </Row>
+                  
                 </form>
               </div>
             </div>
