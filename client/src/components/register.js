@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
-import { Col, Button, Image, Row} from 'react-bootstrap';
+import { Button, Image, Row} from 'react-bootstrap';
 import icon from './registerImage.svg';
 
 class Register extends Component {

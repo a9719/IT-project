@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Form, Button, Image, Col, Row} from 'react-bootstrap';
+import { Button, Image, Col, Row} from 'react-bootstrap';
 import icon from './loginImage.svg';
 
 class Login extends Component {
