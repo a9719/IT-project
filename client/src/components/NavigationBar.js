@@ -7,12 +7,12 @@ const Styles = styled.div
   .navbar { background-color: #365; }
   a, .navbar-nav, .navbar-light .nav-link {
     color: #000000;
-    &:hover { color: white; }
+    &:hover { color: #365; }
   }
   .navbar-brand {
     font-size: 1.4em;
     color: #000000;
-    &:hover { color: white; }
+    &:hover { color: #365; }
   }
   .dropdown-center {
     position: absolute !important;
