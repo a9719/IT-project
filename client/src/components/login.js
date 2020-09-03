@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image';
-import Col from 'react-bootstrap/Col';
+import { Form, Button, Image, Col, Row} from 'react-bootstrap';
 import icon from './loginImage.svg';
 
 class Login extends Component {
@@ -53,10 +49,11 @@ class Login extends Component {
             </div>
             <div className="col align-self-center pl-1">
               <div className="col-md-12 m-auto">
-                <p className="display-4 text-center">
+                <p className="lead text-center">
                   Login with
                 </p>
-                {/*<form onSubmit={this.onSubmit}>
+
+                  <form onSubmit={this.onSubmit}>
                   <div className="form-group">
                     <input
                       type="email"
@@ -76,11 +73,24 @@ class Login extends Component {
                       value={this.state.password}
                       onChange={this.onChange}
                     />
-                  </div>
-                  <input type="submit" className="btn btn-info btn-block mt-4" />
-                  </form>*/}
 
-                  <Form>
+                    
+                  </div>
+                  <Row>
+                      <Col>
+                        <Button variant="info" type="submit" size="lg" block>
+                          Login
+                        </Button>  
+                      </Col>
+                      <Col>
+                        <Button href="/register" variant="outline-info" type="submit" size="lg" block>
+                          Sign up
+                        </Button>
+                      </Col>
+                    </Row>
+                  </form>
+
+                  {/*<Form>
 
                     <Form.Group controlId="formBasicEmail">
                       <Form.Label>Email address</Form.Label>
@@ -95,20 +105,20 @@ class Login extends Component {
                       <Form.Control type="password" placeholder="Password" />
                     </Form.Group>
 
-                    <Form.Row>
+                    <Row>
                       <Col>
-                        <Button variant="primary" type="submit" size="lg" block>
+                        <Button variant="info" type="submit" size="lg" block>
                           Login
                         </Button>  
                       </Col>
                       <Col>
-                        <Button href="/register" variant="light" type="submit" size="lg" block>
+                        <Button href="/register" variant="outline-info" type="submit" size="lg" block>
                           Sign up
                         </Button>
                       </Col>
-                    </Form.Row>
+                    </Row>
 
-                  </Form>
+                  </Form>*/}
 
               </div>
             </div>
