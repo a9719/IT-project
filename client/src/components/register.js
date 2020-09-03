@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
-import NavigationBar from './NavigationBar';
 
 class Register extends Component {
   constructor() {
@@ -46,7 +45,6 @@ class Register extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <NavigationBar/>
               <h1 className="display-4 text-center">Sign Up</h1>
               <p className="lead text-center">
                 Create your DevConnector account

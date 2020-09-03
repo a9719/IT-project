@@ -1,7 +1,9 @@
 import React from 'react';
 import { Nav, Navbar, Dropdown} from 'react-bootstrap';
 import styled from 'styled-components';
-const Styles = styled.div`
+
+const Styles = styled.div
+`
   .navbar { background-color: #365; }
   a, .navbar-nav, .navbar-light .nav-link {
     color: #000000;
@@ -20,7 +22,9 @@ const Styles = styled.div`
   .color-nav {
       background-color : rgb(255,255,255);
   }
-`;export const NavigationBar = () => (
+`;
+
+export const NavigationBar = () => (
   <Styles>  
     <Navbar className = "color-nav" expand="lg">
       <Navbar.Brand href="/">SwatKats</Navbar.Brand>

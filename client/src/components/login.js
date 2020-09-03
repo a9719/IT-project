@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import NavigationBar from "./NavigationBar";
+
 class Login extends Component {
   constructor() {
     super();
@@ -38,7 +38,6 @@ class Login extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <NavigationBar/>
               <h1 className="display-4 text-center">Log In</h1>
               <p className="lead text-center">
                 Sign in to your DevConnector account

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import NavigationBar from './NavigationBar'
 
 class Landing extends Component {
   render() {
     return (
-      <NavigationBar/>
+      <p>Welcome to Swat Kats!</p>
     )
   }
 }
