@@ -1,10 +1,12 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('users');
+var Profile =mongoose.model('profile');
 var express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken')
 
 var createUser = function(req, res) {
 
@@ -16,14 +18,25 @@ var createUser = function(req, res) {
 
     User.findOne({email:user.email}, function(err, user1) {
         if (user1) {
-            console.log("ccccc");
+            console.log("User exists!");
      
             
         } else {
-            console.log(user1);
+           
             user.save(function (err, newUser) {
+                console.log(newUser);
                 if (!err) {
-                    console.log("rehistered");
+                    var profile =new Profile({
+                        user: newUser,
+                        website:'',
+                        email:'',
+                        phone:'',
+                        skills:'',
+                        bio:'',
+                        date:''});
+                    console.log(profile);
+                    console.log(profile.save());
+                    console.log("registered");
                 } else {
                     res.sendStatus(400);
                 }
@@ -93,7 +106,16 @@ var loginUser = function(req, res) {
     //check for existing user
     User.findOne({email:user.email,password:user.password}, function(err, user1) {
         if (user1) {
-            console.log("ccccc");
+            console.log("Successful login ");
+            const payload = {
+                _id: user1._id,
+                name: user1.name,
+                email: user1.email
+              }
+              let token = payload;
+              res.send(token);
+
+            
      
             
         }
@@ -106,6 +128,12 @@ var loginUser = function(req, res) {
          });
   
 };
+var makeProfile =function(req,res){
+
+    
+    
+
+}
 module.exports.loginUser =loginUser;
 module.exports.createUser = createUser;
 module.exports.findAllUsers = findAllUsers;

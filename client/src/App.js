@@ -1,25 +1,33 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Landing from './components/landing.js'
 
-import Register from './components/register'
-import Login from './components/login.js'
+  
+import React, {Component} from 'react';
+import { Container, Row, Col } from 'reactstrap';
+import {Helmet} from 'react-helmet';
+import PropTypes from "prop-types";
+import {connect} from 'react-redux';
+
+
 class App extends Component {
+
   render() {
-    return (
-      <Router>
-        <div className="App">
-          
-          <Route exact path="/" component={Landing} />
-          <div className="container">
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
+
+      
+      return(
+          <div>
+          <h1 className="text-center">WELCOME </h1>
           </div>
-          </div>
-          </Router>
-    )
+      )
   }
 }
 
 
-export default App
+
+App.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(App);
