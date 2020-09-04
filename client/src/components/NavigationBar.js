@@ -27,7 +27,7 @@ const Styles = styled.div
 
 export const NavigationBar = () => (
   <Styles>  
-    <Navbar className = "color-nav" expand="lg" fixed="top" bg="light" variant="light">
+    <Navbar className = "color-nav" expand="lg" bg="light" variant="light">
       <Navbar.Brand href="/">
         <img
           src={logo}
