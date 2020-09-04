@@ -49,7 +49,7 @@ class Register extends Component {
             <h1 className="display-4 mx-auto mt-5">Create Account</h1>
             </div>
           <div className="row mt-5 align-self-center">
-            <div className="col align-self-center pr-1">
+            <div className="col align-self-center pr-1 d-none d-md-block">
               <div className="col-md-12 m-auto">
                 <Image src={icon} fluid />
               </div>

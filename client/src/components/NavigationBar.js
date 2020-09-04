@@ -1,6 +1,7 @@
 import React from 'react';
 import { Nav, Navbar, Dropdown} from 'react-bootstrap';
 import styled from 'styled-components';
+import logo from './logo.svg';
 
 const Styles = styled.div
 `
@@ -26,8 +27,16 @@ const Styles = styled.div
 
 export const NavigationBar = () => (
   <Styles>  
-    <Navbar className = "color-nav" expand="lg">
-      <Navbar.Brand href="/">SwatKats</Navbar.Brand>
+    <Navbar className = "color-nav" expand="lg" fixed="top" bg="light" variant="light">
+      <Navbar.Brand href="/">
+        <img
+          src={logo}
+          width="80"
+          height="80"
+          className="d-inline-block align-top"
+          alt=""
+        />
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav"/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
