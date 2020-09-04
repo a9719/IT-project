@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
-import { Col, Button, Image, Row} from 'react-bootstrap';
+import { Button, Image, Row} from 'react-bootstrap';
 import icon from './registerImage.svg';
 
 class Register extends Component {
@@ -44,13 +44,13 @@ class Register extends Component {
 
     return (
       <div className="register">
-        <div className="container-fluid p-10">
+        <div className="container-fluid w-80 mt-5 bg-light rounded pb-5">
           <div className = "row">
             <h1 className="display-4 mx-auto mt-5">Create Account</h1>
             </div>
           <div className="row mt-5 align-self-center">
-            <div className="col align-self-center pr-1">
-              <div className="col-md-12 m-auto">
+            <div className="col align-self-center pr-1 d-none d-md-block">
+              <div className="col-md-10 m-auto mb-5">
                 <Image src={icon} fluid />
               </div>
             </div>

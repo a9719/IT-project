@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Form, Button, Image, Col, Row} from 'react-bootstrap';
+import { Button, Image, Col, Row} from 'react-bootstrap';
 import icon from './loginImage.svg';
 
 class Login extends Component {
@@ -37,7 +37,7 @@ class Login extends Component {
   render() {
     return (
       <div className="login">
-        <div className="container-fluid p-10">
+        <div className="container-fluid w-80 mt-5 bg-light rounded pb-5">
           <div className = "row">
             <h1 className="display-4 mx-auto mt-5">Welcome Back</h1>
           </div>
