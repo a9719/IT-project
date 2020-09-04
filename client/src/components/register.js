@@ -50,7 +50,7 @@ class Register extends Component {
             </div>
           <div className="row mt-5 align-self-center">
             <div className="col align-self-center pr-1 d-none d-md-block">
-              <div className="col-md-12 m-auto">
+              <div className="col-md-10 m-auto">
                 <Image src={icon} fluid />
               </div>
             </div>
