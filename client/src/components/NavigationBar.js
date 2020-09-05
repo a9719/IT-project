@@ -43,7 +43,7 @@ export const NavigationBar = () => (
           <Nav.Item><Nav.Link href="/register">Register</Nav.Link></Nav.Item> 
           <Nav.Item><Nav.Link href="/login">Login</Nav.Link></Nav.Item>
           <Dropdown class = "dropdown-center">
-                <Dropdown.Toggle variant = "info" id = "dropdown-basic">
+                <Dropdown.Toggle variant = "outline-info" id = "dropdown-basic">
                     Language Options
                 </Dropdown.Toggle>
 
