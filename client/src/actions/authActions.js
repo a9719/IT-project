@@ -18,10 +18,10 @@ export const loginUser = user => dispatch => {
     .post('/login', user)
       .then(res => {
         const token=res.data;
-        console.log(token);
-        localStorage.setItem("jwtToken", token);
-        setAuthToken(token);
-        const decoded = token;
+        console.log(token._id);
+        localStorage.setItem("jwtToken", token._id);
+        setAuthToken(token._id);
+        const decoded = token._id;
         // Set the current user
         dispatch(setCurrentUser(decoded));
 

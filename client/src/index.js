@@ -21,26 +21,7 @@ import Profile  from './components/profile'
 
 // Check for token to keep the user logged in
 
-if (localStorage.jwtToken) {
-    // Set auth header
-    console.log(localStorage.jwtToken);
-    const token = localStorage.jwtToken;
-    setAuthToken(token);
-    // Decode token and get user info and expiry
-    const decoded = token;
-    // Set user and isAuthenticated
-    store.dispatch(setCurrentUser(decoded));
 
-    // Check for an expired token
-    const currentTime = Date.now() / 1000; // Math to get it into milliseconds
-    if (decoded.exp < currentTime) {
-        // Logout user
-        
-
-        // Redirect to login
-        window.location.href = "./login";
-    }
-}
 
 // Add the routes to the different pages from that you can access from the Navbar
 const routing = (

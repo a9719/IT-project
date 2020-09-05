@@ -28,8 +28,9 @@ var createUser = function(req, res) {
                 if (!err) {
                     var profile =new Profile({
                         user: newUser,
+                        name: user.name,
                         website:'',
-                        email:'',
+                        email:user.email,
                         phone:'',
                         skills:'',
                         bio:'',
@@ -47,7 +48,7 @@ var createUser = function(req, res) {
 
 // Find all users
 var findAllUsers = function(req, res) {
-    User.find(function(err, users) {
+    Profile.find(function(err, users) {
         if (!err) {
             res.send(users);
         } else {
@@ -59,7 +60,7 @@ var findAllUsers = function(req, res) {
 // Find one user by id
 var findOneUser = function(req, res) {
     var userInx = req.params.id;
-    User.findById(userInx, function(err, user) {
+    Profile.findById(userInx, function(err, user) {
         if (!err) {
             res.send(user);
         } else {
@@ -128,12 +129,26 @@ var loginUser = function(req, res) {
          });
   
 };
-var makeProfile =function(req,res){
+var getProfile =function(req,res){
+    
+    var k=req.params.user;
+
+    
+    Profile.find({user:k},function(err,user2){
+        if(user2){
+            const payload=user2;
+            console.log(user2);
+            res.send(payload);
+        }else{
+           res.send(k);
+        }
+    })
 
     
     
 
-}
+};
+module.exports.getProfile =getProfile;
 module.exports.loginUser =loginUser;
 module.exports.createUser = createUser;
 module.exports.findAllUsers = findAllUsers;
