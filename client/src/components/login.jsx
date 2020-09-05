@@ -72,7 +72,7 @@ render() {
           <Helmet> 
               <meta charset="utf-8" />
               <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-              <title>Login to Story Quest</title>
+              <title>Login to MyUni</title>
           </Helmet>
           {/* The main signin form */}
           <div className="text-center signin-box bg-light">
@@ -111,7 +111,7 @@ render() {
                   <ErrorAlert errorMsg={errors.passwordincorrect} />
                   <Button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</Button>
                   <p className="mt-3 mb-2">Don't have an account? <Link style={{color: "blue"}} to="/register">Register here</Link></p>
-                  <p className="mt-5 mb-3 text-muted">&copy; Team FrankTheTank 2019</p>
+                  <p className="mt-5 mb-3 text-muted">&copy; Team SwatKats 2020</p>
               </Form>
           </div>
       </div>

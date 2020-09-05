@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
-
+import {Helmet} from 'react-helmet';
 class Register extends Component {
   constructor() {
     super();
@@ -33,8 +33,10 @@ class Register extends Component {
 
     axios
       .post('/register', newUser)
-      .then(res => console.log(res.data))
+      .then(res => {this.props.history.push("/login");})
       .catch(err => this.setState({ errors: err.response.data }));
+    
+    this.props.history.push("/login");
   }
 
   render() {
@@ -42,6 +44,11 @@ class Register extends Component {
 
     return (
       <div className="register">
+        <Helmet> 
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+              <title>Register for MyUni</title>
+          </Helmet>
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
