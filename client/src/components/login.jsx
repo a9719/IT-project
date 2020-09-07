@@ -1,8 +1,7 @@
-// The component that renders the login form and contains all the logic for reading in user input and then posting
-// it to the backend
-import React, {Component} from 'react';
-import {Button, Label, Input, Form} from 'reactstrap';
-
+import React, { Component } from 'react';
+import axios from 'axios';
+import { Button, Image, Col, Row} from 'react-bootstrap';
+import icon from './loginImage.svg';
 import {Helmet} from 'react-helmet';
 import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
@@ -20,10 +19,9 @@ class Login extends Component {
       password: '',
       errors: {}
     };
-    
+
     this.onSubmit = this.onSubmit.bind(this);
-    
-   
+    this.onChange =this.onChange.bind(this);
   }
 
   componentDidMount() {
@@ -47,7 +45,7 @@ componentDidUpdate(prevProps) {
 }
 
 onChange = (e) => {
-  this.setState({[e.target.id]: e.target.value});
+  this.setState({[e.target.name]: e.target.value});
 }
 
 onSubmit = (e) => {
@@ -62,78 +60,127 @@ onSubmit = (e) => {
   this.props.loginUser(userData);
   this.props.setUserLoading();
 };
+  render() {
+    const { errors } = this.state;
+    return (
+      <div className="login">
+        <div className="container-fluid bg-light mt-5 pb-5 pt-5 rounded">
+          <div className = "row">
+            <h1 className="display-4 mx-auto">Welcome Back</h1>
+          </div>
+          <div className="row mt-5 align-self-center">
+          <div className="col align-self-center d-none d-lg-block">
+              <div className="col-md-8 m-auto">
+                <Image src={icon} fluid />
+              </div>
+            </div>
+            <div className="col align-self-center">
+              <div className="col-md-12 m-auto">
+                <p className="lead text-center">
+                  Login with
+                </p>
 
-render() {
-
-  const { errors } = this.state;
-  
-  return (
-      <div>
-          <Helmet> 
-              <meta charset="utf-8" />
-              <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-              <title>Login to MyUni</title>
-          </Helmet>
-          {/* The main signin form */}
-          <div className="text-center signin-box bg-light">
-              <Form noValidate className="form-signin" onSubmit={this.onSubmit}>
-                  
-                  <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-                  <Label htmlFor="email" className="sr-only">Email address</Label>
-                  <Input 
-                      onChange={this.onChange}
+                  <form onSubmit={this.onSubmit}>
+                  <div className="form-group">
+                    <input onChange={this.onChange}
                       value={this.state.email}
                       error={errors.email}
-                      type="email" 
-                      id="email" 
+                      type="email"
                       className={classnames("form-control", {
-                                  invalid: errors.email || errors.emailnotfound
-                              })}
-                      placeholder="Email address" 
-                      required autoFocus 
-                  />
-                  <ErrorAlert errorMsg={errors.email} />
-                  <ErrorAlert errorMsg={errors.emailnotfound} />
-                  <Label htmlFor="password" className="sr-only">Password</Label>
-                  <Input 
-                      onChange={this.onChange}
-                      value={this.state.password}
-                      error={errors.password}
-                      type="password" 
-                      id="password" 
-                      className={classnames("form-control", {
-                                  invalid: errors.password || errors.passwordincorrect
-                              })}
-                      placeholder="Password" 
-                      required 
-                  />
-                  <ErrorAlert errorMsg={errors.password} />
-                  <ErrorAlert errorMsg={errors.passwordincorrect} />
-                  <Button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</Button>
-                  <p className="mt-3 mb-2">Don't have an account? <Link style={{color: "blue"}} to="/register">Register here</Link></p>
-                  <p className="mt-5 mb-3 text-muted">&copy; Team SwatKats 2020</p>
-              </Form>
+                        invalid: errors.email || errors.emailnotfound
+                    })}
+                      placeholder="Email Address"
+                      name="email"
+                          
+                          required autoFocus 
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                    onChange={this.onChange}
+                    value={this.state.password}
+                    error={errors.password}
+                    type="password"
+                    className={classnames("form-control", {
+                      invalid: errors.password || errors.passwordincorrect
+                  })}
+                      placeholder="Password"
+                      name="password"
+                      required
+                      
+                      
+                    />
+
+                    
+                  </div>
+                  <Row>
+                      <Col>
+                        <Button variant="info" type="submit" size="lg" block>
+                          Login
+                        </Button>  
+                      </Col>
+                      <Col>
+                        <Button href="/register" variant="outline-info" type="submit" size="lg" block>
+                          Sign up
+                        </Button>
+                      </Col>
+                    </Row>
+                  </form>
+
+                  {/*<Form>
+
+                    <Form.Group controlId="formBasicEmail">
+                      <Form.Label>Email address</Form.Label>
+                      <Form.Control type="email" placeholder="Enter email" />
+                      <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                      </Form.Text>
+                    </Form.Group>
+
+                    <Form.Group controlId="formBasicPassword">
+                      <Form.Label>Password</Form.Label>
+                      <Form.Control type="password" placeholder="Password" />
+                    </Form.Group>
+
+                    <Row>
+                      <Col>
+                        <Button variant="info" type="submit" size="lg" block>
+                          Login
+                        </Button>  
+                      </Col>
+                      <Col>
+                        <Button href="/register" variant="outline-info" type="submit" size="lg" block>
+                          Sign up
+                        </Button>
+                      </Col>
+                    </Row>
+
+                  </Form>*/}
+
+              </div>
+            </div>
           </div>
+        </div>
       </div>
-  )
-}
+    )
+  }
 }
 
 Login.propTypes = {
-loginUser: PropTypes.func.isRequired,
-setUserLoading: PropTypes.func.isRequired,
-setUserNotLoading: PropTypes.func.isRequired,
-auth: PropTypes.object.isRequired,
-errors: PropTypes.object.isRequired
-};
-
-// This maps the state that we get from the Redux store to the props for this component
-const mapStateToProps = state => ({
-auth: state.auth,
-errors: state.errors
-});
-
-export default connect(
-mapStateToProps,
-{ loginUser, setUserLoading, setUserNotLoading }
-)(Login);
+  loginUser: PropTypes.func.isRequired,
+  setUserLoading: PropTypes.func.isRequired,
+  setUserNotLoading: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+  };
+  
+  // This maps the state that we get from the Redux store to the props for this component
+  const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+  });
+  
+  export default connect(
+  mapStateToProps,
+  { loginUser, setUserLoading, setUserNotLoading }
+  )(Login);

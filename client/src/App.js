@@ -3,7 +3,6 @@ import { Container, Row, Col } from 'reactstrap';
 import {Helmet} from 'react-helmet';
 import PropTypes from "prop-types";
 import {connect} from 'react-redux';
-
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import "./App.css"
 import NavigationBar from "./components/NavigationBar"
