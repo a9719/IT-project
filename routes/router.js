@@ -9,7 +9,8 @@ router.post('/login', controller.loginUser);
 router.get('/profile1/:user',controller.getProfile);
 router.put('/profilebio/:user',controller.addBio);
 router.put('/profileskills/:user',controller.addSkills);
-
+router.put('/profileedu/:user',controller.addEducation);
+router.put('/profilesub/:user',controller.addSubjects);
 
 // Find all users
 router.get('/users', controller.findAllUsers);

@@ -21,10 +21,32 @@ const ProfileSchema = new mongoose.Schema({
     bio: {
         type: String
     },
-    
-    date: {
-      type: Date,
-      default: Date.now
-    }
+    education: [
+      {
+        school: {
+          type: String,
+          required: true
+        }
+      }
+    ],
+    subjects: [
+     
+      {
+        subjectname:{
+          type:String,
+          required:true
+        },
+        subjectdescripition:{
+          type:String,
+          required:true
+        },
+        subjectyear:{
+          type:Number,
+          required:true
+        }
+
+
+      }
+    ]
 });
 var profile = mongoose.model('profile', ProfileSchema);

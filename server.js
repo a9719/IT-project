@@ -24,7 +24,7 @@ mongoose.connect(
   .catch(err => console.log(err))
 require('./models/user.js');
 require('./models/profile.js');
-require('./models/edu.js');
+
 var routes = require('./routes/router.js');
 
 app.use('/', routes);

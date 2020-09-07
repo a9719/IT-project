@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var User = mongoose.model('users');
 var Profile =mongoose.model('profile');
 var express = require('express');
-var Education =mongoose.model('education');
+
 const app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -27,15 +27,12 @@ var createUser = function(req, res) {
             user.save(function (err, newUser) {
                 console.log(newUser);
                 if (!err) {
-                    var edu =new Education({
-                        user: newUser,
-                        "education.school":''
-                    });
-                    console.log(edu.save());
                     var profile =new Profile({
                         user: newUser,
                         name: user.name,
                         website:'',
+                        education:[],
+                        subjects:[],
                         email:user.email,
                         phone:'',
                         skills:'',
@@ -189,7 +186,43 @@ var addSkills= function(req,res){
         }
     })
 };
+
+var addEducation= function(req,res){
+    var user1=req.params.user;
     
+    const edu= req.body.education;
+
+    
+    Profile.findOneAndUpdate({user:user1},{$push: {education:{school:edu}}},{new: true},function(err,user2){
+        if(err){
+            console.log(user2);
+            res.send("wrong");
+            
+        }else{
+            console.log(user2);
+           res.send("found");
+        }
+    })
+};
+var addSubjects= function(req,res){
+    var user1=req.params.user;
+    
+    const edu= req.body;
+
+    
+    Profile.findOneAndUpdate({user:user1},{$push: {subjects:{subjectname:edu.subjectname,subjectdescripition:edu.subjectdesc,subjectyear:edu.year}}},{new: true},function(err,user2){
+        if(err){
+            console.log(user2);
+            res.send("wrong");
+            
+        }else{
+            console.log(user2);
+           res.send("found");
+        }
+    })
+};
+module.exports.addSubjects=addSubjects;
+module.exports.addEducation=addEducation;
 module.exports.addSkills=addSkills;
 module.exports.addBio= addBio;
 module.exports.getProfile =getProfile;
