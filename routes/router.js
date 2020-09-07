@@ -6,7 +6,8 @@ var controller = require('../controller.js');
 
 router.post('/register', controller.createUser);
 router.post('/login', controller.loginUser);
- 
+router.get('/profile1/:user',controller.getProfile);
+
 // Find all users
 router.get('/users', controller.findAllUsers);
  

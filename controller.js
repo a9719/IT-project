@@ -1,10 +1,13 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('users');
+var Profile =mongoose.model('profile');
 var express = require('express');
+var Education =mongoose.model('education');
 const app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken')
 
 var createUser = function(req, res) {
 
@@ -16,14 +19,31 @@ var createUser = function(req, res) {
 
     User.findOne({email:user.email}, function(err, user1) {
         if (user1) {
-            console.log("ccccc");
+            console.log("User exists!");
      
             
         } else {
-            console.log(user1);
+           
             user.save(function (err, newUser) {
+                console.log(newUser);
                 if (!err) {
-                    console.log("rehistered");
+                    var edu =new Education({
+                        user: newUser,
+                        "education.school":''
+                    });
+                    console.log(edu.save());
+                    var profile =new Profile({
+                        user: newUser,
+                        name: user.name,
+                        website:'',
+                        email:user.email,
+                        phone:'',
+                        skills:'',
+                        bio:'',
+                        date:''});
+                    
+                    console.log(profile.save());
+                    console.log("registered");
                 } else {
                     res.sendStatus(400);
                 }
@@ -34,7 +54,7 @@ var createUser = function(req, res) {
 
 // Find all users
 var findAllUsers = function(req, res) {
-    User.find(function(err, users) {
+    Profile.find(function(err, users) {
         if (!err) {
             res.send(users);
         } else {
@@ -46,7 +66,7 @@ var findAllUsers = function(req, res) {
 // Find one user by id
 var findOneUser = function(req, res) {
     var userInx = req.params.id;
-    User.findById(userInx, function(err, user) {
+    Profile.findById(userInx, function(err, user) {
         if (!err) {
             res.send(user);
         } else {
@@ -93,7 +113,16 @@ var loginUser = function(req, res) {
     //check for existing user
     User.findOne({email:user.email,password:user.password}, function(err, user1) {
         if (user1) {
-            console.log("ccccc");
+            console.log("Successful login ");
+            const payload = {
+                _id: user1._id,
+                name: user1.name,
+                email: user1.email
+              }
+              let token = payload;
+              res.send(token);
+
+            
      
             
         }
@@ -106,6 +135,27 @@ var loginUser = function(req, res) {
          });
   
 };
+var getProfile =function(req,res){
+    
+    var k=req.params.user;
+
+    
+    Profile.find({user:k},function(err,user2){
+        if(user2){
+            const payload=user2;
+            console.log(user2);
+            res.send(payload);
+        }else{
+           res.send(k);
+        }
+    })
+
+    
+    
+
+};
+
+module.exports.getProfile =getProfile;
 module.exports.loginUser =loginUser;
 module.exports.createUser = createUser;
 module.exports.findAllUsers = findAllUsers;
