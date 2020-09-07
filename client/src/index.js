@@ -5,7 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser } from "./actions/authActions";
-
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { Provider } from "react-redux";
 
 
