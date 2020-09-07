@@ -154,7 +154,44 @@ var getProfile =function(req,res){
     
 
 };
+var addBio= function(req,res){
+    var user1=req.params.user;
+    
+    const bio1= req.body.bio;
 
+    
+    Profile.findOneAndUpdate({user:user1},{$set:{bio:bio1}},{new: true},function(err,user2){
+        if(err){
+            console.log(user2);
+            res.send("wrong");
+            
+        }else{
+            console.log(user2);
+           res.send("found");
+        }
+    })
+};
+
+var addSkills= function(req,res){
+    var user1=req.params.user;
+    
+    const skill= req.body.skill;
+
+    
+    Profile.findOneAndUpdate({user:user1},{$push: {skills:skill}},{new: true},function(err,user2){
+        if(err){
+            console.log(user2);
+            res.send("wrong");
+            
+        }else{
+            console.log(user2);
+           res.send("found");
+        }
+    })
+};
+    
+module.exports.addSkills=addSkills;
+module.exports.addBio= addBio;
 module.exports.getProfile =getProfile;
 module.exports.loginUser =loginUser;
 module.exports.createUser = createUser;
