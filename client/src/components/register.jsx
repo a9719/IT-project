@@ -8,6 +8,7 @@ class Register extends Component {
     this.state = {
       name: '',
       email: '',
+      image:null,
       password: '',
       password2: '',
       errors: {}
@@ -27,6 +28,7 @@ class Register extends Component {
     const newUser = {
       name: this.state.name,
       email: this.state.email,
+      image: this.state.image,
       password: this.state.password,
       password2: this.state.password2
     };
@@ -54,7 +56,7 @@ class Register extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
               <p className="lead text-center">
-                Create your DevConnector account
+                Create your account
               </p>
               <form noValidate onSubmit={this.onSubmit}>
                 <div className="form-group">
@@ -87,6 +89,9 @@ class Register extends Component {
                     <div className="invalid-feedback">{errors.email}</div>
                   )}
 
+                </div>
+                <div>
+                  <input type="file" name="image" value={this.state.image} onChange={this.onChange}  ></input>
                 </div>
                 <div className="form-group">
                   <input

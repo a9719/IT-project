@@ -41,6 +41,7 @@ class Profile extends Component {
           <div className="col-sm-8 mx-auto">
     <h1 className="text-center">WELCOME {this.state.email} </h1>
           </div>
+          
         </div>
       </div>
     )

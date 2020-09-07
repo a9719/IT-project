@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var User = mongoose.model('users');
 var Profile =mongoose.model('profile');
 var express = require('express');
+var Education =mongoose.model('education');
 const app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -26,6 +27,11 @@ var createUser = function(req, res) {
             user.save(function (err, newUser) {
                 console.log(newUser);
                 if (!err) {
+                    var edu =new Education({
+                        user: newUser,
+                        "education.school":''
+                    });
+                    console.log(edu.save());
                     var profile =new Profile({
                         user: newUser,
                         name: user.name,
@@ -35,7 +41,7 @@ var createUser = function(req, res) {
                         skills:'',
                         bio:'',
                         date:''});
-                    console.log(profile);
+                    
                     console.log(profile.save());
                     console.log("registered");
                 } else {
@@ -148,6 +154,7 @@ var getProfile =function(req,res){
     
 
 };
+
 module.exports.getProfile =getProfile;
 module.exports.loginUser =loginUser;
 module.exports.createUser = createUser;
