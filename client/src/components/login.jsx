@@ -8,6 +8,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser, setUserLoading, setUserNotLoading } from "../actions/authActions";
 import classnames from "classnames";
+import NavigationBar from "./NavigationBar"
+import Footer from "./Footer"
 
 import ErrorAlert from "../alerts";
 
@@ -63,9 +65,13 @@ onSubmit = (e) => {
   render() {
     const { errors } = this.state;
     return (
+      
       <div className="login">
+        <NavigationBar/>
         <div className="container-fluid bg-light mt-5 pb-5 pt-5 rounded">
+        
           <div className = "row">
+            
             <h1 className="display-4 mx-auto">Welcome Back</h1>
           </div>
           <div className="row mt-5 align-self-center">
@@ -127,40 +133,14 @@ onSubmit = (e) => {
                     </Row>
                   </form>
 
-                  {/*<Form>
-
-                    <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Email address</Form.Label>
-                      <Form.Control type="email" placeholder="Enter email" />
-                      <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                      </Form.Text>
-                    </Form.Group>
-
-                    <Form.Group controlId="formBasicPassword">
-                      <Form.Label>Password</Form.Label>
-                      <Form.Control type="password" placeholder="Password" />
-                    </Form.Group>
-
-                    <Row>
-                      <Col>
-                        <Button variant="info" type="submit" size="lg" block>
-                          Login
-                        </Button>  
-                      </Col>
-                      <Col>
-                        <Button href="/register" variant="outline-info" type="submit" size="lg" block>
-                          Sign up
-                        </Button>
-                      </Col>
-                    </Row>
-
-                  </Form>*/}
-
+                  
               </div>
+              
             </div>
           </div>
+          
         </div>
+        <Footer/>
       </div>
     )
   }
