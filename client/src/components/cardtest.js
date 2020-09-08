@@ -8,8 +8,11 @@ import "./thumbnailsize.css"
 export const testCard = props => (
     <Nav>
         <Nav.Link href={props.link}>
-            <Card style={{ width: '22rem' }}>
-                <Card.Img src={image} alt/>
+        <div class = "row">
+            <Card style={{ width: '20rem' }}>
+                <Card.Img src={image} alt= "Card image"/>
+            </Card>
+            <Card style={{ width: '20rem' }}>
                 <Card.Header> {props.name} </Card.Header>
                 <Card.Body>
                     <Card.Text>
@@ -18,6 +21,7 @@ export const testCard = props => (
                     </Card.Text>
                 </Card.Body>
             </Card>
+        </div>
         </Nav.Link>
     </Nav>
   )

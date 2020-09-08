@@ -22,7 +22,6 @@ class App extends Component {
           
           <div className = "content-wrap">
             <Card name = "jonh doe" link = "/register"/>
-
             <Router>
               <div className="App">
                 <Route exact path="/" component={Landing} />
