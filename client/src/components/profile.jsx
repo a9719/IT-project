@@ -8,6 +8,9 @@ import JwtDecode from 'jwt-decode';
 import setAuthToken from "../utils/setAuthToken"
 import { GET_PROFILE } from "../actions/profileActions";
 
+import NavigationBar from "./NavigationBar";
+import Footer from "./Footer";
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -37,12 +40,14 @@ class Profile extends Component {
     
     return (
       <div className="container">
+        <NavigationBar/>
         <div className="jumbotron mt-5">
           <div className="col-sm-8 mx-auto">
     <h1 className="text-center">WELCOME {this.state.email} </h1>
           </div>
           
         </div>
+        <Footer/>
       </div>
     )
   }
