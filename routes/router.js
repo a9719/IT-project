@@ -11,6 +11,8 @@ router.put('/profilebio/:user',controller.addBio);
 router.put('/profileskills/:user',controller.addSkills);
 router.put('/profileedu/:user',controller.addEducation);
 router.put('/profilesub/:user',controller.addSubjects);
+router.put('/findanddeletsub/:user',controller.findSubjectsAndDelete);
+
 
 // Find all users
 router.get('/users', controller.findAllUsers);
