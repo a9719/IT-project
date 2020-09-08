@@ -21,7 +21,7 @@ class App extends Component {
           <NavigationBar/>
           
           <div className = "content-wrap">
-            <Card/>
+            <Card name = "jonh doe" link = "/register"/>
 
             <Router>
               <div className="App">
