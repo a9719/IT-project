@@ -15,13 +15,14 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: ''
+      email: '',
+      bio: ''
     };}
 
   componentDidMount() {
     axios
         .get('/profile1/'+(this.props.auth.user))
-        .then(res=>{this.setState({email:res.data[0].email});
+        .then(res=>{this.setState({email:res.data[0].email, bio:res.data[0].name});
           console.log(this.state);
           console.log("2");})
     
@@ -44,6 +45,7 @@ class Profile extends Component {
         <div className="jumbotron mt-5">
           <div className="col-sm-8 mx-auto">
     <h1 className="text-center">WELCOME {this.state.email} </h1>
+    <h2 className = "text-center">Welcome {this.state.bio} </h2>
           </div>
           
         </div>

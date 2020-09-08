@@ -27,11 +27,12 @@ class Landing extends Component {
   displayUsers = (users) => {
     if(!users.length) return null;
     
-    users = users.slice(0,3);
+    users = users.slice(3,8);
     return users.map((users, index) => (
       <div key = {index}>
         <h3>{users.name}</h3>
         <p>{users.email}</p>
+        <p>{users.bio}</p>
       </div>
     ))
   };
