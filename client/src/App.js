@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import "./App.css"
 import NavigationBar from "./components/NavigationBar"
 import Footer from "./components/Footer"
+import Card from "./components/cardtest"
 
 import Register from './components/register';
 import Login from './components/login';
@@ -18,8 +19,10 @@ class App extends Component {
     return (
         <div className = "page-container">
           <NavigationBar/>
-
+          
           <div className = "content-wrap">
+            <Card/>
+
             <Router>
               <div className="App">
                 <Route exact path="/" component={Landing} />
