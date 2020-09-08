@@ -11,6 +11,7 @@ import Footer from "./components/Footer"
 import Register from './components/register';
 import Login from './components/login';
 import Landing from './components/landing';
+import Card from 'react-bootstrap/Card';
 
 class App extends Component {
 
@@ -18,6 +19,7 @@ class App extends Component {
     return (
         <div className = "page-container">
           <NavigationBar/>
+          <Card name = "Jon Snow" link = "/register"/>
 
           <div className = "content-wrap">
             <Router>
