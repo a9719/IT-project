@@ -37,7 +37,6 @@ const Styles = styled.div
   }
 `;
 
-
 class Profile extends Component {
   constructor(props) {
     super(props);
