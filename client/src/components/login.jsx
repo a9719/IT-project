@@ -8,7 +8,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser, setUserLoading, setUserNotLoading } from "../actions/authActions";
 import classnames from "classnames";
-import NavigationBar from "./NavigationBar"
+import NavigationBar from "./NavigationBar";
+
 import Footer from "./Footer"
 
 import ErrorAlert from "../alerts";
