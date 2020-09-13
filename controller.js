@@ -226,7 +226,6 @@ var addSubjects= function(req,res){
     
     const edu= req.body;
 
-    
     Profile.findOneAndUpdate({user:user1},{$push: {subjects:{subjectname:edu.subjectname,subjectdescripition:edu.subjectdesc,subjectyear:edu.year}}},{new: true},function(err,user2){
         if(err){
             console.log(user2);
@@ -256,6 +255,8 @@ var findSubjectsAndDelete= function(req,res){
         }
     })
 };
+
+
 module.exports.findSubjectsAndDelete=findSubjectsAndDelete;
 module.exports.addSubjects=addSubjects;
 module.exports.addEducation=addEducation;

@@ -4,7 +4,7 @@ import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser } from "./actions/authActions";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Provider } from "react-redux";
 
@@ -20,6 +20,25 @@ import Login from './components/login'
 import Profile  from './components/profile'
 
 // Check for token to keep the user logged in
+if (localStorage.jwtToken) {
+    // Set auth header
+    const token = localStorage.jwtToken;
+    setAuthToken(token);
+    // Decode token and get user info and expiry
+    const decoded = token;
+    // Set user and isAuthenticated
+    store.dispatch(setCurrentUser(decoded));
+
+    // Check for an expired token
+    const currentTime = Date.now() / 1000; // Math to get it into milliseconds
+    if (decoded.exp < currentTime) {
+        // Logout user
+        store.dispatch(logoutUser());
+
+        // Redirect to login
+        window.location.href = "./login";
+    }
+}
 
 
 
