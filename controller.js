@@ -187,6 +187,24 @@ var addSkills= function(req,res){
     })
 };
 
+var findSkillAndDelete = function(req, res) {
+    var user1 = req.params.user;
+
+    const skill = req.body.skill;
+
+    Profile.findOneAndUpdate({user:user1},{$pull: {skills: {skill}}},{new: true},function(err,user2){
+        if(err){
+            console.log(user2);
+            res.send("wrong");
+            
+        }else{
+            console.log(user2);
+           res.send("found");
+        }
+    })
+}
+
+
 var addEducation= function(req,res){
     var user1=req.params.user;
     
@@ -256,8 +274,9 @@ var findSubjectsAndDelete= function(req,res){
     })
 };
 
-
+module.exports.findSkillAndDelete=findSkillAndDelete;
 module.exports.findSubjectsAndDelete=findSubjectsAndDelete;
+module.exports.findSk
 module.exports.addSubjects=addSubjects;
 module.exports.addEducation=addEducation;
 module.exports.addSkills=addSkills;
