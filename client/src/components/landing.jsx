@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import TestCard from './TestCard'
 
 class Landing extends Component {
 
@@ -27,12 +28,16 @@ class Landing extends Component {
   displayUsers = (users) => {
     if(!users.length) return null;
     
-    users = users.slice(0,3);
+    users = users.slice(3,8);
     return users.map((users, index) => (
-      <div key = {index}>
-        <h3>{users.name}</h3>
-        <p>{users.email}</p>
+      <div class = "card-group mt-5" key = {index} >
+        <TestCard name  = {users.name} bio = {users.bio}/>
       </div>
+      // <div key = {index}>
+      //   <h3>{users.name}</h3>
+      //   <p>{users.email}</p>
+      //   <p>{users.bio}</p>
+      // </div>
     ))
   };
 
