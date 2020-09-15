@@ -35,14 +35,38 @@ const Styles = styled.div
   .color-nav {
       background-color : rgb(255,255,255);
   }
+  .nav.nav-center {
+    display: inline-block;
+    left: 0;
+    right: 0;
+    margin:0;
+    float:none;
+  }
 `;
+function DisplayList(props) {
+  const items = props;
+  const listItems = items.map( (item, index) =>
+    <li key = {index} >{item}</li>
+  );
+  return (
+    <ul>{listItems}</ul> 
+  );
+}
+
+
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      bio: ''
+      name: '',
+      bio: '',
+      skills: [],
+      subjects: [],
+      education: [],
+      website: '',
+      phone: ''
     };
   this.onLogoutClick=this.onLogoutClick.bind(this);}
 
@@ -54,11 +78,21 @@ class Profile extends Component {
   componentDidMount() {
     axios
         .get('/profile1/'+(this.props.auth.user))
-        .then(res=>{this.setState({email:res.data[0].email, bio:res.data[0].name});
+        .then(res=>{
+          this.setState({email:res.data[0].email,
+                         name:res.data[0].name,
+                         bio:res.data[0].bio,
+                         skills:res.data[0].skills,
+                         subjects:res.data[0].subjects,
+                         education:res.data[0].education,
+                         website:res.data[0].website,
+                         phone:res.data[0].phone
+                        });
           console.log(this.state);
           console.log("2");})
     
 }
+
 
 
 
@@ -108,11 +142,39 @@ class Profile extends Component {
         </div>
         <div className="jumbotron mt-5">
           <div className="col-sm-8 mx-auto">
-    <h1 className="text-center">WELCOME {this.state.email} </h1>
-    <h2 className = "text-center">Welcome {this.state.bio} </h2>
+            <h1 className="text-center">WELCOME {this.state.name} </h1>
           </div>
-          
+          <div class = "mx-auto">
+            <Navbar bg="light" variant="light">
+              <Navbar.Toggle />
+              <Navbar.Collapse className="justify-content-center">
+                <Nav fill>
+                  <Nav.Link href = "#personal"> Personal </Nav.Link>
+                  <Nav.Link href = "#skills"> Skills </Nav.Link>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+          </div>
         </div>
+
+        <div  id = "personal" className="jumbotron mt-5 bg-info text-white">
+          <div className="col-sm-8 mx-auto">
+            <h1 className="text-center"> Personal Details </h1>
+          </div>
+        </div>
+        <div>
+            <p style= {{ fontSize: '25px'}} > {this.state.bio} </p>
+        </div>
+
+        <div id = "skills" className="jumbotron mt-5 bg-info text-white">
+          <div className="col-sm-8 mx-auto">
+            <h1 className="text-center"> Skills </h1>
+          </div>
+        </div>
+        <div>
+            <p style= {{ fontSize: '25px'}} > {DisplayList(this.state.skills)} </p>
+        </div>
+
         <Footer/>
       </div>
     )

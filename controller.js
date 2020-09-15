@@ -35,7 +35,7 @@ var createUser = function(req, res) {
                         subjects:[],
                         email:user.email,
                         phone:'',
-                        skills:'',
+                        skills:[],
                         bio:'',
                         date:''});
                     
