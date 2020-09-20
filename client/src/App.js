@@ -13,14 +13,14 @@ import Login from './components/login';
 import Landing from './components/landing';
 import Card from 'react-bootstrap/Card';
 
+const dotenv = require('dotenv').config()
+
 class App extends Component {
 
   render() {
     return (
         <div className = "page-container">
           <NavigationBar/>
-          <Card name = "Jon Snow" link = "/register"/>
-
           <div className = "content-wrap">
             <Router>
               <div className="App">
