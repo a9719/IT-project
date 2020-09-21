@@ -29,9 +29,17 @@ class Landing extends Component {
     
     users = users.slice(0,3);
     return users.map((users, index) => (
+<<<<<<< Updated upstream
       <div key = {index}>
         <h3>{users.name}</h3>
         <p>{users.email}</p>
+=======
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class = "card-group " key = {index} >
+          <TestCard name  = {users.name} bio = {users.bio}/>
+        </div>
+>>>>>>> Stashed changes
       </div>
     ))
   };

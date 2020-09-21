@@ -19,7 +19,11 @@ class App extends Component {
     return (
         <div className = "page-container">
           <NavigationBar/>
+<<<<<<< Updated upstream
           
+=======
+
+>>>>>>> Stashed changes
           <div className = "content-wrap">
             <Card name = "jonh doe" link = "/register"/>
             <Router>
