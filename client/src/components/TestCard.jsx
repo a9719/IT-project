@@ -24,7 +24,7 @@ import "./thumbnailsize.css"
 
 export const TestCard = props => (
     <Nav>
-        <div class = "row ">
+        <div class = "row">
             <CardGroup>
                 <Card style={{ width: '20rem' }}>
                     <Card.Img src={image} alt= "Card image"/>

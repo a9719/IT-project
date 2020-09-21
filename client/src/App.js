@@ -12,6 +12,7 @@ import Card from "./components/cardtest"
 import Register from './components/register';
 import Login from './components/login';
 import Landing from './components/landing';
+import Card from 'react-bootstrap/Card';
 
 class App extends Component {
 
@@ -19,11 +20,6 @@ class App extends Component {
     return (
         <div className = "page-container">
           <NavigationBar/>
-<<<<<<< Updated upstream
-          
-=======
-
->>>>>>> Stashed changes
           <div className = "content-wrap">
             <Card name = "jonh doe" link = "/register"/>
             <Router>

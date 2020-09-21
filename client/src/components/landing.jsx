@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import TestCard from './TestCard'
 
 class Landing extends Component {
 
@@ -27,19 +28,17 @@ class Landing extends Component {
   displayUsers = (users) => {
     if(!users.length) return null;
     
-    users = users.slice(0,3);
+    users = users.slice(3,8);
     return users.map((users, index) => (
-<<<<<<< Updated upstream
       <div key = {index}>
         <h3>{users.name}</h3>
         <p>{users.email}</p>
-=======
-      <div class="row">
-        <div class="col-md-4"></div>
-        <div class = "card-group " key = {index} >
-          <TestCard name  = {users.name} bio = {users.bio}/>
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class = "card-group mt-5" key = {index} >
+            <TestCard name  = {users.name} bio = {users.bio}/>
+          </div>
         </div>
->>>>>>> Stashed changes
       </div>
     ))
   };
