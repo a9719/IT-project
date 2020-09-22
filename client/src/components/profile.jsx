@@ -66,7 +66,9 @@ class Profile extends Component {
       subjects: [],
       education: [],
       website: '',
-      phone: ''
+      phone: '',
+      selectedFile: null,
+      profilePicture: ''
     };
   this.onLogoutClick=this.onLogoutClick.bind(this);}
 
@@ -93,6 +95,43 @@ class Profile extends Component {
     
 }
 
+
+  fileSelectedHandler = event => {
+    this.setState({
+      selectedFile: event.target.files[0]
+    })
+  }
+
+
+
+  fileUploadHandler = () => {
+    const fd = new FormData();
+    fd.append('image', this.state.selectedFile);
+    // axios.post('/file-upload', fd).then((res) => {
+    //     this.newPP = res.data.imageUrl;
+    //     console.log(res);
+    //     console.log(this.newPP);
+      
+    // }).then(() => {
+    //     axios.put().then(console.log((newresponse)))
+    // })
+
+      axios.post('/file-upload', fd).then((postResponse) => {
+        this.newPP = postResponse.data.imageUrl;
+        console.log(postResponse);
+      }).then(() => {
+        //do PUT call
+        console.log(this.newPP);
+        const data = {
+          profilePic: this.newPP
+        }
+        console.log(data);
+        axios.put('/addprofilepic/' + this.props.auth.user, data).then((putResponse) => {
+          //do PUT stuff with response
+          console.log(putResponse);
+        })
+      })
+  }
 
 
 
@@ -143,6 +182,8 @@ class Profile extends Component {
         <div className="jumbotron mt-5">
           <div className="col-sm-8 mx-auto">
             <h1 className="text-center">WELCOME {this.state.name} </h1>
+            <input type = "file" onChange={this.fileSelectedHandler}/>
+            <button onClick={this.fileUploadHandler}>Upload</button>
           </div>
           <div class = "mx-auto">
             <Navbar bg="light" variant="light">
