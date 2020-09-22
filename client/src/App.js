@@ -12,7 +12,6 @@ import Card from "./components/cardtest"
 import Register from './components/register';
 import Login from './components/login';
 import Landing from './components/landing';
-import Card from 'react-bootstrap/Card';
 
 class App extends Component {
 
@@ -21,7 +20,6 @@ class App extends Component {
         <div className = "page-container">
           <NavigationBar/>
           <div className = "content-wrap">
-            <Card name = "jonh doe" link = "/register"/>
             <Router>
               <div className="App">
                 <Route exact path="/" component={Landing} />
