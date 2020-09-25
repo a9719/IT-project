@@ -7,11 +7,11 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import "./App.css"
 import NavigationBar from "./components/NavigationBar"
 import Footer from "./components/Footer"
+import Card from "./components/cardtest"
 
 import Register from './components/register';
 import Login from './components/login';
 import Landing from './components/landing';
-import Card from 'react-bootstrap/Card';
 
 const dotenv = require('dotenv').config()
 
