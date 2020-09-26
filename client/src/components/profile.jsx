@@ -11,31 +11,8 @@ import { setCurrentUser, logoutUser } from "./../actions/authActions";
 import JwtDecode from 'jwt-decode';
 import setAuthToken from "../utils/setAuthToken"
 import { GET_PROFILE } from "../actions/profileActions";
-
-import NavigationBar from "./NavigationBar";
+import NavigationBar from "./components/NavigationBar"
 import Footer from "./Footer";
-
-const Styles = styled.div
-`
-  .navbar { background-color: #365; }
-  a, .navbar-nav, .navbar-light .nav-link {
-    color: #000000;
-    &:hover { color: #365; }
-  }
-  .navbar-brand {
-    font-size: 1.4em;
-    color: #000000;
-    &:hover { color: #365; }
-  }
-  .dropdown-center {
-    position: absolute !important;
-    left: 50%;
-    right: 50%;
-  }
-  .color-nav {
-      background-color : rgb(255,255,255);
-  }
-`;
 
 class Profile extends Component {
   constructor(props) {
@@ -65,51 +42,20 @@ class Profile extends Component {
   
   render() {
     
-    if ((this.state.email.length)===0)
-    { console.log("1");
-      this.componentDidMount();
-      return null;
-    }
+    //if ((this.state.email.length)===0)
+    //{ console.log("1");
+      //this.componentDidMount();
+      //return null;
+    //}
     
     
     return (
-      <div className="container">
-        <div className="navbar">
-        <Styles>  
-    <Navbar className = "color-nav" expand="lg" bg="light" variant="light">
-      <Navbar.Brand href="/">
-        <img
-          src={logo}
-          width="80"
-          height="80"
-          className="d-inline-block align-top"
-          alt=""
-        />
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
-          <Nav.Item><Nav.Link href="" onClick={this.onLogoutClick}>Logout</Nav.Link></Nav.Item> 
-          <Dropdown class = "dropdown-center">
-                <Dropdown.Toggle variant = "outline-info" id = "dropdown-basic">
-                    Language Options
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">English</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Chinese</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Japanese</Dropdown.Item>
-                </Dropdown.Menu>
-          </Dropdown>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  </Styles>
-        </div>
+      <div className = "page-container">
+        <NavigationBar/>
         <div className="jumbotron mt-5">
           <div className="col-sm-8 mx-auto">
-    <h1 className="text-center">WELCOME {this.state.email} </h1>
-    <h2 className = "text-center">Welcome {this.state.bio} </h2>
+            <h1 className="text-center">WELCOME {this.state.email} </h1>
+            <h2 className = "text-center">Welcome {this.state.bio} </h2>
           </div>
           
         </div>
