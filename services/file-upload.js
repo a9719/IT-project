@@ -14,15 +14,26 @@ aws.config.update({
 })
 const s3 = new aws.S3();
  
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype == 'image/jpeg' ||  file.mimetype  == 'image/png') {
+    cb(null, true);
+  } else {
+    cb(new Error('Invalid mime type, only JPEG or PNG'), false);
+  }
+}
+
+
 const upload = multer({
+  fileFilter,
   storage: multerS3({
     s3: s3,
     bucket: 'it-project-bucket-2020',
+    acl: 'public-read',
     metadata: function (req, file, cb) {
       cb(null, {fieldName: 'TESTING_IMAGE'});
     },
     key: function (req, file, cb) {
-      cb(null, Date.now().toString())
+      cb(null, Date.now().toString() + ".jpg")
     }
   })
 })

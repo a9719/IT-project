@@ -7,7 +7,11 @@ const singleUpload = upload.single('image');
 
 router.post('/file-upload', function(req, res) {
     singleUpload(req, res, function(err) {
-        // Router.put send to the local user
+        
+        if (err) {
+            return res.status(422).send({errors: [{title: 'File Upload Error', detail: err.message}]})
+        }
+
         return res.json({'imageUrl': req.file.location});
     });
 });

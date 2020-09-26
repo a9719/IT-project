@@ -88,13 +88,13 @@ class Profile extends Component {
                          subjects:res.data[0].subjects,
                          education:res.data[0].education,
                          website:res.data[0].website,
-                         phone:res.data[0].phone
+                         phone:res.data[0].phone,
+                         profilePicture: res.data[0].profile_picture
                         });
           console.log(this.state);
           console.log("2");})
     
 }
-
 
   fileSelectedHandler = event => {
     this.setState({
@@ -107,21 +107,14 @@ class Profile extends Component {
   fileUploadHandler = () => {
     const fd = new FormData();
     fd.append('image', this.state.selectedFile);
-    // axios.post('/file-upload', fd).then((res) => {
-    //     this.newPP = res.data.imageUrl;
-    //     console.log(res);
-    //     console.log(this.newPP);
-      
-    // }).then(() => {
-    //     axios.put().then(console.log((newresponse)))
-    // })
-
-      axios.post('/file-upload', fd).then((postResponse) => {
+      try {
+        axios.post('/file-upload', fd).then((postResponse) => {
         this.newPP = postResponse.data.imageUrl;
         console.log(postResponse);
+      }, (err) => {
+        console.log(err);
       }).then(() => {
         //do PUT call
-        console.log(this.newPP);
         const data = {
           profilePic: this.newPP
         }
@@ -131,9 +124,10 @@ class Profile extends Component {
           console.log(putResponse);
         })
       })
+    }catch(err) {
+      console.log(err);
+    };
   }
-
-
 
   
   render() {
@@ -182,7 +176,8 @@ class Profile extends Component {
         <div className="jumbotron mt-5">
           <div className="col-sm-8 mx-auto">
             <h1 className="text-center">WELCOME {this.state.name} </h1>
-            <input type = "file" onChange={this.fileSelectedHandler}/>
+            <img src = {this.state.profilePicture} alt = "profilePic"/>
+            <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
             <button onClick={this.fileUploadHandler}>Upload</button>
           </div>
           <div class = "mx-auto">
