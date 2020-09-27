@@ -1,12 +1,15 @@
 var express = require('express');
+const img_upload = require('../services/img-upload');
+const pdf_upload = require('../services/pdf-upload');
+const img_delete = require('../services/img-delete');
 var router = express.Router();
 
-const upload = require('../services/file-upload');
 
-const singleUpload = upload.single('image');
+const singleImgUpload = img_upload.single('image');
+const singlePdfUpload = pdf_upload.single('transcript');
 
-router.post('/file-upload', function(req, res) {
-    singleUpload(req, res, function(err) {
+router.post('/img-upload', function(req, res) {
+    singleImgUpload(req, res, function(err) {
         
         if (err) {
             return res.status(422).send({errors: [{title: 'File Upload Error', detail: err.message}]})
@@ -15,5 +18,27 @@ router.post('/file-upload', function(req, res) {
         return res.json({'imageUrl': req.file.location});
     });
 });
+
+
+router.post('/pdf-upload', function(req, res) {
+    singlePdfUpload(req, res, function(err) {
+        if (err) {
+            return res.status(422).send({errors: [{title: 'File Upload Error', detail: err.message}]})
+        }
+
+        return res.json({'transcriptUrl': req.file.location});
+    });
+});
+
+router.delete('/deletepicture', function(req, res) {
+    try {
+        img_delete(req.body.url);
+        res.send("found");
+    }catch(err) {
+        console.log(err);
+    }
+});
+
+
 
 module.exports = router;

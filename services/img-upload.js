@@ -23,12 +23,11 @@ const fileFilter = (req, file, cb) => {
 }
 
 
-const upload = multer({
+const img_upload = multer({
   fileFilter,
   storage: multerS3({
     s3: s3,
     bucket: 'it-project-bucket-2020',
-    acl: 'public-read',
     metadata: function (req, file, cb) {
       cb(null, {fieldName: 'TESTING_IMAGE'});
     },
@@ -38,4 +37,4 @@ const upload = multer({
   })
 })
 
-module.exports = upload;
+module.exports = img_upload;

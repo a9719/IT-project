@@ -14,6 +14,7 @@ import { GET_PROFILE } from "../actions/profileActions";
 
 import NavigationBar from "./NavigationBar";
 import Footer from "./Footer";
+import "./profile_pic.css";
 
 const Styles = styled.div
 `
@@ -89,7 +90,8 @@ class Profile extends Component {
                          education:res.data[0].education,
                          website:res.data[0].website,
                          phone:res.data[0].phone,
-                         profilePicture: res.data[0].profile_picture
+                         profilePicture: res.data[0].profile_picture,
+                         imgHash: Date.now()
                         });
           console.log(this.state);
           console.log("2");})
@@ -106,9 +108,12 @@ class Profile extends Component {
 
   fileUploadHandler = () => {
     const fd = new FormData();
+    if (this.state.selectedFile == null) {
+      return (Error);
+    }
     fd.append('image', this.state.selectedFile);
       try {
-        axios.post('/file-upload', fd).then((postResponse) => {
+        axios.post('/img-upload', fd).then((postResponse) => {
         this.newPP = postResponse.data.imageUrl;
         console.log(postResponse);
       }, (err) => {
@@ -121,6 +126,9 @@ class Profile extends Component {
         console.log(data);
         axios.put('/addprofilepic/' + this.props.auth.user, data).then((putResponse) => {
           //do PUT stuff with response
+          this.setState({
+            profilePicture: this.newPP
+          });
           console.log(putResponse);
         })
       })
@@ -176,7 +184,7 @@ class Profile extends Component {
         <div className="jumbotron mt-5">
           <div className="col-sm-8 mx-auto">
             <h1 className="text-center">WELCOME {this.state.name} </h1>
-            <img src = {this.state.profilePicture} alt = "profilePic"/>
+            <img key = {this.state.imgHash} src = {this.state.profilePicture} class = "profile_pic" alt = "profilePic"/>
             <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
             <button onClick={this.fileUploadHandler}>Upload</button>
           </div>
