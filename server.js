@@ -25,9 +25,12 @@ mongoose.connect(
 require('./models/user.js');
 require('./models/profile.js');
 
-var routes = require('./routes/router.js');
+const routes = require('./routes/router.js');
+const fileRoutes = require('./routes/file-upload.js');
+
 
 app.use('/', routes);
+app.use('/', fileRoutes);
 
 app.listen(port, function() {
   console.log('Server is running on port: ' + port)
