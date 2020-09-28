@@ -81,6 +81,7 @@ class Profile extends Component {
   componentDidMount() {
     axios
         .get('/profile1/'+(this.props.auth.user))
+
         .then(res=>{
           this.setState({email:res.data[0].email,
                          name:res.data[0].name,
@@ -95,6 +96,7 @@ class Profile extends Component {
                         });
           console.log(this.state);
           console.log("2");})
+
     
 }
 
@@ -141,7 +143,7 @@ class Profile extends Component {
   render() {
     
     if ((this.state.email.length)===0)
-    { console.log("1");
+    { 
       this.componentDidMount();
       return null;
     }
