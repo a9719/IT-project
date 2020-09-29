@@ -30,7 +30,7 @@ var createUser = function(req, res) {
                     var profile =new Profile({
                         user: newUser,
                         name: user.name,
-                        profile_picture: '',
+                        profile_picture: "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/blank-profile.png",
                         website:'',
                         education:[],
                         subjects:[],
