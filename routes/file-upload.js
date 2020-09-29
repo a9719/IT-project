@@ -33,8 +33,7 @@ router.post('/pdf-upload', function(req, res) {
 
 router.delete('/deletepicture', (req, res, next)=> {
     try {
-        console.log(req);
-        img_delete(req.config.url);
+        img_delete(req.query.url);
         res.send("found");
     }catch(err) {
         console.log(err);

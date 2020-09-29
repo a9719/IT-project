@@ -111,14 +111,16 @@ class Profile extends Component {
     if (this.state.selectedFile == null) {
       return (Error);
     }
+    if (this.state.profilePicture !==  "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/blank-profile.png") {
+      axios.delete('/deletepicture', {
+        params: {
+          url: this.state.profilePicture
+        }
+      }).then(res=> {
+        console.log(res);
+      })
+    }
 
-    axios.delete('/deletepicture', {
-      data: {
-        url: "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/nl.PNG"
-      }
-    }).then(res=> {
-      console.log(res);
-    })
 
     fd.append('image', this.state.selectedFile);
       try {
