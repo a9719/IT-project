@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Helmet} from "react-helmet";
 import axios from 'axios';
 import {connect} from 'react-redux';
-import { Nav, Navbar, Dropdown} from 'react-bootstrap';
+import { Nav, Navbar, Dropdown, Button} from 'react-bootstrap';
 import styled from 'styled-components';
 import logo from './logo.svg';
 import PropTypes from 'prop-types';
@@ -72,19 +72,7 @@ function DisplayList(props) {
     <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
   );
 }
-function DisplayList1(props) {
-  var items = props;
-  console.log();
-  const sortedActivities = items.sort((a, b) => b.subjectyear - a.subjectyear);
-  items= sortedActivities;
 
-  const listItems = items.map( (item, index) =>
-<li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear}</li>
-  );
-  return (
-    <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
-  );
-}
 function DisplayList2(props) {
   var items = props;
   console.log();
@@ -115,7 +103,9 @@ class Profile extends Component {
       selectedFile: null,
       profilePicture: ''
     };
-  this.onLogoutClick=this.onLogoutClick.bind(this);}
+  this.onLogoutClick=this.onLogoutClick.bind(this);
+  
+}
 
     onLogoutClick = (e) => {
       e.preventDefault();
@@ -147,6 +137,8 @@ class Profile extends Component {
     })
   }
 
+ 
+
 
 
   fileUploadHandler = () => {
@@ -160,7 +152,7 @@ class Profile extends Component {
           url: this.state.profilePicture
         }
       }).then(res=> {
-        console.log(res);
+        
       })
     }
 
@@ -194,15 +186,42 @@ class Profile extends Component {
 
   
   render() {
+function deletesubject(index,user) {
+        
+        axios.put('findanddeletsub/'+user,index)
+        .then(response=> window.location.reload())
+        .catch(error => {
+          console.log("handlesubmit error for blog ", error)
+      })
+        
+        
+     
+      }
+      
+    
     
     if ((this.state.email.length)===0)
     { console.log("1");
       this.componentDidMount();
       return null;
     }
-    
+  
+    function DisplayList1(items,user) {
+      
+      console.log();
+      const sortedActivities = items.sort((a, b) => b.subjectyear - a.subjectyear);
+      items= sortedActivities;
+      
+      const listItems = items.map( (item, index) =>
+    <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={() => {deletesubject(items[index],user)}}>Delete</Button></li>
+      );
+      return (
+        <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
+      );
+    }
     
     return (
+      
       <div>
         
         <header id="home">
@@ -298,7 +317,7 @@ class Profile extends Component {
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Subjects</h2>
       <div>         
-      <p style= {{ fontSize: '25px'}} > {DisplayList1(this.state.subjects)} </p>
+      <p style= {{ fontSize: '25px'}} > {DisplayList1(this.state.subjects, this.props.auth.user)} </p>
       </div>
             
       
