@@ -53,6 +53,19 @@ function DisplayList(props) {
     <ul>{listItems}</ul> 
   );
 }
+function DisplayList1(props) {
+  var items = props;
+  console.log();
+  const sortedActivities = items.sort((a, b) => b.subjectyear - a.subjectyear);
+  items= sortedActivities;
+
+  const listItems = items.map( (item, index) =>
+<li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear}</li>
+  );
+  return (
+    <ul>{listItems}</ul> 
+  );
+}
 
 
 
@@ -93,8 +106,7 @@ class Profile extends Component {
                          profilePicture: res.data[0].profile_picture,
                          imgHash: Date.now()
                         });
-          console.log(this.state);
-          console.log("2");})
+          })
     
 }
 
@@ -126,7 +138,7 @@ class Profile extends Component {
       try {
         axios.post('/img-upload', fd).then((postResponse) => {
         this.newPP = postResponse.data.imageUrl;
-        console.log(postResponse);
+       
       }, (err) => {
         console.log(err);
       }).then(() => {
@@ -134,13 +146,13 @@ class Profile extends Component {
         const data = {
           profilePic: this.newPP
         }
-        console.log(data);
+        
         axios.put('/addprofilepic/' + this.props.auth.user, data).then((putResponse) => {
           //do PUT stuff with response
           this.setState({
             profilePicture: this.newPP
           });
-          console.log(putResponse);
+          
         })
       })
 
@@ -229,6 +241,15 @@ class Profile extends Component {
         </div>
         <div>
             <p style= {{ fontSize: '25px'}} > {DisplayList(this.state.skills)} </p>
+        </div>
+
+        <div id = "subjects" className="jumbotron mt-5 bg-info text-white">
+          <div className="col-sm-8 mx-auto">
+            <h1 className="text-center"> Subjects </h1>
+          </div>
+        </div>
+        <div>
+            <p style= {{ fontSize: '25px'}} > {DisplayList1(this.state.subjects)} </p>
         </div>
 
         <Footer/>

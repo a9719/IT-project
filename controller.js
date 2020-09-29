@@ -76,7 +76,7 @@ var findOneUser = function(req, res) {
 //Find one user by name
 var findUserByName = function(req, res) {
     var userName = req.params.name;
-    console.log(userName);
+    
     User.findOne({name:userName}, function(err, user) {
         if (!err) {
             console.log("errrr")
@@ -141,7 +141,7 @@ var getProfile =function(req,res){
     Profile.find({user:k},function(err,user2){
         if(user2){
             const payload=user2;
-            console.log(user2);
+            
             res.send(payload);
         }else{
            res.send(k);
@@ -160,11 +160,11 @@ var addBio= function(req,res){
     
     Profile.findOneAndUpdate({user:user1},{$set:{bio:bio1}},{new: true},function(err,user2){
         if(err){
-            console.log(user2);
+            
             res.send("wrong");
             
         }else{
-            console.log(user2);
+          
            res.send("found");
         }
     })
@@ -178,11 +178,11 @@ var addSkills= function(req,res){
     
     Profile.findOneAndUpdate({user:user1},{$push: {skills:skill}},{new: true},function(err,user2){
         if(err){
-            console.log(user2);
+          
             res.send("wrong");
             
         }else{
-            console.log(user2);
+        
            res.send("found");
         }
     })
