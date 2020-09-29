@@ -22,6 +22,16 @@ const ProfileSchema = new mongoose.Schema({
     bio: {
         type: String
     },
+    work: [{
+      workplace: {type: String},
+      position: {type: String},
+      from: {type: String},
+      to: {type: String}
+
+
+
+    }],
+    intro:{ type: String},
     education: [
       {
         school: {

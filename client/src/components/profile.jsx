@@ -15,6 +15,11 @@ import { GET_PROFILE } from "../actions/profileActions";
 import NavigationBar from "./NavigationBar";
 import Footer from "./Footer";
 import "./profile_pic.css";
+import "./css/default.css";
+import "./css/fonts.css";
+import "./css/layout.css";
+import "./css/magnific-popup.css";
+import "./css/media-queries.css";
 
 const Styles = styled.div
 `
@@ -43,6 +48,20 @@ const Styles = styled.div
     margin:0;
     float:none;
   }
+  .float-container {
+    border: 3px solid #fff;
+    padding: 20px;
+}
+
+.float-child {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+} 
+.education1 {
+  padding: 90px 0 72px; background: #fff;
+} 
 `;
 function DisplayList(props) {
   const items = props;
@@ -50,7 +69,7 @@ function DisplayList(props) {
     <li key = {index} >{item}</li>
   );
   return (
-    <ul>{listItems}</ul> 
+    <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
   );
 }
 function DisplayList1(props) {
@@ -63,7 +82,19 @@ function DisplayList1(props) {
 <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear}</li>
   );
   return (
-    <ul>{listItems}</ul> 
+    <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
+  );
+}
+function DisplayList2(props) {
+  var items = props;
+  console.log();
+  
+
+  const listItems = items.map( (item, index) =>
+<li style={{margin:'25'}} key = {index} >{item.school}</li>
+  );
+  return (
+    <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
   );
 }
 
@@ -172,84 +203,113 @@ class Profile extends Component {
     
     
     return (
-      <div className="container">
-        <div className="navbar">
-        <Styles>  
-    <Navbar className = "color-nav" expand="lg" bg="light" variant="light">
-      <Navbar.Brand href="/">
-        <img
-          src={logo}
-          width="80"
-          height="80"
-          className="d-inline-block align-top"
-          alt=""
-        />
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
-          <Nav.Item><Nav.Link href="" onClick={this.onLogoutClick}>Logout</Nav.Link></Nav.Item> 
-          <Dropdown class = "dropdown-center">
-                <Dropdown.Toggle variant = "outline-info" id = "dropdown-basic">
-                    Language Options
-                </Dropdown.Toggle>
+      <div>
+        
+        <header id="home">
+        <nav id="nav-wrap">
 
-                <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">English</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Chinese</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Japanese</Dropdown.Item>
-                </Dropdown.Menu>
-          </Dropdown>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  </Styles>
-        </div>
-        <div className="jumbotron mt-5">
-          <div className="col-sm-8 mx-auto">
-            <h1 className="text-center">WELCOME {this.state.name} </h1>
+        <a className="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+        <a className="mobile-btn" href="#home" title="Hide navigation">Hide navigation</a>
+
+        <ul id="nav" className="nav">
+        <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
+   <li><a className="smoothscroll" href="#about">Education</a></li>
+  <li><a className="smoothscroll" href="#skills">Skills</a></li>
+   <li><a className="smoothscroll" href="#projects">Projects</a></li>
+   <li><a className="smoothscroll" href="#subjects">Subjects</a></li>
+   <li><a className="smoothscroll" href="#contact">Contact</a></li>
+   <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}>Logout</a></li>
+</ul>
+
+</nav>
+        <div class="row banner">
+         <div class="banner-text">
+          
+            <h1 class="responsive-headline"> I'm  {this.state.name} </h1>
+            <div class="float-container">
+            <div class="float-child">
             <img key = {this.state.imgHash} src = {this.state.profilePicture} class = "profile_pic" alt = "profilePic"/>
-            <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
+            
+            
+              </div>
+
+                <div class="float-child">
+                <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
             <button onClick={this.fileUploadHandler}>Upload</button>
-          </div>
-          <div class = "mx-auto">
-            <Navbar bg="light" variant="light">
-              <Navbar.Toggle />
-              <Navbar.Collapse className="justify-content-center">
-                <Nav fill>
-                  <Nav.Link href = "#personal"> Personal </Nav.Link>
-                  <Nav.Link href = "#skills"> Skills </Nav.Link>
-                </Nav>
-              </Navbar.Collapse>
-            </Navbar>
-          </div>
-        </div>
+                <h3> <a class="smoothscroll" href="#about" float="left" width="50%"> {this.state.bio}</a></h3>
+             </div>
+            </div>
+            
+            <hr />
+            
+         </div>
+      </div>
+      </header>
+      <section id="about">
+      <div className="row">
+       
+         <div className="nine columns main-col">
+            <h2>About Me</h2>
 
-        <div  id = "personal" className="jumbotron mt-5 bg-info text-white">
-          <div className="col-sm-8 mx-auto">
-            <h1 className="text-center"> Personal Details </h1>
-          </div>
-        </div>
-        <div>
-            <p style= {{ fontSize: '25px'}} > {this.state.bio} </p>
-        </div>
+            <p>{this.state.bio}</p>
+            <div className="row">
+               <div className="columns contact-details">
+                  <h2>Contact Details</h2>
+                  <p className="address">
+						   <span>{this.state.phone}</span><br />
+                     <span>{this.state.email}</span>
+					   </p>
+               </div>
+               <div className="columns download">
+                  <p>
+                  
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>
 
-        <div id = "skills" className="jumbotron mt-5 bg-info text-white">
-          <div className="col-sm-8 mx-auto">
-            <h1 className="text-center"> Skills </h1>
-          </div>
-        </div>
-        <div>
-            <p style= {{ fontSize: '25px'}} > {DisplayList(this.state.skills)} </p>
-        </div>
+   </section>
+   
+   <section id="education">
+      <div style={{backgroundColor:'#fff'}}>
+      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Education</h2>
+      <div>         
+            <p  class="lead add-bottom" style= {{ fontSize: '20px'}}  > {DisplayList2(this.state.education)} </p>
+      </div>
+            
+      
+      </div>
 
-        <div id = "subjects" className="jumbotron mt-5 bg-info text-white">
-          <div className="col-sm-8 mx-auto">
-            <h1 className="text-center"> Subjects </h1>
-          </div>
-        </div>
+   </section>
+
+   <section id="skills">
+      <div style={{backgroundColor:'#fff'}}>
+      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Skills</h2>
+      <div>         
+      <p style= {{ fontSize: '25px'}} > {DisplayList(this.state.skills)} </p>
+      </div>
+            
+      
+      </div>
+
+   </section>
+   <section id="subjects">
+      <div style={{backgroundColor:'#fff'}}>
+      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Subjects</h2>
+      <div>         
+      <p style= {{ fontSize: '25px'}} > {DisplayList1(this.state.subjects)} </p>
+      </div>
+            
+      
+      </div>
+
+   </section>
+
+
+      
         <div>
-            <p style= {{ fontSize: '25px'}} > {DisplayList1(this.state.subjects)} </p>
+            
         </div>
 
         <Footer/>
