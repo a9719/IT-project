@@ -82,7 +82,8 @@ class Profile extends Component {
       website: '',
       phone: '',
       selectedFile: null,
-      profilePicture: ''
+      profilePicture: '',
+      transcript: ''
     };
   this.onLogoutClick=this.onLogoutClick.bind(this);}
 
@@ -104,6 +105,7 @@ class Profile extends Component {
                          website:res.data[0].website,
                          phone:res.data[0].phone,
                          profilePicture: res.data[0].profile_picture,
+                         transcript: res.data[0].transcript,
                          imgHash: Date.now()
                         });
           })
@@ -117,8 +119,52 @@ class Profile extends Component {
   }
 
 
+  pdfUploadHandler = () => {
+    const fd = new FormData();
+    if (this.state.selectedFile == null) {
+      return (Error);
+    }
+    if (this.state.transcript !== "") {
+      axios.delete('/deletepicture', {
+        params: {
+          url: this.state.transcript
+        }
+      }).then(res=> {
+        console.log(res);
+      })
+    }
 
-  fileUploadHandler = () => {
+
+    fd.append('transcript', this.state.selectedFile);
+      try {
+        axios.post('/pdf-upload', fd).then((postResponse) => {
+        this.newTrans = postResponse.data.transcriptUrl;
+       
+      }, (err) => {
+        console.log(err);
+      }).then(() => {
+        //do PUT call
+        const data = {
+          transcript: this.newTrans
+        }
+        
+        axios.put('/addtranscript/' + this.props.auth.user, data).then((putResponse) => {
+          //do PUT stuff with response
+          this.setState({
+            transcript: this.newTrans
+          });
+          
+        })
+      })
+
+    }catch(err) {
+      console.log(err);
+    };
+  }
+
+
+
+  imgUploadHandler = () => {
     const fd = new FormData();
     if (this.state.selectedFile == null) {
       return (Error);
@@ -210,7 +256,11 @@ class Profile extends Component {
             <h1 className="text-center">WELCOME {this.state.name} </h1>
             <img key = {this.state.imgHash} src = {this.state.profilePicture} class = "profile_pic" alt = "profilePic"/>
             <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
-            <button onClick={this.fileUploadHandler}>Upload</button>
+            <button onClick={this.imgUploadHandler}>Upload</button>
+            <h1 className = "text-center"> UPLOAD TRANSCRIPT </h1>
+            <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
+            <button onClick={this.pdfUploadHandler}>Upload Transcript </button>
+            <a href = {this.state.transcript} download = "user_transcript">Click to Download Transcript</a>
           </div>
           <div class = "mx-auto">
             <Navbar bg="light" variant="light">

@@ -31,6 +31,7 @@ var createUser = function(req, res) {
                         user: newUser,
                         name: user.name,
                         profile_picture: "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/blank-profile.png",
+                        transcript: "",
                         website:'',
                         education:[],
                         subjects:[],
@@ -292,6 +293,24 @@ var addProfilePicture = function(req, res) {
     })
 }
 
+var addTranscript = function(req, res) {
+    var user1 = req.params.user;
+
+    const transcript = req.body.transcript;
+
+    Profile.findOneAndUpdate({user:user1},{$set:{transcript:transcript}},{new: true},function(err,user2){
+        if(err){
+            console.log(user2);
+            res.send("wrong");
+            
+        }else{
+            console.log(user2);
+           res.send("found");
+        }
+    })
+}
+
+module.exports.addTranscript=addTranscript;
 module.exports.addProfilePicture=addProfilePicture;
 module.exports.findSkillAndDelete=findSkillAndDelete;
 module.exports.findSubjectsAndDelete=findSubjectsAndDelete;
