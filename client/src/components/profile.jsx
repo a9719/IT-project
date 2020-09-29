@@ -94,7 +94,6 @@ class Profile extends Component {
   componentDidMount() {
     axios
         .get('/profile1/'+(this.props.auth.user))
-
         .then(res=>{
           this.setState({email:res.data[0].email,
                          name:res.data[0].name,
@@ -108,7 +107,6 @@ class Profile extends Component {
                          imgHash: Date.now()
                         });
           })
-
     
 }
 
@@ -125,6 +123,17 @@ class Profile extends Component {
     if (this.state.selectedFile == null) {
       return (Error);
     }
+    if (this.state.profilePicture !==  "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/blank-profile.png") {
+      axios.delete('/deletepicture', {
+        params: {
+          url: this.state.profilePicture
+        }
+      }).then(res=> {
+        console.log(res);
+      })
+    }
+
+
     fd.append('image', this.state.selectedFile);
       try {
         axios.post('/img-upload', fd).then((postResponse) => {
@@ -146,6 +155,7 @@ class Profile extends Component {
           
         })
       })
+
     }catch(err) {
       console.log(err);
     };
@@ -155,7 +165,7 @@ class Profile extends Component {
   render() {
     
     if ((this.state.email.length)===0)
-    { 
+    { console.log("1");
       this.componentDidMount();
       return null;
     }
