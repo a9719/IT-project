@@ -16,7 +16,7 @@ const img_delete = (props) => {
     const {region, bucket, key} = AmazonS3URI(props);
 
     var params = {
-        Bucket : "it-project-bucket-2020",
+        Bucket : bucket,
         Key : key
     }
 
