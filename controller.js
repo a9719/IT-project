@@ -30,12 +30,13 @@ var createUser = function(req, res) {
                     var profile =new Profile({
                         user: newUser,
                         name: user.name,
+                        profile_picture: '',
                         website:'',
                         education:[],
                         subjects:[],
                         email:user.email,
                         phone:'',
-                        skills:'',
+                        skills:[],
                         bio:'',
                         date:''});
                     
@@ -274,6 +275,24 @@ var findSubjectsAndDelete= function(req,res){
     })
 };
 
+var addProfilePicture = function(req, res) {
+    var user1 = req.params.user;
+
+    const profilePic = req.body.profilePic;
+
+    Profile.findOneAndUpdate({user:user1},{$set:{profile_picture:profilePic}},{new: true},function(err,user2){
+        if(err){
+            console.log(user2);
+            res.send("wrong");
+            
+        }else{
+            console.log(user2);
+           res.send("found");
+        }
+    })
+}
+
+module.exports.addProfilePicture=addProfilePicture;
 module.exports.findSkillAndDelete=findSkillAndDelete;
 module.exports.findSubjectsAndDelete=findSubjectsAndDelete;
 module.exports.findSk

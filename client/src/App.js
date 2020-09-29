@@ -13,6 +13,8 @@ import Register from './components/register';
 import Login from './components/login';
 import Landing from './components/landing';
 
+const dotenv = require('dotenv').config()
+
 class App extends Component {
 
   render() {

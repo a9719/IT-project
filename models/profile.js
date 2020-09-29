@@ -5,6 +5,7 @@ const ProfileSchema = new mongoose.Schema({
         ref: 'user'
     },
     name:{type:String},
+    profile_picture:{type:String},
     website: {
         type: String
     },

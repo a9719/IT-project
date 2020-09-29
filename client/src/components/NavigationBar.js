@@ -24,8 +24,11 @@ const Styles = styled.div
       background-color : rgb(255,255,255);
   }
 `;
-
+const listLanguage = [
+  {key:'en', label:'English'}
+];
 export const NavigationBar = () => (
+  
   <Styles>  
     <Navbar className = "color-nav" expand="lg" bg="light" variant="light">
       <Navbar.Brand href="/">

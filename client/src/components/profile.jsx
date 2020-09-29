@@ -17,12 +17,21 @@ import NavigationBar from "./NavigationBar"
 
 import image from './blank-profile.png';
 
+
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      bio: ''
+      name: '',
+      bio: '',
+      skills: [],
+      subjects: [],
+      education: [],
+      website: '',
+      phone: '',
+      selectedFile: null,
+      profilePicture: ''
     };
   this.onLogoutClick=this.onLogoutClick.bind(this);}
 
@@ -34,13 +43,63 @@ class Profile extends Component {
   componentDidMount() {
     axios
         .get('/profile1/'+(this.props.auth.user))
-        .then(res=>{this.setState({email:res.data[0].email, bio:res.data[0].name});
+
+        .then(res=>{
+          this.setState({email:res.data[0].email,
+                         name:res.data[0].name,
+                         bio:res.data[0].bio,
+                         skills:res.data[0].skills,
+                         subjects:res.data[0].subjects,
+                         education:res.data[0].education,
+                         website:res.data[0].website,
+                         phone:res.data[0].phone,
+                         profilePicture: res.data[0].profile_picture,
+                         imgHash: Date.now()
+                        });
           console.log(this.state);
           console.log("2");})
+
     
 }
 
+  fileSelectedHandler = event => {
+    this.setState({
+      selectedFile: event.target.files[0]
+    })
+  }
 
+
+
+  fileUploadHandler = () => {
+    const fd = new FormData();
+    if (this.state.selectedFile == null) {
+      return (Error);
+    }
+    fd.append('image', this.state.selectedFile);
+      try {
+        axios.post('/img-upload', fd).then((postResponse) => {
+        this.newPP = postResponse.data.imageUrl;
+        console.log(postResponse);
+      }, (err) => {
+        console.log(err);
+      }).then(() => {
+        //do PUT call
+        const data = {
+          profilePic: this.newPP
+        }
+        console.log(data);
+        axios.put('/addprofilepic/' + this.props.auth.user, data).then((putResponse) => {
+          //do PUT stuff with response
+          this.setState({
+            profilePicture: this.newPP
+          });
+          console.log(putResponse);
+        })
+      })
+    }catch(err) {
+      console.log(err);
+    };
+  }
 
   
   render() {
