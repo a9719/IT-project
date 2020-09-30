@@ -125,7 +125,7 @@ class Profile extends Component {
       return (Error);
     }
     if (this.state.transcript !== "") {
-      axios.delete('/deletepicture', {
+      axios.delete('/deletefile', {
         params: {
           url: this.state.transcript
         }
@@ -170,7 +170,7 @@ class Profile extends Component {
       return (Error);
     }
     if (this.state.profilePicture !==  "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/blank-profile.png") {
-      axios.delete('/deletepicture', {
+      axios.delete('/deletefile', {
         params: {
           url: this.state.profilePicture
         }
