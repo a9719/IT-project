@@ -58,6 +58,12 @@ const ProfileSchema = new mongoose.Schema({
 
 
       }
-    ]
+    ],
+    projects:[{
+      projectname:{type:String, required:true},
+      projectdescription:{type:String,required:true},
+      projectlink:{type:String}
+
+    }]
 });
 var profile = mongoose.model('profile', ProfileSchema);
