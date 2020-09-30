@@ -82,6 +82,9 @@ function DisplayList2(props) {
   );
 }
 
+function startDownload(url) {
+  window.location.href(url)
+}
 
 
 class Profile extends Component {
@@ -338,7 +341,7 @@ function deletesubject(index,user) {
 
                 <div class="float-child">
                 <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
-            <button onClick={this.fileUploadHandler}>Upload</button>
+            <button onClick={this.imgUploadHandler}>Upload</button>
                 <h3> <a class="smoothscroll" href="#about" float="left" width="50%"> {this.state.bio}</a></h3>
              </div>
             </div>
@@ -365,6 +368,9 @@ function deletesubject(index,user) {
                </div>
                <div className="columns download">
                   <p>
+                  <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
+                  <button onClick={this.pdfUploadHandler}>Upload Transcript </button>
+                  <a href = {this.state.transcript} target = "_blank" download = "transcript">Click to Download Transcript</a>
                   
                   </p>
                </div>
@@ -386,6 +392,8 @@ function deletesubject(index,user) {
 
    </section>
 
+
+
    <section id="skills">
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Skills</h2>
@@ -397,6 +405,7 @@ function deletesubject(index,user) {
       </div>
 
    </section>
+
    <section id="subjects">
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Subjects</h2>

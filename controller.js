@@ -33,6 +33,7 @@ var createUser = function(req, res) {
                         profile_picture: "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/blank-profile.png",
                         transcript: "",
                         website:'',
+                        gallery:[],
                         education:[],
                         subjects:[],
                         work:[],
