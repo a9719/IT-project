@@ -17,14 +17,8 @@ import NavigationBar from "./NavigationBar"
 
 import image from './blank-profile.png';
 import { Button, Modal} from 'react-bootstrap';
-import styled from 'styled-components';
-import logo from './logo.svg';
-import PropTypes from 'prop-types';
 
-import {  logoutUser } from "./../actions/authActions";
 
-import Footer from "./Footer";
-import NavigationBar from "./NavigationBar";
 import "./profile_pic.css";
 import "./css/default.css";
 import "./css/fonts.css";
@@ -288,19 +282,35 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
 
   
   render() {
-function deletesubject(index,user) {
-        
-        axios.put('findanddeletsub/'+user,index)
-        .then(response=> window.location.reload())
-        .catch(error => {
-          console.log("handlesubmit error for blog ", error)
+    function deletesubject(index,user) {
+
+      axios.put('findanddeletsub/'+user,index)
+      .then(response=> window.location.reload())
+      .catch(error => {
+        console.log("handlesubmit error for blog ", error)
       })
-        
-        
-     
-      }
+    }
       
     
+  if ((this.state.email.length)===0)
+  { console.log("1");
+    this.componentDidMount();
+    return null;
+  }
+
+  function DisplayList1(items,user) {
+    
+    console.log();
+    const sortedActivities = items.sort((a, b) => b.subjectyear - a.subjectyear);
+    items= sortedActivities;
+    
+    const listItems = items.map( (item, index) =>
+  <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={() => {deletesubject(items[index],user)}}>Delete</Button></li>
+    );
+    return (
+      <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
+    );
+  }    
         
     return (
       <div className = "page-container">
@@ -381,31 +391,6 @@ function deletesubject(index,user) {
               </Accordion>
           </div>
 
-  if ((this.state.email.length)===0)
-    { console.log("1");
-      this.componentDidMount();
-      return null;
-    }
-  
-    function DisplayList1(items,user) {
-      
-      console.log();
-      const sortedActivities = items.sort((a, b) => b.subjectyear - a.subjectyear);
-      items= sortedActivities;
-      
-      const listItems = items.map( (item, index) =>
-    <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={() => {deletesubject(items[index],user)}}>Delete</Button></li>
-      );
-      return (
-        <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
-      );
-    }
-    
-    return (
-      
-      <React.Fragment>
-        <NavigationBar/>
-
       <div>
         
         <header id="home">
@@ -468,7 +453,7 @@ function deletesubject(index,user) {
                   <p>
                   <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
                   <button onClick={this.pdfUploadHandler}>Upload Transcript </button>
-                  <a href = {this.state.transcript} target = "_blank" download = "transcript">Click to Download Transcript</a>
+                  <a href = {this.state.transcript} target = "_blank" rel ="noopener noreferrer" download = "transcript">Click to Download Transcript</a>
                   
                   </p>
                </div>
@@ -569,7 +554,7 @@ function deletesubject(index,user) {
         </div>
         <Footer/>
       </div>
-      </React.Fragment>
+      </div>
     )
   }
 }
