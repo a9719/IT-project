@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import {  logoutUser } from "./../actions/authActions";
 
 import Footer from "./Footer";
+import NavigationBar from "./NavigationBar";
 import "./profile_pic.css";
 import "./css/default.css";
 import "./css/fonts.css";
@@ -59,6 +60,7 @@ const Styles = styled.div
   padding: 90px 0 72px; background: #fff;
 } 
 `;
+
 function DisplayList(props) {
   const items = props;
   const listItems = items.map( (item, index) =>
@@ -309,25 +311,29 @@ function deletesubject(index,user) {
     
     return (
       
+      <React.Fragment>
+        <NavigationBar/>
+
       <div>
         
         <header id="home">
         <nav id="nav-wrap">
 
-        <a className="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
-        <a className="mobile-btn" href="#home" title="Hide navigation">Hide navigation</a>
+          <a className="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+          <a className="mobile-btn" href="#home" title="Hide navigation">Hide navigation</a>
 
-        <ul id="nav" className="nav">
-        <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
-   <li><a className="smoothscroll" href="#about">Education</a></li>
-  <li><a className="smoothscroll" href="#skills">Skills</a></li>
-   <li><a className="smoothscroll" href="#projects">Projects</a></li>
-   <li><a className="smoothscroll" href="#subjects">Subjects</a></li>
-   <li><a className="smoothscroll" href="#contact">Contact</a></li>
-   <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}>Logout</a></li>
-</ul>
+          <ul id="nav" className="nav">
+          <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
+          <li><a className="smoothscroll" href="#about">Education</a></li>
+          <li><a className="smoothscroll" href="#skills">Skills</a></li>
+          <li><a className="smoothscroll" href="#projects">Projects</a></li>
+          <li><a className="smoothscroll" href="#subjects">Subjects</a></li>
+          <li><a className="smoothscroll" href="#contact">Contact</a></li>
+          <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}>Logout</a></li>
+          </ul>
 
-</nav>
+        </nav>
+
         <div class="row banner">
          <div class="banner-text">
           
@@ -472,6 +478,7 @@ function deletesubject(index,user) {
 
         <Footer/>
       </div>
+      </React.Fragment>
     )
   }
 }
