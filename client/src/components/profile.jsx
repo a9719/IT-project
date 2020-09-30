@@ -20,6 +20,7 @@ import "./css/magnific-popup.css";
 import "./css/media-queries.css";
 import en from "./i18n/en";
 import cn from "./i18n/cn";
+import jp from "./i18n/jp";
 
 const Styles = styled.div
 `
@@ -90,6 +91,7 @@ function DisplayList2(props) {
 //Translation
 counterpart.registerTranslations('en',en);
 counterpart.registerTranslations('cn',cn);
+counterpart.registerTranslations('jp',jp);
 
 counterpart.setLocale('en');
 class Profile extends Component {
