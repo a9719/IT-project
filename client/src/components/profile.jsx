@@ -1,18 +1,14 @@
 import React, { Component } from 'react'
-import {Helmet} from "react-helmet";
+
 import axios from 'axios';
 import {connect} from 'react-redux';
-import { Nav, Navbar, Dropdown, Button} from 'react-bootstrap';
+import { Button, Modal} from 'react-bootstrap';
 import styled from 'styled-components';
 import logo from './logo.svg';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { setCurrentUser, logoutUser } from "./../actions/authActions";
-import JwtDecode from 'jwt-decode';
-import setAuthToken from "../utils/setAuthToken"
-import { GET_PROFILE } from "../actions/profileActions";
 
-import NavigationBar from "./NavigationBar";
+import {  logoutUser } from "./../actions/authActions";
+
 import Footer from "./Footer";
 import "./profile_pic.css";
 import "./css/default.css";
@@ -101,11 +97,54 @@ class Profile extends Component {
       website: '',
       phone: '',
       selectedFile: null,
-      profilePicture: ''
+      profilePicture: '',
+      showAdd:false,
+      addsubjectname:'',
+      addsubjectyear:'',
+      addsubjectdescripition:''
     };
   this.onLogoutClick=this.onLogoutClick.bind(this);
+  this.onChange =this.onChange.bind(this);
+  this.onSubmitSubject =this.onSubmitSubject.bind(this);
   
 }
+showAddModal = () => {
+  this.setState({ showAdd: true });
+};
+
+hideAddModal = () => {
+  this.setState({subjectname:''});
+  this.setState({subjectdescripition:''});
+  this.setState({subjectyear:''});
+  this.setState({ showAdd: false });
+};
+onChange = (e) => {
+  
+  this.setState({[e.target.name]: e.target.value});
+}
+onSubmitSubject = (e) =>{
+  
+  e.preventDefault();
+
+
+  const userData = {
+    subjectname: this.state.addsubjectname,
+    subjectdesc: this.state.addsubjectdescripition,
+    year: this.state.addsubjectyear
+};
+console.log(userData);
+
+axios.put('/profilesub/'+this.props.auth.user,userData)
+
+
+  this.setState({addsubjectname:''});
+  this.setState({addsubjectdescripition:''});
+  this.setState({addsubjectyear:''});
+  this.setState({showAdd:false});
+
+
+}
+
 
     onLogoutClick = (e) => {
       e.preventDefault();
@@ -318,6 +357,52 @@ function deletesubject(index,user) {
       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Subjects</h2>
       <div>         
       <p style= {{ fontSize: '25px'}} > {DisplayList1(this.state.subjects, this.props.auth.user)} </p>
+      <button style={{alignItems:'center'}} onClick={this.showAddModal}>Add Subjects</button>
+      <Modal show={this.state.showAdd} >
+        <Modal.Header closeButton onClick={this.hideAddModal}></Modal.Header>
+      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Add Subjects</h2>
+      <form onSubmit={this.onSubmitSubject}>
+                  <div className="form-group">
+                    <input onChange={this.onChange}
+                      value={this.state.addsubjectname}
+                      
+                      type="text"
+                      className={("form-control")}
+                      placeholder="Add Subject Name"
+                      name="addsubjectname"
+                          
+                          required autoFocus 
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input onChange={this.onChange}
+                      value={this.state.addsubjectdescripition}
+                      
+                      type="text"
+                      className={("form-control")}
+                      placeholder="Add Subject Description"
+                      name="addsubjectdescripition"
+                          
+                          required autoFocus 
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input onChange={this.onChange}
+                      value={this.state.addsubjectyear}
+                      
+                      type="text"
+                      className={("form-control")}
+                      placeholder="Add Subject Year"
+                      name="addsubjectyear"
+                          
+                          required autoFocus 
+                    />
+                  </div>
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
+                  </form>
+
+      
+        </Modal>
       </div>
             
       
