@@ -313,6 +313,25 @@ var addTranscript = function(req, res) {
     })
 }
 
+var addGallery = function(req, res) {
+    var user1 = req.params.user;
+
+    const galleryPic = req.body;
+
+    Profile.findOneAndUpdate({user:user1},{$push:{imagesource:galleryPic.imagesource, description:galleryPic.description}},{new: true},function(err,user2){
+        if(err){
+            console.log(user2);
+            res.send("wrong");
+            
+        }else{
+            console.log(user2);
+           res.send("found");
+        }
+    })
+}
+
+
+module.exports.addGallery=addGallery;
 module.exports.addTranscript=addTranscript;
 module.exports.addProfilePicture=addProfilePicture;
 module.exports.findSkillAndDelete=findSkillAndDelete;
