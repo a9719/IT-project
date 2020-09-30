@@ -23,6 +23,16 @@ const ProfileSchema = new mongoose.Schema({
     bio: {
         type: String
     },
+    work: [{
+      workplace: {type: String},
+      position: {type: String},
+      from: {type: String},
+      to: {type: String}
+
+
+
+    }],
+    intro:{ type: String},
     education: [
       {
         school: {
@@ -49,6 +59,12 @@ const ProfileSchema = new mongoose.Schema({
 
 
       }
-    ]
+    ],
+    projects:[{
+      projectname:{type:String, required:true},
+      projectdescription:{type:String,required:true},
+      projectlink:{type:String}
+
+    }]
 });
 var profile = mongoose.model('profile', ProfileSchema);

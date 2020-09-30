@@ -35,6 +35,8 @@ var createUser = function(req, res) {
                         website:'',
                         education:[],
                         subjects:[],
+                        work:[],
+                        intro:"",
                         email:user.email,
                         phone:'',
                         skills:[],
@@ -196,11 +198,11 @@ var findSkillAndDelete = function(req, res) {
 
     Profile.findOneAndUpdate({user:user1},{$pull: {skills: {skill}}},{new: true},function(err,user2){
         if(err){
-            console.log(user2);
+            
             res.send("wrong");
             
         }else{
-            console.log(user2);
+           
            res.send("found");
         }
     })
@@ -215,11 +217,11 @@ var addEducation= function(req,res){
     
     Profile.findOneAndUpdate({user:user1},{$push: {education:{school:edu}}},{new: true},function(err,user2){
         if(err){
-            console.log(user2);
+            
             res.send("wrong");
             
         }else{
-            console.log(user2);
+        
            res.send("found");
         }
     })
@@ -232,11 +234,11 @@ var deleteEducation= function(req,res){
     
     Profile.findOneAndUpdate({user:user1},{$pull: {education:{school:edu}}},{new: true},function(err,user2){
         if(err){
-            console.log(user2);
+          
             res.send("wrong");
             
         }else{
-            console.log(user2);
+           
            res.send("found");
         }
     })
@@ -248,11 +250,11 @@ var addSubjects= function(req,res){
 
     Profile.findOneAndUpdate({user:user1},{$push: {subjects:{subjectname:edu.subjectname,subjectdescripition:edu.subjectdesc,subjectyear:edu.year}}},{new: true},function(err,user2){
         if(err){
-            console.log(user2);
+         
             res.send("wrong");
             
         }else{
-            console.log(user2);
+          
            res.send("found");
         }
     })
@@ -262,15 +264,15 @@ var findSubjectsAndDelete= function(req,res){
     var user1=req.params.user;
     
     const edu= req.body;
-
+    console.log(req.body);
     
-    Profile.findOneAndUpdate({user:user1},{$pull:{subjects:{subjectname:edu.subjectname,subjectdescripition:edu.subjectdesc,subjectyear:edu.year}}},{new: true},function(err,user2){
+    Profile.findOneAndUpdate({user:user1},{$pull:{subjects:{subjectname:edu.subjectname,subjectdescripition:edu.subjectdescripition,subjectyear:edu.subjectyear}}},{new: true},function(err,user2){
         if(err){
-            console.log(user2);
+            
             res.send("wrong");
             
         }else{
-            console.log(user2);
+            
            res.send("found");
         }
     })
@@ -283,11 +285,11 @@ var addProfilePicture = function(req, res) {
 
     Profile.findOneAndUpdate({user:user1},{$set:{profile_picture:profilePic}},{new: true},function(err,user2){
         if(err){
-            console.log(user2);
+            
             res.send("wrong");
             
         }else{
-            console.log(user2);
+            
            res.send("found");
         }
     })

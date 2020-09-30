@@ -1,20 +1,21 @@
 import React, { Component } from 'react'
-import {Helmet} from "react-helmet";
+
 import axios from 'axios';
 import {connect} from 'react-redux';
-import { Nav, Navbar, Dropdown} from 'react-bootstrap';
+import { Button, Modal} from 'react-bootstrap';
 import styled from 'styled-components';
 import logo from './logo.svg';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { setCurrentUser, logoutUser } from "./../actions/authActions";
-import JwtDecode from 'jwt-decode';
-import setAuthToken from "../utils/setAuthToken"
-import { GET_PROFILE } from "../actions/profileActions";
 
-import NavigationBar from "./NavigationBar";
+import {  logoutUser } from "./../actions/authActions";
+
 import Footer from "./Footer";
 import "./profile_pic.css";
+import "./css/default.css";
+import "./css/fonts.css";
+import "./css/layout.css";
+import "./css/magnific-popup.css";
+import "./css/media-queries.css";
 
 const Styles = styled.div
 `
@@ -43,6 +44,20 @@ const Styles = styled.div
     margin:0;
     float:none;
   }
+  .float-container {
+    border: 3px solid #fff;
+    padding: 20px;
+}
+
+.float-child {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+} 
+.education1 {
+  padding: 90px 0 72px; background: #fff;
+} 
 `;
 function DisplayList(props) {
   const items = props;
@@ -50,20 +65,20 @@ function DisplayList(props) {
     <li key = {index} >{item}</li>
   );
   return (
-    <ul>{listItems}</ul> 
+    <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
   );
 }
-function DisplayList1(props) {
+
+function DisplayList2(props) {
   var items = props;
   console.log();
-  const sortedActivities = items.sort((a, b) => b.subjectyear - a.subjectyear);
-  items= sortedActivities;
+  
 
   const listItems = items.map( (item, index) =>
-<li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear}</li>
+<li style={{margin:'25'}} key = {index} >{item.school}</li>
   );
   return (
-    <ul>{listItems}</ul> 
+    <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
   );
 }
 
@@ -83,9 +98,54 @@ class Profile extends Component {
       phone: '',
       selectedFile: null,
       profilePicture: '',
-      transcript: ''
+      transcript: '',
+      showAdd:false,
+      addsubjectname:'',
+      addsubjectyear:'',
+      addsubjectdescripition:''
     };
-  this.onLogoutClick=this.onLogoutClick.bind(this);}
+  this.onLogoutClick=this.onLogoutClick.bind(this);
+  this.onChange =this.onChange.bind(this);
+  this.onSubmitSubject =this.onSubmitSubject.bind(this);
+  
+}
+showAddModal = () => {
+  this.setState({ showAdd: true });
+};
+
+hideAddModal = () => {
+  this.setState({subjectname:''});
+  this.setState({subjectdescripition:''});
+  this.setState({subjectyear:''});
+  this.setState({ showAdd: false });
+};
+onChange = (e) => {
+  
+  this.setState({[e.target.name]: e.target.value});
+}
+onSubmitSubject = (e) =>{
+  
+  e.preventDefault();
+
+
+  const userData = {
+    subjectname: this.state.addsubjectname,
+    subjectdesc: this.state.addsubjectdescripition,
+    year: this.state.addsubjectyear
+};
+console.log(userData);
+
+axios.put('/profilesub/'+this.props.auth.user,userData)
+
+
+  this.setState({addsubjectname:''});
+  this.setState({addsubjectdescripition:''});
+  this.setState({addsubjectyear:''});
+  this.setState({showAdd:false});
+
+
+}
+
 
     onLogoutClick = (e) => {
       e.preventDefault();
@@ -118,6 +178,7 @@ class Profile extends Component {
     })
   }
 
+ 
 
   pdfUploadHandler = () => {
     const fd = new FormData();
@@ -175,7 +236,7 @@ class Profile extends Component {
           url: this.state.profilePicture
         }
       }).then(res=> {
-        console.log(res);
+        
       })
     }
 
@@ -209,97 +270,195 @@ class Profile extends Component {
 
   
   render() {
+function deletesubject(index,user) {
+        
+        axios.put('findanddeletsub/'+user,index)
+        .then(response=> window.location.reload())
+        .catch(error => {
+          console.log("handlesubmit error for blog ", error)
+      })
+        
+        
+     
+      }
+      
+    
     
     if ((this.state.email.length)===0)
     { console.log("1");
       this.componentDidMount();
       return null;
     }
-    
+  
+    function DisplayList1(items,user) {
+      
+      console.log();
+      const sortedActivities = items.sort((a, b) => b.subjectyear - a.subjectyear);
+      items= sortedActivities;
+      
+      const listItems = items.map( (item, index) =>
+    <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={() => {deletesubject(items[index],user)}}>Delete</Button></li>
+      );
+      return (
+        <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
+      );
+    }
     
     return (
-      <div className="container">
-        <div className="navbar">
-        <Styles>  
-    <Navbar className = "color-nav" expand="lg" bg="light" variant="light">
-      <Navbar.Brand href="/">
-        <img
-          src={logo}
-          width="80"
-          height="80"
-          className="d-inline-block align-top"
-          alt=""
-        />
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
-          <Nav.Item><Nav.Link href="" onClick={this.onLogoutClick}>Logout</Nav.Link></Nav.Item> 
-          <Dropdown class = "dropdown-center">
-                <Dropdown.Toggle variant = "outline-info" id = "dropdown-basic">
-                    Language Options
-                </Dropdown.Toggle>
+      
+      <div>
+        
+        <header id="home">
+        <nav id="nav-wrap">
 
-                <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">English</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Chinese</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Japanese</Dropdown.Item>
-                </Dropdown.Menu>
-          </Dropdown>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  </Styles>
-        </div>
-        <div className="jumbotron mt-5">
-          <div className="col-sm-8 mx-auto">
-            <h1 className="text-center">WELCOME {this.state.name} </h1>
+        <a className="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+        <a className="mobile-btn" href="#home" title="Hide navigation">Hide navigation</a>
+
+        <ul id="nav" className="nav">
+        <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
+   <li><a className="smoothscroll" href="#about">Education</a></li>
+  <li><a className="smoothscroll" href="#skills">Skills</a></li>
+   <li><a className="smoothscroll" href="#projects">Projects</a></li>
+   <li><a className="smoothscroll" href="#subjects">Subjects</a></li>
+   <li><a className="smoothscroll" href="#contact">Contact</a></li>
+   <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}>Logout</a></li>
+</ul>
+
+</nav>
+        <div class="row banner">
+         <div class="banner-text">
+          
+            <h1 class="responsive-headline"> I'm  {this.state.name} </h1>
+            <div class="float-container">
+            <div class="float-child">
             <img key = {this.state.imgHash} src = {this.state.profilePicture} class = "profile_pic" alt = "profilePic"/>
-            <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
-            <button onClick={this.imgUploadHandler}>Upload</button>
-            <h1 className = "text-center"> UPLOAD TRANSCRIPT </h1>
-            <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
-            <button onClick={this.pdfUploadHandler}>Upload Transcript </button>
-            <a href = {this.state.transcript} download = "user_transcript">Click to Download Transcript</a>
-          </div>
-          <div class = "mx-auto">
-            <Navbar bg="light" variant="light">
-              <Navbar.Toggle />
-              <Navbar.Collapse className="justify-content-center">
-                <Nav fill>
-                  <Nav.Link href = "#personal"> Personal </Nav.Link>
-                  <Nav.Link href = "#skills"> Skills </Nav.Link>
-                </Nav>
-              </Navbar.Collapse>
-            </Navbar>
-          </div>
-        </div>
+            
+            
+              </div>
 
-        <div  id = "personal" className="jumbotron mt-5 bg-info text-white">
-          <div className="col-sm-8 mx-auto">
-            <h1 className="text-center"> Personal Details </h1>
-          </div>
-        </div>
-        <div>
-            <p style= {{ fontSize: '25px'}} > {this.state.bio} </p>
-        </div>
+                <div class="float-child">
+                <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
+            <button onClick={this.fileUploadHandler}>Upload</button>
+                <h3> <a class="smoothscroll" href="#about" float="left" width="50%"> {this.state.bio}</a></h3>
+             </div>
+            </div>
+            
+            <hr />
+            
+         </div>
+      </div>
+      </header>
+      <section id="about">
+      <div className="row">
+       
+         <div className="nine columns main-col">
+            <h2>About Me</h2>
 
-        <div id = "skills" className="jumbotron mt-5 bg-info text-white">
-          <div className="col-sm-8 mx-auto">
-            <h1 className="text-center"> Skills </h1>
-          </div>
-        </div>
-        <div>
-            <p style= {{ fontSize: '25px'}} > {DisplayList(this.state.skills)} </p>
-        </div>
+            <p>{this.state.bio}</p>
+            <div className="row">
+               <div className="columns contact-details">
+                  <h2>Contact Details</h2>
+                  <p className="address">
+						   <span>{this.state.phone}</span><br />
+                     <span>{this.state.email}</span>
+					   </p>
+               </div>
+               <div className="columns download">
+                  <p>
+                  
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>
 
-        <div id = "subjects" className="jumbotron mt-5 bg-info text-white">
-          <div className="col-sm-8 mx-auto">
-            <h1 className="text-center"> Subjects </h1>
-          </div>
-        </div>
+   </section>
+   
+   <section id="education">
+      <div style={{backgroundColor:'#fff'}}>
+      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Education</h2>
+      <div>         
+            <p  class="lead add-bottom" style= {{ fontSize: '20px'}}  > {DisplayList2(this.state.education)} </p>
+      </div>
+            
+      
+      </div>
+
+   </section>
+
+   <section id="skills">
+      <div style={{backgroundColor:'#fff'}}>
+      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Skills</h2>
+      <div>         
+      <p style= {{ fontSize: '25px'}} > {DisplayList(this.state.skills)} </p>
+      </div>
+            
+      
+      </div>
+
+   </section>
+   <section id="subjects">
+      <div style={{backgroundColor:'#fff'}}>
+      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Subjects</h2>
+      <div>         
+      <p style= {{ fontSize: '25px'}} > {DisplayList1(this.state.subjects, this.props.auth.user)} </p>
+      <button style={{alignItems:'center'}} onClick={this.showAddModal}>Add Subjects</button>
+      <Modal show={this.state.showAdd} >
+        <Modal.Header closeButton onClick={this.hideAddModal}></Modal.Header>
+      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Add Subjects</h2>
+      <form onSubmit={this.onSubmitSubject}>
+                  <div className="form-group">
+                    <input onChange={this.onChange}
+                      value={this.state.addsubjectname}
+                      
+                      type="text"
+                      className={("form-control")}
+                      placeholder="Add Subject Name"
+                      name="addsubjectname"
+                          
+                          required autoFocus 
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input onChange={this.onChange}
+                      value={this.state.addsubjectdescripition}
+                      
+                      type="text"
+                      className={("form-control")}
+                      placeholder="Add Subject Description"
+                      name="addsubjectdescripition"
+                          
+                          required autoFocus 
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input onChange={this.onChange}
+                      value={this.state.addsubjectyear}
+                      
+                      type="text"
+                      className={("form-control")}
+                      placeholder="Add Subject Year"
+                      name="addsubjectyear"
+                          
+                          required autoFocus 
+                    />
+                  </div>
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
+                  </form>
+
+      
+        </Modal>
+      </div>
+            
+      
+      </div>
+
+   </section>
+
+
+      
         <div>
-            <p style= {{ fontSize: '25px'}} > {DisplayList1(this.state.subjects)} </p>
+            
         </div>
 
         <Footer/>
