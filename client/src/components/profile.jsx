@@ -17,13 +17,6 @@ import NavigationBar from "./NavigationBar"
 
 import image from './blank-profile.png';
 import { Button, Modal} from 'react-bootstrap';
-import styled from 'styled-components';
-import logo from './logo.svg';
-import PropTypes from 'prop-types';
-
-import {  logoutUser } from "./../actions/authActions";
-
-import Footer from "./Footer";
 import "./profile_pic.css";
 import "./css/default.css";
 import "./css/fonts.css";
@@ -378,12 +371,13 @@ function deletesubject(index,user) {
                 </Card>
               </Accordion>
           </div>
+      </div>
 
-  if ((this.state.email.length)===0)
-    { console.log("1");
-      this.componentDidMount();
-      return null;
-    }
+    //if((this.state.email.length)===0)
+    //{ console.log("1");
+      //this.componentDidMount();
+      //return null;
+    //}
   
     function DisplayList1(items,user) {
       
