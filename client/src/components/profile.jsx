@@ -2,21 +2,14 @@ import React, { Component } from 'react'
 
 import axios from 'axios';
 import {connect} from 'react-redux';
-import { Nav, Navbar, Dropdown, Card, CardGroup, Accordion, AccordionToggle} from 'react-bootstrap';
+import { Nav, Navbar, Dropdown, Card, CardGroup, Accordion, AccordionToggle,Button, Modal} from 'react-bootstrap';
 import styled from 'styled-components';
 import logo from './logo.svg';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { setCurrentUser, logoutUser } from "./../actions/authActions";
-import JwtDecode from 'jwt-decode';
-import setAuthToken from "../utils/setAuthToken"
-import { GET_PROFILE } from "../actions/profileActions";
-import Footer from "./Footer";
-import NavigationBar from "./NavigationBar"
 
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
 
-import image from './blank-profile.png';
-import { Button, Modal} from 'react-bootstrap';
 
 
 import "./profile_pic.css";
@@ -25,6 +18,9 @@ import "./css/fonts.css";
 import "./css/layout.css";
 import "./css/magnific-popup.css";
 import "./css/media-queries.css";
+import en from "./i18n/en";
+import cn from "./i18n/cn";
+import jp from "./i18n/jp";
 
 const Styles = styled.div
 `
@@ -96,6 +92,14 @@ function startDownload(url) {
   window.location.href(url)
 }
 
+
+//Translation
+counterpart.registerTranslations('en',en);
+counterpart.registerTranslations('cn',cn);
+counterpart.registerTranslations('jp',jp);
+
+counterpart.setLocale('en');
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -112,15 +116,39 @@ class Profile extends Component {
       profilePicture: '',
       transcript: '',
       showAdd:false,
+      showlang:false,
       addsubjectname:'',
       addsubjectyear:'',
-      addsubjectdescripition:''
+      addsubjectdescripition:'',
+      lang:'en'
     };
   this.onLogoutClick=this.onLogoutClick.bind(this);
   this.onChange =this.onChange.bind(this);
   this.onSubmitSubject =this.onSubmitSubject.bind(this);
+
   
 }
+switchtoen = () => {
+  
+  counterpart.setLocale('en')
+  this.setState({showlang:false});
+};
+switchtocn = () => {
+  
+  counterpart.setLocale('cn');
+  this.setState({showlang:false});
+};
+switchtojp= () => {
+  
+  counterpart.setLocale('jp')
+  this.setState({showlang:false});
+};
+showLanguage =() => {
+this.setState({showlang:true});
+};
+hideLanguage =() => {
+  this.setState({showlang:false});
+  };
 showAddModal = () => {
   this.setState({ showAdd: true });
 };
@@ -145,6 +173,7 @@ onSubmitSubject = (e) =>{
     subjectdesc: this.state.addsubjectdescripition,
     year: this.state.addsubjectyear
 };
+
 console.log(userData);
 
 axios.put('/profilesub/'+this.props.auth.user,userData)
@@ -409,12 +438,33 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
           <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}>Logout</a></li>
           </ul>
 
-        </nav>
+
+        <ul id="nav" className="nav">
+        <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
+   <li><a className="smoothscroll" href="#about"><Translate content='education'></Translate> </a></li>
+  <li><a className="smoothscroll" href="#skills"><Translate content='skills'></Translate> </a></li>
+   <li><a className="smoothscroll" href="#projects"><Translate content='projects'></Translate> </a></li>
+   <li><a className="smoothscroll" href="#subjects"><Translate content='subjects'></Translate> </a></li>
+   <li><a className="smoothscroll" href="#contact"><Translate content='contact'></Translate> </a></li>
+   <li><a className="smoothscroll" href="#" onClick={this.showLanguage}> <Translate content='language'></Translate> </a> </li>
+   <Modal show={this.state.showlang} >
+        <Modal.Header closeButton onClick={this.hideLanguage}></Modal.Header>
+        <button type="button" class="block" onClick={this.switchtoen}>English</button> 
+        <button type="button" class="block" onClick={this.switchtocn}>Chinese</button> 
+        <button type="button" class="block"onClick={this.switchtojp}>Japanese</button> 
+
+      
+
+      
+    </Modal>
+   <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}><Translate content='logout'></Translate> </a></li>
+</ul>
+
 
         <div class="row banner">
          <div class="banner-text">
-          
-            <h1 class="responsive-headline"> I'm  {this.state.name} </h1>
+            
+            <h1 class="responsive-headline"> <Translate content='Im'></Translate>  {this.state.name} </h1>
             <div class="float-container">
             <div class="float-child">
             <img key = {this.state.imgHash} src = {this.state.profilePicture} class = "profile_pic" alt = "profilePic"/>
@@ -424,7 +474,9 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
 
                 <div class="float-child">
                 <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
-            <button onClick={this.imgUploadHandler}>Upload</button>
+
+            <button onClick={this.imgUploadHandler}><Translate content='upload'></Translate> </button>
+
                 <h3> <a class="smoothscroll" href="#about" float="left" width="50%"> {this.state.bio}</a></h3>
              </div>
             </div>
@@ -438,12 +490,12 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
       <div className="row">
        
          <div className="nine columns main-col">
-            <h2>About Me</h2>
+            <h2><Translate content='about_me'></Translate> </h2>
 
             <p>{this.state.bio}</p>
             <div className="row">
                <div className="columns contact-details">
-                  <h2>Contact Details</h2>
+                  <h2><Translate content='contact_details'></Translate> </h2>
                   <p className="address">
 						   <span>{this.state.phone}</span><br />
                      <span>{this.state.email}</span>
@@ -465,7 +517,7 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
    
    <section id="education">
       <div style={{backgroundColor:'#fff'}}>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Education</h2>
+      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='education'></Translate> </h2>
       <div>         
             <p  class="lead add-bottom" style= {{ fontSize: '20px'}}  > {DisplayList2(this.state.education)} </p>
       </div>
@@ -479,7 +531,7 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
 
    <section id="skills">
       <div style={{backgroundColor:'#fff'}}>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Skills</h2>
+      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='skills'></Translate> </h2>
       <div>         
       <p style= {{ fontSize: '25px'}} > {DisplayList(this.state.skills)} </p>
       </div>
@@ -491,13 +543,13 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
 
    <section id="subjects">
       <div style={{backgroundColor:'#fff'}}>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Subjects</h2>
+      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
       <div>         
       <p style= {{ fontSize: '25px'}} > {DisplayList1(this.state.subjects, this.props.auth.user)} </p>
-      <button style={{alignItems:'center'}} onClick={this.showAddModal}>Add Subjects</button>
+      <button style={{alignItems:'center'}} onClick={this.showAddModal}><Translate content='add_subjects'></Translate> </button>
       <Modal show={this.state.showAdd} >
         <Modal.Header closeButton onClick={this.hideAddModal}></Modal.Header>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Add Subjects</h2>
+      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='add_subjects'></Translate> </h2>
       <form onSubmit={this.onSubmitSubject}>
                   <div className="form-group">
                     <input onChange={this.onChange}
