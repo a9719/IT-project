@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 const img_upload = require('../services/img-upload');
 const pdf_upload = require('../services/pdf-upload');
-const img_delete = require('../services/img-delete');
+const file_delete = require('../services/file-delete');
 var router = express.Router();
 
 
@@ -31,9 +31,9 @@ router.post('/pdf-upload', function(req, res) {
     });
 });
 
-router.delete('/deletepicture', (req, res, next)=> {
+router.delete('/deletefile', (req, res, next)=> {
     try {
-        img_delete(req.query.url);
+        file_delete(req.query.url);
         res.send("found");
     }catch(err) {
         console.log(err);

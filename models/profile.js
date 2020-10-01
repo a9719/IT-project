@@ -6,6 +6,7 @@ const ProfileSchema = new mongoose.Schema({
     },
     name:{type:String},
     profile_picture:{type:String},
+    transcript:{type:String},
     website: {
         type: String
     },
@@ -27,10 +28,12 @@ const ProfileSchema = new mongoose.Schema({
       position: {type: String},
       from: {type: String},
       to: {type: String}
-
-
-
     }],
+    gallery: [{
+      imagesource: {type: String},
+      description: {type: String}
+    }],
+
     intro:{ type: String},
     education: [
       {

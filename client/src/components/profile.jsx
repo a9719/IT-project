@@ -87,6 +87,9 @@ function DisplayList2(props) {
   );
 }
 
+function startDownload(url) {
+  window.location.href(url)
+}
 
 //Translation
 counterpart.registerTranslations('en',en);
@@ -108,6 +111,7 @@ class Profile extends Component {
       phone: '',
       selectedFile: null,
       profilePicture: '',
+      transcript: '',
       showAdd:false,
       showlang:false,
       addsubjectname:'',
@@ -199,6 +203,7 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
                          website:res.data[0].website,
                          phone:res.data[0].phone,
                          profilePicture: res.data[0].profile_picture,
+                         transcript: res.data[0].transcript,
                          imgHash: Date.now()
                         });
           })
@@ -213,15 +218,58 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
 
  
 
+  pdfUploadHandler = () => {
+    const fd = new FormData();
+    if (this.state.selectedFile == null) {
+      return (Error);
+    }
+    if (this.state.transcript !== "") {
+      axios.delete('/deletefile', {
+        params: {
+          url: this.state.transcript
+        }
+      }).then(res=> {
+        console.log(res);
+      })
+    }
 
 
-  fileUploadHandler = () => {
+    fd.append('transcript', this.state.selectedFile);
+      try {
+        axios.post('/pdf-upload', fd).then((postResponse) => {
+        this.newTrans = postResponse.data.transcriptUrl;
+       
+      }, (err) => {
+        console.log(err);
+      }).then(() => {
+        //do PUT call
+        const data = {
+          transcript: this.newTrans
+        }
+        
+        axios.put('/addtranscript/' + this.props.auth.user, data).then((putResponse) => {
+          //do PUT stuff with response
+          this.setState({
+            transcript: this.newTrans
+          });
+          
+        })
+      })
+
+    }catch(err) {
+      console.log(err);
+    };
+  }
+
+
+
+  imgUploadHandler = () => {
     const fd = new FormData();
     if (this.state.selectedFile == null) {
       return (Error);
     }
     if (this.state.profilePicture !==  "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/blank-profile.png") {
-      axios.delete('/deletepicture', {
+      axios.delete('/deletefile', {
         params: {
           url: this.state.profilePicture
         }
@@ -339,7 +387,9 @@ function deletesubject(index,user) {
 
                 <div class="float-child">
                 <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
-            <button onClick={this.fileUploadHandler}><Translate content='upload'></Translate> </button>
+
+            <button onClick={this.imgUploadHandler}><Translate content='upload'></Translate> </button>
+
                 <h3> <a class="smoothscroll" href="#about" float="left" width="50%"> {this.state.bio}</a></h3>
              </div>
             </div>
@@ -366,6 +416,9 @@ function deletesubject(index,user) {
                </div>
                <div className="columns download">
                   <p>
+                  <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
+                  <button onClick={this.pdfUploadHandler}>Upload Transcript </button>
+                  <a href = {this.state.transcript} target = "_blank" download = "transcript">Click to Download Transcript</a>
                   
                   </p>
                </div>
@@ -387,6 +440,8 @@ function deletesubject(index,user) {
 
    </section>
 
+
+
    <section id="skills">
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='skills'></Translate> </h2>
@@ -398,6 +453,7 @@ function deletesubject(index,user) {
       </div>
 
    </section>
+
    <section id="subjects">
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
