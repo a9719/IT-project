@@ -279,7 +279,7 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
 
   
   render() {
-function deletesubject(index,user) {
+  function deletesubject(index,user) {
         
         axios.put('findanddeletsub/'+user,index)
         .then(response=> window.location.reload())
@@ -289,95 +289,13 @@ function deletesubject(index,user) {
         
         
      
-      }
-      
-    
-        
-    return (
-      <div className = "page-container">
-        <NavigationBar/>
-        <div className="jumbotron mt-5">
-          <div className="col-sm-8 mx-auto">
-            <h1 className="text-center">WELCOME {this.state.email} </h1>
-            <h2 className = "text-center">Welcome {this.state.bio} </h2>
-          </div>
-        </div>
-        <div class = "row">
-            <div class="col-md-3"></div>
-                <CardGroup>
-                    <Card style={{ width: '30rem' }}>
-                        <Card.Header> Jonh Doe </Card.Header>
-                        <Card.Body>
-                            <Card.Text> Bio goes here</Card.Text>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: '30rem' }}>
-                        <Card.Img src={image} alt= "Card image"/>
-                    </Card>
-                </CardGroup>
-          </div>
-          <div class = "row">
-            <div class="col-md-3"></div>
-            <CardGroup>
-                    <Card style={{ width: '20rem' }}>
-                      <Card.Header> Accademics </Card.Header>
-                    </Card>
-                    <Card style={{ width: '20rem' }}>
-                      <Card.Header> Skills </Card.Header>
-                    </Card>
-                    <Card style={{ width: '20rem' }}>
-                      <Card.Header> Projects </Card.Header>
-                    </Card>
-                </CardGroup>
-          </div>
-          {/*1: this is apparently how you comment seems overly complicated
-          2: i am unsure as to how to properly format the cards and what not to look good. Dylan*/}
-          <div class = "row">
-            <div class="col-md-3"></div>
-              <Accordion>
-                <Card style={{ width: '60rem' }}>
-                  <Accordion.Toggle as = {Card.Header} eventKey = '0'>
-                    Accademics
-                  </Accordion.Toggle>
-                  <Accordion.Collapse eventKey="0">
-                    <Card.Body>this should be a list of Accademic pages</Card.Body>
-                  </Accordion.Collapse>
-                </Card>
-              </Accordion>
-          </div>
-          <div class = "row">
-            <div class="col-md-3"></div>
-              <Accordion>
-                <Card style={{ width: '60rem' }}>
-                  <Accordion.Toggle as = {Card.Header} eventKey = '0'>
-                    Skills
-                  </Accordion.Toggle>
-                  <Accordion.Collapse eventKey="0">
-                    <Card.Body>this should be a list of Skill pages</Card.Body>
-                  </Accordion.Collapse>
-                </Card>
-              </Accordion>
-          </div>
-          <div class = "row">
-            <div class="col-md-3"></div>
-              <Accordion>
-                <Card style={{ width: '60rem' }}>
-                  <Accordion.Toggle as = {Card.Header} eventKey = '0'>
-                    Projects
-                  </Accordion.Toggle>
-                  <Accordion.Collapse eventKey="0">
-                    <Card.Body>this should be a list of Project pages</Card.Body>
-                  </Accordion.Collapse>
-                </Card>
-              </Accordion>
-          </div>
-      </div>
+      } 
 
-    //if((this.state.email.length)===0)
-    //{ console.log("1");
-      //this.componentDidMount();
-      //return null;
-    //}
+    if((this.state.email.length)===0)
+    { console.log("1");
+      this.componentDidMount();
+      return null;
+    }
   
     function DisplayList1(items,user) {
       
