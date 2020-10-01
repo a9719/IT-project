@@ -6,7 +6,8 @@ import { Nav, Navbar, Dropdown, Card, CardGroup, Accordion, AccordionToggle,Butt
 import styled from 'styled-components';
 import logo from './logo.svg';
 import PropTypes from 'prop-types';
-
+import { setCurrentUser, logoutUser } from "./../actions/authActions";
+import Footer from './Footer.js';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 
@@ -342,103 +343,9 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
   }    
         
     return (
-      <div className = "page-container">
-        <NavigationBar/>
-        <div className="jumbotron mt-5">
-          <div className="col-sm-8 mx-auto">
-            <h1 className="text-center">WELCOME {this.state.email} </h1>
-            <h2 className = "text-center">Welcome {this.state.bio} </h2>
-          </div>
-        </div>
-        <div class = "row">
-            <div class="col-md-3"></div>
-                <CardGroup>
-                    <Card style={{ width: '30rem' }}>
-                        <Card.Header> Jonh Doe </Card.Header>
-                        <Card.Body>
-                            <Card.Text> Bio goes here</Card.Text>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: '30rem' }}>
-                        <Card.Img src={image} alt= "Card image"/>
-                    </Card>
-                </CardGroup>
-          </div>
-          <div class = "row">
-            <div class="col-md-3"></div>
-            <CardGroup>
-                    <Card style={{ width: '20rem' }}>
-                      <Card.Header> Accademics </Card.Header>
-                    </Card>
-                    <Card style={{ width: '20rem' }}>
-                      <Card.Header> Skills </Card.Header>
-                    </Card>
-                    <Card style={{ width: '20rem' }}>
-                      <Card.Header> Projects </Card.Header>
-                    </Card>
-                </CardGroup>
-          </div>
-          {/*1: this is apparently how you comment seems overly complicated
-          2: i am unsure as to how to properly format the cards and what not to look good. Dylan*/}
-          <div class = "row">
-            <div class="col-md-3"></div>
-              <Accordion>
-                <Card style={{ width: '60rem' }}>
-                  <Accordion.Toggle as = {Card.Header} eventKey = '0'>
-                    Accademics
-                  </Accordion.Toggle>
-                  <Accordion.Collapse eventKey="0">
-                    <Card.Body>this should be a list of Accademic pages</Card.Body>
-                  </Accordion.Collapse>
-                </Card>
-              </Accordion>
-          </div>
-          <div class = "row">
-            <div class="col-md-3"></div>
-              <Accordion>
-                <Card style={{ width: '60rem' }}>
-                  <Accordion.Toggle as = {Card.Header} eventKey = '0'>
-                    Skills
-                  </Accordion.Toggle>
-                  <Accordion.Collapse eventKey="0">
-                    <Card.Body>this should be a list of Skill pages</Card.Body>
-                  </Accordion.Collapse>
-                </Card>
-              </Accordion>
-          </div>
-          <div class = "row">
-            <div class="col-md-3"></div>
-              <Accordion>
-                <Card style={{ width: '60rem' }}>
-                  <Accordion.Toggle as = {Card.Header} eventKey = '0'>
-                    Projects
-                  </Accordion.Toggle>
-                  <Accordion.Collapse eventKey="0">
-                    <Card.Body>this should be a list of Project pages</Card.Body>
-                  </Accordion.Collapse>
-                </Card>
-              </Accordion>
-          </div>
-
-      <div>
-        
-        <header id="home">
+      <div>    
+        <header >
         <nav id="nav-wrap">
-
-          <a className="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
-          <a className="mobile-btn" href="#home" title="Hide navigation">Hide navigation</a>
-
-          <ul id="nav" className="nav">
-          <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
-          <li><a className="smoothscroll" href="#about">Education</a></li>
-          <li><a className="smoothscroll" href="#skills">Skills</a></li>
-          <li><a className="smoothscroll" href="#projects">Projects</a></li>
-          <li><a className="smoothscroll" href="#subjects">Subjects</a></li>
-          <li><a className="smoothscroll" href="#contact">Contact</a></li>
-          <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}>Logout</a></li>
-          </ul>
-
-
         <ul id="nav" className="nav">
         <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
    <li><a className="smoothscroll" href="#about"><Translate content='education'></Translate> </a></li>
@@ -459,7 +366,7 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
     </Modal>
    <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}><Translate content='logout'></Translate> </a></li>
 </ul>
-
+</nav>
 
         <div class="row banner">
          <div class="banner-text">
@@ -601,12 +508,10 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
 
 
       
-        <div>
-            
-        </div>
+      
         <Footer/>
       </div>
-      </div>
+     
     )
   }
 }
