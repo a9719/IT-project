@@ -30,14 +30,10 @@ var createUser = function(req, res) {
                     var profile =new Profile({
                         user: newUser,
                         name: user.name,
-                        profile_picture: "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/blank-profile.png",
-                        transcript: "",
+                        profile_picture: '',
                         website:'',
-                        gallery:[],
                         education:[],
                         subjects:[],
-                        work:[],
-                        intro:"",
                         email:user.email,
                         phone:'',
                         skills:[],
@@ -80,7 +76,7 @@ var findOneUser = function(req, res) {
 //Find one user by name
 var findUserByName = function(req, res) {
     var userName = req.params.name;
-    
+    console.log(userName);
     User.findOne({name:userName}, function(err, user) {
         if (!err) {
             console.log("errrr")
@@ -145,7 +141,7 @@ var getProfile =function(req,res){
     Profile.find({user:k},function(err,user2){
         if(user2){
             const payload=user2;
-            
+            console.log(user2);
             res.send(payload);
         }else{
            res.send(k);
@@ -164,11 +160,11 @@ var addBio= function(req,res){
     
     Profile.findOneAndUpdate({user:user1},{$set:{bio:bio1}},{new: true},function(err,user2){
         if(err){
-            
+            console.log(user2);
             res.send("wrong");
             
         }else{
-          
+            console.log(user2);
            res.send("found");
         }
     })
@@ -182,11 +178,11 @@ var addSkills= function(req,res){
     
     Profile.findOneAndUpdate({user:user1},{$push: {skills:skill}},{new: true},function(err,user2){
         if(err){
-          
+            console.log(user2);
             res.send("wrong");
             
         }else{
-        
+            console.log(user2);
            res.send("found");
         }
     })
@@ -199,11 +195,11 @@ var findSkillAndDelete = function(req, res) {
 
     Profile.findOneAndUpdate({user:user1},{$pull: {skills: {skill}}},{new: true},function(err,user2){
         if(err){
-            
+            console.log(user2);
             res.send("wrong");
             
         }else{
-           
+            console.log(user2);
            res.send("found");
         }
     })
@@ -218,11 +214,11 @@ var addEducation= function(req,res){
     
     Profile.findOneAndUpdate({user:user1},{$push: {education:{school:edu}}},{new: true},function(err,user2){
         if(err){
-            
+            console.log(user2);
             res.send("wrong");
             
         }else{
-        
+            console.log(user2);
            res.send("found");
         }
     })
@@ -235,11 +231,11 @@ var deleteEducation= function(req,res){
     
     Profile.findOneAndUpdate({user:user1},{$pull: {education:{school:edu}}},{new: true},function(err,user2){
         if(err){
-          
+            console.log(user2);
             res.send("wrong");
             
         }else{
-           
+            console.log(user2);
            res.send("found");
         }
     })
@@ -251,11 +247,11 @@ var addSubjects= function(req,res){
 
     Profile.findOneAndUpdate({user:user1},{$push: {subjects:{subjectname:edu.subjectname,subjectdescripition:edu.subjectdesc,subjectyear:edu.year}}},{new: true},function(err,user2){
         if(err){
-         
+            console.log(user2);
             res.send("wrong");
             
         }else{
-          
+            console.log(user2);
            res.send("found");
         }
     })
@@ -265,15 +261,15 @@ var findSubjectsAndDelete= function(req,res){
     var user1=req.params.user;
     
     const edu= req.body;
-    console.log(req.body);
+
     
-    Profile.findOneAndUpdate({user:user1},{$pull:{subjects:{subjectname:edu.subjectname,subjectdescripition:edu.subjectdescripition,subjectyear:edu.subjectyear}}},{new: true},function(err,user2){
+    Profile.findOneAndUpdate({user:user1},{$pull:{subjects:{subjectname:edu.subjectname,subjectdescripition:edu.subjectdesc,subjectyear:edu.year}}},{new: true},function(err,user2){
         if(err){
-            
+            console.log(user2);
             res.send("wrong");
             
         }else{
-            
+            console.log(user2);
            res.send("found");
         }
     })
@@ -286,23 +282,6 @@ var addProfilePicture = function(req, res) {
 
     Profile.findOneAndUpdate({user:user1},{$set:{profile_picture:profilePic}},{new: true},function(err,user2){
         if(err){
-            
-            res.send("wrong");
-            
-        }else{
-            
-           res.send("found");
-        }
-    })
-}
-
-var addTranscript = function(req, res) {
-    var user1 = req.params.user;
-
-    const transcript = req.body.transcript;
-
-    Profile.findOneAndUpdate({user:user1},{$set:{transcript:transcript}},{new: true},function(err,user2){
-        if(err){
             console.log(user2);
             res.send("wrong");
             
@@ -313,7 +292,6 @@ var addTranscript = function(req, res) {
     })
 }
 
-module.exports.addTranscript=addTranscript;
 module.exports.addProfilePicture=addProfilePicture;
 module.exports.findSkillAndDelete=findSkillAndDelete;
 module.exports.findSubjectsAndDelete=findSubjectsAndDelete;

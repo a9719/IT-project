@@ -12,11 +12,11 @@ aws.config.update({
 const s3 = new aws.S3();
 
 
-const file_delete = (props) => {
+const img_delete = (props) => {
     const {region, bucket, key} = AmazonS3URI(props);
 
     var params = {
-        Bucket : bucket,
+        Bucket : "it-project-bucket-2020",
         Key : key
     }
 
@@ -27,4 +27,4 @@ const file_delete = (props) => {
     }).promise();
 }
 
-module.exports = file_delete;
+module.exports = img_delete;

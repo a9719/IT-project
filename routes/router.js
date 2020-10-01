@@ -13,7 +13,6 @@ router.put('/profileedu/:user',controller.addEducation);
 router.put('/profilesub/:user',controller.addSubjects);
 router.put('/findanddeletsub/:user',controller.findSubjectsAndDelete);
 router.put('/addprofilepic/:user',controller.addProfilePicture);
-router.put('/addtranscript/:user',controller.addTranscript);
 
 // Find all users
 router.get('/users', controller.findAllUsers);
