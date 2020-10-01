@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import "./App.css"
 import NavigationBar from "./components/NavigationBar"
+import CarouselHomepage from "./components/CarouselHomepage"
 import Footer from "./components/Footer"
 import Card from "./components/cardtest"
 
