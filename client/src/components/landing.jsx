@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import TestCard from './TestCard'
 import Cardflip from './Cardflip'
+import CarouselHomepage from './CarouselHomepage'
 
 class Landing extends Component {
 
@@ -54,9 +55,11 @@ class Landing extends Component {
   render() {
     return (
       // <p>Welcome to Swat Kats!</p>
-      <div className = "users">
-        <p>Welcome to Swat Kats!</p>
-        {this.displayUsers(this.state.users)}
+      <div>
+        <CarouselHomepage/>
+        <div className = "users">
+          {this.displayUsers(this.state.users)}
+        </div>
       </div>
     )
   }

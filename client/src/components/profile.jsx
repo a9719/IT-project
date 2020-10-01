@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 
 import axios from 'axios';
 import {connect} from 'react-redux';
-import { Button, Modal} from 'react-bootstrap';
+import { Nav, Navbar, Dropdown, Card, CardGroup, Accordion, AccordionToggle,Button, Modal} from 'react-bootstrap';
 import styled from 'styled-components';
 import logo from './logo.svg';
 import PropTypes from 'prop-types';
+
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 
-import {  logoutUser } from "./../actions/authActions";
 
-import Footer from "./Footer";
+
 import "./profile_pic.css";
 import "./css/default.css";
 import "./css/fonts.css";
@@ -64,6 +64,7 @@ const Styles = styled.div
   padding: 90px 0 72px; background: #fff;
 } 
 `;
+
 function DisplayList(props) {
   const items = props;
   const listItems = items.map( (item, index) =>
@@ -91,12 +92,14 @@ function startDownload(url) {
   window.location.href(url)
 }
 
+
 //Translation
 counterpart.registerTranslations('en',en);
 counterpart.registerTranslations('cn',cn);
 counterpart.registerTranslations('jp',jp);
 
 counterpart.setLocale('en');
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -308,49 +311,133 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
 
   
   render() {
-function deletesubject(index,user) {
-        
-        axios.put('findanddeletsub/'+user,index)
-        .then(response=> window.location.reload())
-        .catch(error => {
-          console.log("handlesubmit error for blog ", error)
+    function deletesubject(index,user) {
+
+      axios.put('findanddeletsub/'+user,index)
+      .then(response=> window.location.reload())
+      .catch(error => {
+        console.log("handlesubmit error for blog ", error)
       })
-        
-        
-     
-      }
-      
-    
-    
-    if ((this.state.email.length)===0)
-    { console.log("1");
-      this.componentDidMount();
-      return null;
     }
-  
-    function DisplayList1(items,user) {
       
-      console.log();
-      const sortedActivities = items.sort((a, b) => b.subjectyear - a.subjectyear);
-      items= sortedActivities;
-      
-      const listItems = items.map( (item, index) =>
-    <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={() => {deletesubject(items[index],user)}}>Delete</Button></li>
-      );
-      return (
-        <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
-      );
-    }
     
+  if ((this.state.email.length)===0)
+  { console.log("1");
+    this.componentDidMount();
+    return null;
+  }
+
+  function DisplayList1(items,user) {
+    
+    console.log();
+    const sortedActivities = items.sort((a, b) => b.subjectyear - a.subjectyear);
+    items= sortedActivities;
+    
+    const listItems = items.map( (item, index) =>
+  <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={() => {deletesubject(items[index],user)}}>Delete</Button></li>
+    );
     return (
-      
+      <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
+    );
+  }    
+        
+    return (
+      <div className = "page-container">
+        <NavigationBar/>
+        <div className="jumbotron mt-5">
+          <div className="col-sm-8 mx-auto">
+            <h1 className="text-center">WELCOME {this.state.email} </h1>
+            <h2 className = "text-center">Welcome {this.state.bio} </h2>
+          </div>
+        </div>
+        <div class = "row">
+            <div class="col-md-3"></div>
+                <CardGroup>
+                    <Card style={{ width: '30rem' }}>
+                        <Card.Header> Jonh Doe </Card.Header>
+                        <Card.Body>
+                            <Card.Text> Bio goes here</Card.Text>
+                        </Card.Body>
+                    </Card>
+                    <Card style={{ width: '30rem' }}>
+                        <Card.Img src={image} alt= "Card image"/>
+                    </Card>
+                </CardGroup>
+          </div>
+          <div class = "row">
+            <div class="col-md-3"></div>
+            <CardGroup>
+                    <Card style={{ width: '20rem' }}>
+                      <Card.Header> Accademics </Card.Header>
+                    </Card>
+                    <Card style={{ width: '20rem' }}>
+                      <Card.Header> Skills </Card.Header>
+                    </Card>
+                    <Card style={{ width: '20rem' }}>
+                      <Card.Header> Projects </Card.Header>
+                    </Card>
+                </CardGroup>
+          </div>
+          {/*1: this is apparently how you comment seems overly complicated
+          2: i am unsure as to how to properly format the cards and what not to look good. Dylan*/}
+          <div class = "row">
+            <div class="col-md-3"></div>
+              <Accordion>
+                <Card style={{ width: '60rem' }}>
+                  <Accordion.Toggle as = {Card.Header} eventKey = '0'>
+                    Accademics
+                  </Accordion.Toggle>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>this should be a list of Accademic pages</Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+          </div>
+          <div class = "row">
+            <div class="col-md-3"></div>
+              <Accordion>
+                <Card style={{ width: '60rem' }}>
+                  <Accordion.Toggle as = {Card.Header} eventKey = '0'>
+                    Skills
+                  </Accordion.Toggle>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>this should be a list of Skill pages</Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+          </div>
+          <div class = "row">
+            <div class="col-md-3"></div>
+              <Accordion>
+                <Card style={{ width: '60rem' }}>
+                  <Accordion.Toggle as = {Card.Header} eventKey = '0'>
+                    Projects
+                  </Accordion.Toggle>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>this should be a list of Project pages</Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+          </div>
+
       <div>
         
         <header id="home">
         <nav id="nav-wrap">
 
-        <a className="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
-        <a className="mobile-btn" href="#home" title="Hide navigation">Hide navigation</a>
+          <a className="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+          <a className="mobile-btn" href="#home" title="Hide navigation">Hide navigation</a>
+
+          <ul id="nav" className="nav">
+          <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
+          <li><a className="smoothscroll" href="#about">Education</a></li>
+          <li><a className="smoothscroll" href="#skills">Skills</a></li>
+          <li><a className="smoothscroll" href="#projects">Projects</a></li>
+          <li><a className="smoothscroll" href="#subjects">Subjects</a></li>
+          <li><a className="smoothscroll" href="#contact">Contact</a></li>
+          <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}>Logout</a></li>
+          </ul>
+
 
         <ul id="nav" className="nav">
         <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
@@ -373,7 +460,7 @@ function deletesubject(index,user) {
    <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}><Translate content='logout'></Translate> </a></li>
 </ul>
 
-</nav>
+
         <div class="row banner">
          <div class="banner-text">
             
@@ -418,7 +505,7 @@ function deletesubject(index,user) {
                   <p>
                   <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
                   <button onClick={this.pdfUploadHandler}>Upload Transcript </button>
-                  <a href = {this.state.transcript} target = "_blank" download = "transcript">Click to Download Transcript</a>
+                  <a href = {this.state.transcript} target = "_blank" rel ="noopener noreferrer" download = "transcript">Click to Download Transcript</a>
                   
                   </p>
                </div>
@@ -517,19 +604,22 @@ function deletesubject(index,user) {
         <div>
             
         </div>
-
         <Footer/>
+      </div>
       </div>
     )
   }
 }
+        
 Profile.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
 };
+        
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
   });
+        
 export default connect(mapStateToProps, {logoutUser})(Profile);
