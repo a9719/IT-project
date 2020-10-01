@@ -155,9 +155,9 @@ showAddModal = () => {
 };
 
 hideAddModal = () => {
-  this.setState({subjectname:''});
-  this.setState({subjectdescripition:''});
-  this.setState({subjectyear:''});
+  this.setState({addsubjectname:''});
+  this.setState({addsubjectdescripition:''});
+  this.setState({addsubjectyear:''});
   this.setState({ showAdd: false });
 };
 onChange = (e) => {
@@ -309,17 +309,18 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
       console.log(err);
     };
   }
+  deletesubject(index,user) {
+  axios.put('findanddeletsub/'+user,index)
+  .then(res=> this.setState({subjects:res.data.subjects}))
+  .catch(error => {
+    console.log("handlesubmit error for blog ", error)
+  })
 
+    
+  }
   
   render() {
-    function deletesubject(index,user) {
-
-      axios.put('findanddeletsub/'+user,index)
-      .then(response=> window.location.reload())
-      .catch(error => {
-        console.log("handlesubmit error for blog ", error)
-      })
-    }
+    
       
     
   if ((this.state.email.length)===0)
@@ -328,19 +329,7 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
     return null;
   }
 
-  function DisplayList1(items,user) {
     
-    console.log();
-    const sortedActivities = items.sort((a, b) => b.subjectyear - a.subjectyear);
-    items= sortedActivities;
-    
-    const listItems = items.map( (item, index) =>
-  <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={() => {deletesubject(items[index],user)}}>Delete</Button></li>
-    );
-    return (
-      <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{listItems}</ul> 
-    );
-  }    
         
     return (
       <div>    
@@ -452,7 +441,9 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
       <div>         
-      <p style= {{ fontSize: '25px'}} > {DisplayList1(this.state.subjects, this.props.auth.user)} </p>
+      <p style= {{ fontSize: '25px'}} > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.subjects).map( (item, index) =>
+  <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={()=>{this.deletesubject((this.state.subjects)[index],this.props.auth.user)}}>Delete</Button></li>
+    )}</ul> } </p>
       <button style={{alignItems:'center'}} onClick={this.showAddModal}><Translate content='add_subjects'></Translate> </button>
       <Modal show={this.state.showAdd} >
         <Modal.Header closeButton onClick={this.hideAddModal}></Modal.Header>
