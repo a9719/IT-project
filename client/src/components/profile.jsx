@@ -401,126 +401,95 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
         </div>
         </header>
       <section id="about">
-      <div className="row">
-       
-         <div className="nine columns main-col">
+        <div className="row">
+          <div className="nine columns main-col">
             <h2><Translate content='about_me'></Translate> </h2>
-
             <p>{this.state.bio}</p>
             <div className="row">
-               <div className="columns contact-details">
-                  <h2><Translate content='contact_details'></Translate> </h2>
-                  <p className="address">
-						   <span>{this.state.phone}</span><br />
-                     <span>{this.state.email}</span>
-					   </p>
-               </div>
-               <div className="columns download">
-                  <p>
+              <div className="columns contact-details">
+                <h2><Translate content='contact_details'></Translate> </h2>
+                <p className="address">
+                  <span>{this.state.phone}</span><br />
+                  <span>{this.state.email}</span>
+                </p>
+              </div>
+              <div className="columns download">
+                <p>
                   <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
                   <button onClick={this.pdfUploadHandler}>Upload Transcript </button>
                   <a href = {this.state.transcript} target = "_blank" rel ="noopener noreferrer" download = "transcript">Click to Download Transcript</a>
-                  
-                  </p>
-               </div>
+                </p>
+              </div>
             </div>
-         </div>
-      </div>
-
-   </section>
-   
-   <section id="education">
-      <div style={{backgroundColor:'#fff'}}>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='education'></Translate> </h2>
-      <div>         
+          </div>
+        </div>
+      </section>
+      <section id="education">
+        <div style={{backgroundColor:'#fff'}}>
+        <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='education'></Translate> </h2>
+          <div>         
             <p  class="lead add-bottom" style= {{ fontSize: '20px'}}  > {DisplayList2(this.state.education)} </p>
-      </div>
-            
-      
-      </div>
-
-   </section>
-
-
-
-   <section id="skills">
-      <div style={{backgroundColor:'#fff'}}>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='skills'></Translate> </h2>
-      <div>         
-      <p style= {{ fontSize: '25px'}} > {DisplayList(this.state.skills)} </p>
-      </div>
-            
-      
-      </div>
-
-   </section>
-
-   <section id="subjects">
-      <div style={{backgroundColor:'#fff'}}>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
-      <div>         
-      <p style= {{ fontSize: '25px'}} > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.subjects).map( (item, index) =>
-  <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={()=>{this.deletesubject((this.state.subjects)[index],this.props.auth.user)}}>Delete</Button></li>
-    )}</ul> } </p>
-      <button style={{alignItems:'center'}} onClick={this.showAddModal}><Translate content='add_subjects'></Translate> </button>
-      <Modal show={this.state.showAdd} >
-        <Modal.Header closeButton onClick={this.hideAddModal}></Modal.Header>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='add_subjects'></Translate> </h2>
-      <form onSubmit={this.onSubmitSubject}>
+          </div>
+        </div>
+      </section>
+      <section id="skills">
+        <div style={{backgroundColor:'#fff'}}>
+        <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='skills'></Translate> </h2>
+          <div>         
+            <p style= {{ fontSize: '25px'}} > {DisplayList(this.state.skills)} </p>
+          </div>
+        </div>
+      </section>
+      <section id="subjects">
+        <div style={{backgroundColor:'#fff'}}>
+          <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
+          <div>         
+            <p style= {{ fontSize: '25px'}} > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.subjects).map( (item, index) =>
+              <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={()=>{this.deletesubject((this.state.subjects)[index],this.props.auth.user)}}>Delete</Button></li>)}</ul> } 
+            </p>
+            <button style={{alignItems:'center'}} onClick={this.showAddModal}><Translate content='add_subjects'></Translate> </button>
+            <Modal show={this.state.showAdd} >
+              <Modal.Header closeButton onClick={this.hideAddModal}></Modal.Header>
+                <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='add_subjects'></Translate> </h2>
+                <form onSubmit={this.onSubmitSubject}>
                   <div className="form-group">
                     <input onChange={this.onChange}
                       value={this.state.addsubjectname}
-                      
                       type="text"
                       className={("form-control")}
                       placeholder="Add Subject Name"
                       name="addsubjectname"
-                          
-                          required autoFocus 
+                      required autoFocus 
                     />
                   </div>
                   <div className="form-group">
                     <input onChange={this.onChange}
                       value={this.state.addsubjectdescripition}
-                      
                       type="text"
                       className={("form-control")}
                       placeholder="Add Subject Description"
-                      name="addsubjectdescripition"
-                          
-                          required autoFocus 
+                      name="addsubjectdescripition"                            
+                      required autoFocus 
                     />
                   </div>
                   <div className="form-group">
                     <input onChange={this.onChange}
-                      value={this.state.addsubjectyear}
-                      
+                      value={this.state.addsubjectyear}                      
                       type="text"
                       className={("form-control")}
                       placeholder="Add Subject Year"
-                      name="addsubjectyear"
-                          
-                          required autoFocus 
+                      name="addsubjectyear"                         
+                      required autoFocus 
                     />
                   </div>
                   <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
-                  </form>
-
-      
-        </Modal>
+                </form>
+            </Modal>
+          </div>
+        </div>
+      </section>
+      <Footer/>
       </div>
-            
-      
-      </div>
-
-   </section>
-
-
-      
-      
-        <Footer/>
-      </div>
-     
     )
   }
 }
