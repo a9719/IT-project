@@ -78,8 +78,6 @@ function DisplayList(props) {
 function DisplayList2(props) {
   var items = props;
   console.log();
-  
-
   const listItems = items.map( (item, index) =>
 <li style={{margin:'25'}} key = {index} >{item.school}</li>
   );
@@ -349,17 +347,7 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-        </div>*/}
-    
-      
-    
-  if ((this.state.email.length)===0)
-  { console.log("1");
-    this.componentDidMount();
-    return null;
-  }
-
-    
+        </div>*/}  
         
     return (
       <div>    
