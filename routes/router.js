@@ -15,6 +15,7 @@ router.put('/findanddeletsub/:user',controller.findSubjectsAndDelete);
 router.put('/addprofilepic/:user',controller.addProfilePicture);
 router.put('/addtranscript/:user',controller.addTranscript);
 router.put('/addtogallery/:user',controller.addGallery);
+router.put('/deletefromgallery/:user', controller.findGalleryPicAndDelete);
 
 // Find all users
 router.get('/users', controller.findAllUsers);
