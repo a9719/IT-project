@@ -169,7 +169,25 @@ var addBio= function(req,res){
             
         }else{
           
-           res.send("found");
+           res.send(user2);
+        }
+    })
+};
+
+var addPhone= function(req,res){
+    var user1=req.params.user;
+    
+    const phone1= req.body.bio;
+
+    
+    Profile.findOneAndUpdate({user:user1},{$set:{phone:phone1}},{new: true},function(err,user2){
+        if(err){
+            
+            res.send("wrong");
+            
+        }else{
+          
+           res.send(user2);
         }
     })
 };
@@ -187,7 +205,7 @@ var addSkills= function(req,res){
             
         }else{
         
-           res.send("found");
+           res.send(user2);
         }
     })
 };
@@ -204,7 +222,7 @@ var findSkillAndDelete = function(req, res) {
             
         }else{
            
-           res.send("found");
+           res.send(user2);
         }
     })
 }
@@ -223,7 +241,7 @@ var addEducation= function(req,res){
             
         }else{
         
-           res.send("found");
+           res.send(user2);
         }
     })
 };
@@ -240,7 +258,7 @@ var deleteEducation= function(req,res){
             
         }else{
            
-           res.send("found");
+           res.send(user2);
         }
     })
 };
@@ -256,7 +274,7 @@ var addSubjects= function(req,res){
             
         }else{
           
-           res.send("found");
+           res.send(user2);
         }
     })
 };
@@ -274,7 +292,7 @@ var findSubjectsAndDelete= function(req,res){
             
         }else{
             
-           res.send("found");
+           res.send(user2);
         }
     })
 };
@@ -291,7 +309,7 @@ var addProfilePicture = function(req, res) {
             
         }else{
             
-           res.send("found");
+           res.send(user2);
         }
     })
 }
@@ -308,7 +326,7 @@ var addTranscript = function(req, res) {
             
         }else{
             console.log(user2);
-           res.send("found");
+           res.send(user2);
         }
     })
 }
