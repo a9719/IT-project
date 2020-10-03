@@ -415,8 +415,18 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
       <section id="education">
         <div style={{backgroundColor:'#fff'}}>
         <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='education'></Translate> </h2>
-          <div>         
-            <p  class="lead add-bottom" style= {{ fontSize: '20px'}}  > {DisplayList2(this.state.education)} </p>
+          <div> 
+            <Accordion>
+              <Card style={{ width: '60rem' }}>
+                <Accordion.Toggle as = {Card.Header} eventKey = '0'>
+                  2020
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>this should be a list of academics in 2020 pages</Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>        
+            {/*<p  class="lead add-bottom" style= {{ fontSize: '20px'}}  > {DisplayList2(this.state.education)} </p>*/}
           </div>
         </div>
       </section>
@@ -424,7 +434,7 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
         <div style={{backgroundColor:'#fff'}}>
         <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='skills'></Translate> </h2>
           <div>         
-            <p style= {{ fontSize: '25px'}} > {DisplayList(this.state.skills)} </p>
+            {/*<p style= {{ fontSize: '25px'}} > {DisplayList(this.state.skills)} </p>*/}
           </div>
         </div>
       </section>
@@ -432,9 +442,9 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
         <div style={{backgroundColor:'#fff'}}>
           <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
           <div>         
-            <p style= {{ fontSize: '25px'}} > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.subjects).map( (item, index) =>
+            {/*<p style= {{ fontSize: '25px'}} > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.subjects).map( (item, index) =>
               <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={()=>{this.deletesubject((this.state.subjects)[index],this.props.auth.user)}}>Delete</Button></li>)}</ul> } 
-            </p>
+            </p>*/}
             <button style={{alignItems:'center'}} onClick={this.showAddModal}><Translate content='add_subjects'></Translate> </button>
             <Modal show={this.state.showAdd} >
               <Modal.Header closeButton onClick={this.hideAddModal}></Modal.Header>
