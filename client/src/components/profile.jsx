@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
+import 'react-awesome-slider/dist/captioned.css';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { Nav, Navbar, Dropdown, Card, CardGroup, Accordion, AccordionToggle,Button, Modal} from 'react-bootstrap';
