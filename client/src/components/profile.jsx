@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Helmet} from "react-helmet";
 import axios from 'axios';
 import {connect} from 'react-redux';
-import { Nav, Navbar, Dropdown, Card, CardGroup, Accordion, AccordionToggle,Button, Modal} from 'react-bootstrap';
+import { Nav, Navbar, Dropdown, Card, CardGroup, Accordion, AccordionToggle,Button, Modal, Container,Row, Col} from 'react-bootstrap';
 import styled from 'styled-components';
 import logo from './logo.svg';
 import PropTypes from 'prop-types';
@@ -11,6 +11,7 @@ import Footer from './Footer.js';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 import image from './blank-profile.png';
+import DropDown from './dropdown'
 
 import "./profile_pic.css";
 import "./css/default.css";
@@ -415,25 +416,21 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
       <section id="education">
         <div style={{backgroundColor:'#fff'}}>
         <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='education'></Translate> </h2>
-          <div> 
-            <Accordion>
-              <Card style={{ width: '60rem' }}>
-                <Accordion.Toggle as = {Card.Header} eventKey = '0'>
-                  2020
-                </Accordion.Toggle>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>this should be a list of academics in 2020 pages</Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>        
+          <Container fluid > 
+          <div class = 'row'>
+            <div class="col-md-4"></div>
+              <DropDown header = {"2020"} info = {"text"} /> 
+              <DropDown header = {"2020"} info = {"text"} />
             {/*<p  class="lead add-bottom" style= {{ fontSize: '20px'}}  > {DisplayList2(this.state.education)} </p>*/}
           </div>
+          </Container>
         </div>
       </section>
       <section id="skills">
         <div style={{backgroundColor:'#fff'}}>
         <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='skills'></Translate> </h2>
-          <div>         
+          <div>  
+            <DropDown header = {"2020"} info = {"text"} />       
             {/*<p style= {{ fontSize: '25px'}} > {DisplayList(this.state.skills)} </p>*/}
           </div>
         </div>
@@ -441,7 +438,8 @@ axios.put('/profilesub/'+this.props.auth.user,userData)
       <section id="subjects">
         <div style={{backgroundColor:'#fff'}}>
           <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
-          <div>         
+          <div>
+            <DropDown header = {"2020"} info = {"text"} />         
             {/*<p style= {{ fontSize: '25px'}} > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.subjects).map( (item, index) =>
               <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={()=>{this.deletesubject((this.state.subjects)[index],this.props.auth.user)}}>Delete</Button></li>)}</ul> } 
             </p>*/}
