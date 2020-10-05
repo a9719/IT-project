@@ -156,6 +156,43 @@ var getProfile =function(req,res){
     
 
 };
+
+var changeName= function(req,res){
+    var user1=req.params.user;
+    
+    const name1= req.body.name;
+
+    
+    Profile.findOneAndUpdate({user:user1},{$set:{name:name1}},{new: true},function(err,user2){
+        if(err){
+            
+            res.send("wrong");
+            
+        }else{
+          
+           res.send(user2);
+        }
+    })
+};
+
+var addweb= function(req,res){
+    var user1=req.params.user;
+    
+    const web1= req.body.web;
+
+    
+    Profile.findOneAndUpdate({user:user1},{$set:{website:web}},{new: true},function(err,user2){
+        if(err){
+            
+            res.send("wrong");
+            
+        }else{
+          
+           res.send(user2);
+        }
+    })
+};
+
 var addBio= function(req,res){
     var user1=req.params.user;
     
@@ -181,6 +218,23 @@ var addPhone= function(req,res){
 
     
     Profile.findOneAndUpdate({user:user1},{$set:{phone:phone1}},{new: true},function(err,user2){
+        if(err){
+            
+            res.send("wrong");
+            
+        }else{
+          
+           res.send(user2);
+        }
+    })
+};
+var addIntro= function(req,res){
+    var user1=req.params.user;
+    
+    const intro1= req.body.intro;
+
+    
+    Profile.findOneAndUpdate({user:user1},{$set:{intro:intro1}},{new: true},function(err,user2){
         if(err){
             
             res.send("wrong");
@@ -227,6 +281,74 @@ var findSkillAndDelete = function(req, res) {
     })
 }
 
+var addWork= function(req,res){
+    var user1=req.params.user;
+    
+    const work1= req.body.work;
+
+    
+    Profile.findOneAndUpdate({user:user1},{$push: {work:{workplace:work1.workplace, position:work1.position,from:work1.from,to:work1.to}}},{new: true},function(err,user2){
+        if(err){
+            
+            res.send("wrong");
+            
+        }else{
+        
+           res.send(user2);
+        }
+    })
+};
+var findWorkAndDelete= function(req,res){
+    var user1=req.params.user;
+    
+    const work1= req.body;
+    
+    
+    Profile.findOneAndUpdate({user:user1},{$pull:{work:{workplace:work1.workplace, position:work1.position,from:work1.from,to:work1.to}}},{new: true},function(err,user2){
+        if(err){
+            
+            res.send("wrong");
+            
+        }else{
+            
+           res.send(user2);
+        }
+    })
+};
+var addproject= function(req,res){
+    var user1=req.params.user;
+    
+    const work1= req.body.project;
+
+    
+    Profile.findOneAndUpdate({user:user1},{$push: {project:{projectname:work1.projectname, projectdescription:work1.projectdescription,projectlink:work1.projectlink}}},{new: true},function(err,user2){
+        if(err){
+            
+            res.send("wrong");
+            
+        }else{
+        
+           res.send(user2);
+        }
+    })
+};
+var findProjectAndDelete= function(req,res){
+    var user1=req.params.user;
+    
+    const work1= req.body;
+    
+    
+    Profile.findOneAndUpdate({user:user1},{$pull:{project:{projectname:work1.projectname, projectdescription:work1.projectdescription,projectlink:work1.projectlink}}},{new: true},function(err,user2){
+        if(err){
+            
+            res.send("wrong");
+            
+        }else{
+            
+           res.send(user2);
+        }
+    })
+};
 
 var addEducation= function(req,res){
     var user1=req.params.user;
@@ -331,6 +453,13 @@ var addTranscript = function(req, res) {
     })
 }
 
+module.exports.addWork=addWork;
+module.exports.addIntro=addIntro;
+module.exports.addPhone=addPhone;
+module.exports.addproject=addproject;
+module.exports.findWorkAndDelete=findWorkAndDelete;
+module.exports.findProjectAndDelete=findProjectAndDelete;
+module.exports.deleteEducation=deleteEducation;
 module.exports.addTranscript=addTranscript;
 module.exports.addProfilePicture=addProfilePicture;
 module.exports.findSkillAndDelete=findSkillAndDelete;
