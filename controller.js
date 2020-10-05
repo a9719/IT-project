@@ -36,6 +36,7 @@ var createUser = function(req, res) {
                         gallery:[],
                         education:[],
                         subjects:[],
+                        projects:[],
                         work:[],
                         intro:"",
                         email:user.email,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { Nav, Navbar, Dropdown, Card, CardGroup, Accordion, AccordionToggle,Button, Modal} from 'react-bootstrap';
@@ -29,6 +29,18 @@ const Styles = styled.div
   a, .navbar-nav, .navbar-light .nav-link {
     color: #000000;
     &:hover { color: #365; }
+  }
+  .carousel {
+    padding-bottom: 10em;
+  }
+  
+ 
+  .carousel-img {
+    max-width: 1300px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
   .navbar-brand {
     font-size: 1.4em;
@@ -105,6 +117,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      intro:'',
       email: '',
       name: '',
       bio: '',
@@ -112,6 +125,7 @@ class Profile extends Component {
       subjects: [],
       education: [],
       gallery: [],
+      projects:[],
       website: '',
       phone: '',
       selectedFile: null,
@@ -180,6 +194,7 @@ onSubmitSubject = (e) =>{
   console.log(userData);
 
   axios.put('/profilesub/'+this.props.auth.user,userData)
+  .then(res=>this.setState({subjects:res.data.subjects}))
 
 
   this.setState({addsubjectname:''});
@@ -252,9 +267,13 @@ onSubmitGalleryPhoto = (e) => {
           this.setState({email:res.data[0].email,
                          name:res.data[0].name,
                          bio:res.data[0].bio,
+                         intro:res.data[0].intro,
                          skills:res.data[0].skills,
+                         work:res.data[0].work,
+                         projects:res.data[0].projects,
                          subjects:res.data[0].subjects,
                          gallery:res.data[0].gallery,
+                         projects:res.data[0].projects,
                          education:res.data[0].education,
                          website:res.data[0].website,
                          phone:res.data[0].phone,
@@ -443,7 +462,7 @@ onSubmitGalleryPhoto = (e) => {
 
             <button onClick={this.imgUploadHandler}><Translate content='upload'></Translate> </button>
 
-                <h3> <a class="smoothscroll" href="#about" float="left" width="50%"> {this.state.bio}</a></h3>
+                <h3> <a class="smoothscroll" href="#about" float="left" width="50%"> {this.state.intro}</a></h3>
              </div>
             </div>
             
@@ -510,15 +529,36 @@ onSubmitGalleryPhoto = (e) => {
    <section id = "gallery">
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Gallery</h2>
-      <p style= {{ fontSize: '25px'}} > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>
-        {(this.state.gallery).map( (item, index) =>
-          <li>
-            <h3> {item.description} </h3>
-            <img key={index} src={item.imagesource} alt="galleryPhoto"></img>
-            <Button onClick={()=>{this.deletegallerypic((this.state.gallery)[index],this.props.auth.user)}} > Delete Image</Button>
-          </li>
-          )}</ul> } 
-      </p>
+     
+        <Carousel>
+      {(this.state.gallery).map( (item, index) =>
+       <Carousel.Item>
+       <img
+       className="carousel-img"
+       key={index} src={item.imagesource}
+       alt="First slide" style={{ width: '75%',
+        height: '30%',
+        display: 'block',
+        margin: 'auto'
+       }}
+       />
+       <Carousel.Caption className = "caption" style={{position: 'absolute',
+    top: '80%',
+    backgroundColor: 'whitesmoke',
+    display: 'inline-block',
+    borderradius: 'auto',
+    textAlign: 'center',
+    alignItems: 'center',
+    height: '120px',
+    opacity: '0.8'}}>
+       <h3> {item.description} </h3>
+       <Button onClick={()=>{this.deletegallerypic((this.state.gallery)[index],this.props.auth.user)}} > Delete Image</Button>
+         
+              </Carousel.Caption>
+        </Carousel.Item>
+      )}
+     </Carousel>
+   
 
         <form name="uploadForm" onkeydown="return event.key != 'Enter';">
           <div>
@@ -533,12 +573,12 @@ onSubmitGalleryPhoto = (e) => {
       
       </div>
     </section>
-
+   
    <section id="subjects">
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
       <div>         
-      <p style= {{ fontSize: '25px'}} > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.subjects).map( (item, index) =>
+      <p style= {{ fontSize: '25px'}} > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
   <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={()=>{this.deletesubject((this.state.subjects)[index],this.props.auth.user)}}>Delete</Button></li>
     )}</ul> } </p>
       <button style={{alignItems:'center'}} onClick={this.showAddModal}><Translate content='add_subjects'></Translate> </button>
