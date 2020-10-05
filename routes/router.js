@@ -18,6 +18,8 @@ router.put('/profileedu/:user',controller.addEducation);
 router.put('/profilesub/:user',controller.addSubjects);
 router.put('/addprofilepic/:user',controller.addProfilePicture);
 router.put('/addtranscript/:user',controller.addTranscript);
+router.put('/addweb/:user',controller.addweb);
+router.put('/namechange/:user',controller.changeName);
 
 router.put('/deleteedu/:user',controller.deleteEducation);
 router.put('/findanddeletsub/:user',controller.findSubjectsAndDelete);

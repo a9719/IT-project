@@ -454,6 +454,8 @@ var addTranscript = function(req, res) {
 }
 
 module.exports.addWork=addWork;
+module.exports.addweb=addweb;
+module.exports.changeName=changeName;
 module.exports.addIntro=addIntro;
 module.exports.addPhone=addPhone;
 module.exports.addproject=addproject;
