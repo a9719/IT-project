@@ -4,7 +4,7 @@ export default{
     education:"Education",
     skills:"Skills",
     projects:"Projects",
-    subjects:"Pubjects",
+    subjects:"Subjects",
     work:"Work",
     contact:"Contact",
     language:"Language",
