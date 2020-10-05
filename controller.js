@@ -92,6 +92,22 @@ var findUserByName = function(req, res) {
     });
 };
 
+var findUserByEmail = function(req, res) {
+    var email = req.params.useremail;
+
+    Profile.find({email:email}, function(err, user) {
+        if (err) {
+            console.log(err);
+            res.sendStatus(404);
+        } else {
+            res.send(user);
+        }
+
+        
+
+
+    })
+}
 
 
 
@@ -366,6 +382,7 @@ var findGalleryPicAndDelete= function(req,res){
     })
 };
 
+module.exports.findUserByEmail=findUserByEmail;
 module.exports.findGalleryPicAndDelete=findGalleryPicAndDelete;
 module.exports.addGallery=addGallery;
 module.exports.addTranscript=addTranscript;

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { Nav, Navbar, Dropdown, Card, CardGroup, Accordion, AccordionToggle,Button, Modal} from 'react-bootstrap';
@@ -65,6 +67,16 @@ const Styles = styled.div
   padding: 90px 0 72px; background: #fff;
 } 
 `;
+
+function ImageFormat(props) {
+  const items = props;
+
+  const images = items.map( (item, index) => 
+    <div data-src={item.imagesource}/>   
+  )
+  console.log(images);
+  return images;
+}
 
 function DisplayList(props) {
   const items = props;
@@ -510,7 +522,14 @@ onSubmitGalleryPhoto = (e) => {
    <section id = "gallery">
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Gallery</h2>
-      <p style= {{ fontSize: '25px'}} > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>
+      
+      <AwesomeSlider>
+        {ImageFormat(this.state.gallery)}
+      </AwesomeSlider>
+
+
+
+      {/* <p style= {{ fontSize: '25px'}} > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>
         {(this.state.gallery).map( (item, index) =>
           <li>
             <h3> {item.description} </h3>
@@ -518,8 +537,7 @@ onSubmitGalleryPhoto = (e) => {
             <Button onClick={()=>{this.deletegallerypic((this.state.gallery)[index],this.props.auth.user)}} > Delete Image</Button>
           </li>
           )}</ul> } 
-      </p>
-
+      </p> */}
         <form name="uploadForm" onkeydown="return event.key != 'Enter';">
           <div>
             <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
