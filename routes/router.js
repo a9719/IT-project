@@ -33,6 +33,7 @@ router.put('/findanddeletskill/:user',controller.findSkillAndDelete);
 
 
 
+
 // Find all users
 router.get('/users', controller.findAllUsers);
  
@@ -40,5 +41,5 @@ router.get('/users', controller.findAllUsers);
 router.get('/users/id/:id', controller.findOneUser);
  
 //Find one user by name
-router.get('/users/name/:name', controller.findUserByName);
+router.get('/users/name/:name', controller.FuzzySearchUserName);
 module.exports = router;
