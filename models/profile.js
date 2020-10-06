@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
+
 const ProfileSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -73,4 +75,5 @@ const ProfileSchema = new mongoose.Schema({
 
     }]
 });
+
 var profile = mongoose.model('profile', ProfileSchema);
