@@ -462,12 +462,12 @@ var addGallery = function(req, res) {
 
     Profile.findOneAndUpdate({user:user1},{$push:{gallery:{imagesource:galleryPic.imagesource, description:galleryPic.description}}},{new: true},function(err,user2){
         if(err){
-            console.log(user2);
+            
             res.send("wrong");
             
         }else{
-            console.log(user2);
-           res.send("found");
+           
+           res.send(user2);
         }
     })
 }

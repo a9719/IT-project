@@ -389,9 +389,7 @@ onSubmitGalleryPhoto = (e) => {
 
     console.log(galleryPhoto);
 
-    axios.put('/addtogallery/' + this.props.auth.user, galleryPhoto).then(res => {
-      console.log(res);
-    })
+    axios.put('/addtogallery/' + this.props.auth.user, galleryPhoto).then(res => this.setState({gallery:res.data.gallery}))
    
   }, (err) => {
     console.log(err);
