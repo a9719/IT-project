@@ -112,7 +112,7 @@ var deleteUserById = function(req, res) {
 var loginUser = function(req, res) {
     
     const user = req.body;
-    
+    console.log(user);
     //check for existing user
     User.findOne({email:user.email,password:user.password}, function(err, user1) {
         if (user1) {
@@ -270,7 +270,7 @@ var findSkillAndDelete = function(req, res) {
 
     const skill = req.body.skill;
 
-    Profile.findOneAndUpdate({user:user1},{$pull: {skills: {skill}}},{new: true},function(err,user2){
+    Profile.findOneAndUpdate({user:user1},{$pull: {skills: skill}},{new: true},function(err,user2){
         if(err){
             
             res.send("wrong");
@@ -285,9 +285,9 @@ var findSkillAndDelete = function(req, res) {
 var addWork= function(req,res){
     var user1=req.params.user;
     
-    const work1= req.body.work;
+    const work1= req.body;
 
-    
+    console.log(work1);
     Profile.findOneAndUpdate({user:user1},{$push: {work:{workplace:work1.workplace, position:work1.position,from:work1.from,to:work1.to}}},{new: true},function(err,user2){
         if(err){
             
@@ -319,10 +319,10 @@ var findWorkAndDelete= function(req,res){
 var addproject= function(req,res){
     var user1=req.params.user;
     
-    const work1= req.body.project;
+    const work1= req.body;
 
-    
-    Profile.findOneAndUpdate({user:user1},{$push: {project:{projectname:work1.projectname, projectdescription:work1.projectdescription,projectlink:work1.projectlink}}},{new: true},function(err,user2){
+    console.log(work1);
+    Profile.findOneAndUpdate({user:user1},{$push: {projects:{projectname:work1.projectname, projectdescription:work1.projectdescription,projectlink:work1.projectlink}}},{new: true},function(err,user2){
         if(err){
             
             res.send("wrong");
@@ -338,8 +338,8 @@ var findProjectAndDelete= function(req,res){
     
     const work1= req.body;
     
-    
-    Profile.findOneAndUpdate({user:user1},{$pull:{project:{projectname:work1.projectname, projectdescription:work1.projectdescription,projectlink:work1.projectlink}}},{new: true},function(err,user2){
+    console.log(work1);
+    Profile.findOneAndUpdate({user:user1},{$pull:{projects:{projectname:work1.projectname, projectdescription:work1.projectdescription,projectlink:work1.projectlink}}},{new: true},function(err,user2){
         if(err){
             
             res.send("wrong");
@@ -354,10 +354,10 @@ var findProjectAndDelete= function(req,res){
 var addEducation= function(req,res){
     var user1=req.params.user;
     
-    const edu= req.body.education;
+    const edu= req.body;
 
     
-    Profile.findOneAndUpdate({user:user1},{$push: {education:{school:edu}}},{new: true},function(err,user2){
+    Profile.findOneAndUpdate({user:user1},{$push: {education:{school:edu.school, qual:edu.qual}}},{new: true},function(err,user2){
         if(err){
             
             res.send("wrong");
@@ -371,10 +371,10 @@ var addEducation= function(req,res){
 var deleteEducation= function(req,res){
     var user1=req.params.user;
     
-    const edu= req.body.education;
+    const edu= req.body;
 
     
-    Profile.findOneAndUpdate({user:user1},{$pull: {education:{school:edu}}},{new: true},function(err,user2){
+    Profile.findOneAndUpdate({user:user1},{$pull: {education:{school:edu.school, qual:edu.qual}}},{new: true},function(err,user2){
         if(err){
           
             res.send("wrong");

@@ -40,6 +40,10 @@ const ProfileSchema = new mongoose.Schema({
         school: {
           type: String,
           required: true
+        },
+        qual: {
+          type: String,
+          required: true
         }
       }
     ],
