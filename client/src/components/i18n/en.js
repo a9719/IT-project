@@ -14,7 +14,9 @@ export default{
     contact_details:"Contact Details",
     add_subjects:"Add Subjects",
     delete:"Delete",
-    edit_Intro:"Edit Intro"
+    edit_Intro:"Edit Intro",
+    work1: "Work Experience",
+    add_work:"Add Work Experience"
     
 
 
