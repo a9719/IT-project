@@ -112,7 +112,7 @@ var deleteUserById = function(req, res) {
 var loginUser = function(req, res) {
     
     const user = req.body;
-    
+    console.log(user);
     //check for existing user
     User.findOne({email:user.email,password:user.password}, function(err, user1) {
         if (user1) {

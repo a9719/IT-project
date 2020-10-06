@@ -133,6 +133,7 @@ class Profile extends Component {
       addprojectname:'',
       addprojectdescripition:'',
       addprojectlink:'',
+      showphone:false,
       lang:'en'
     };
   this.onLogoutClick=this.onLogoutClick.bind(this);
@@ -306,6 +307,13 @@ hidebioModal = () => {
   this.setState({addinfo:''});
   this.setState({ showbio: false });
 };
+showphoneModal = () => {
+  this.setState({ showphone: true });
+};
+hidephoneModal = () => {
+  this.setState({addinfo:''});
+  this.setState({ showphone: false });
+};
 onSubmitBio =(e) =>{
   e.preventDefault();
   const userData ={
@@ -316,6 +324,17 @@ onSubmitBio =(e) =>{
   .then(res=>this.setState({bio:res.data.bio}))
   this.setState({addinfo:''});
   this.setState({showbio:false});
+}
+onSubmitPhone =(e) =>{
+  e.preventDefault();
+  const userData ={
+    bio:this.state.addinfo
+  };
+  
+  axios.put('/profilephone/'+this.props.auth.user,userData)
+  .then(res=>this.setState({phone:res.data.phone}))
+  this.setState({addinfo:''});
+  this.setState({showphone:false});
 }
 showskillsModal = () => {
   this.setState({ showskills: true });
@@ -685,6 +704,31 @@ onSubmitGalleryPhoto = (e) => {
                   <h2><Translate content='contact_details'></Translate> </h2>
                   <p className="address">
 						   <span>{this.state.phone}</span><br />
+               <div>
+               <Button  onClick={this.showphoneModal}><Translate content='edit_phone'></Translate></Button>
+                <Modal show={this.state.showphone}>
+                <Modal.Header closeButton onClick={this.hidephoneModal}></Modal.Header>
+                <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Bio'></Translate> </h2>
+                <form onSubmit={this.onSubmitPhone}>
+                  <input onChange={this.onChange}
+                      value={this.state.addinfo}
+                      
+                      type="text"
+                      className={("form-control")}
+                      placeholder="Add Phone"
+                      name="addinfo"
+              
+                      maxLength="20"
+                          
+                          required autoFocus 
+                    />
+                  
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
+                  </form>
+                </Modal>
+             
+      </div>
+
                      <span>{this.state.email}</span>
 					   </p>
                </div>
