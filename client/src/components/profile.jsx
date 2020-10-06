@@ -137,6 +137,9 @@ class Profile extends Component {
       addsubjectyear:'',
       addsubjectdescripition:'',
       addgallerydescription:'',
+      showintro:false,
+      addintro:'',
+      addinfo:'',
       lang:'en'
     };
   this.onLogoutClick=this.onLogoutClick.bind(this);
@@ -176,6 +179,13 @@ hideAddModal = () => {
   this.setState({addsubjectyear:''});
   this.setState({ showAdd: false });
 };
+showintroModal = () => {
+  this.setState({ showintro: true });
+};
+hideintroModal = () => {
+  this.setState({addintro:''});
+  this.setState({ showintro: false });
+};
 onChange = (e) => {
   
   this.setState({[e.target.name]: e.target.value});
@@ -204,7 +214,38 @@ onSubmitSubject = (e) =>{
 
 
 }
+onSubmitIntro =(e) =>{
+  e.preventDefault();
+  const userData ={
+    intro:this.state.addintro
+  };
+  
+  axios.put('/profileintro/'+this.props.auth.user,userData)
+  .then(res=>this.setState({intro:res.data.intro}))
+  this.setState({addintro:''});
+  this.setState({showintro:false});
+}
 
+
+
+showbioModal = () => {
+  this.setState({ showbio: true });
+};
+hidebioModal = () => {
+  this.setState({addinfo:''});
+  this.setState({ showbio: false });
+};
+onSubmitBio =(e) =>{
+  e.preventDefault();
+  const userData ={
+    bio:this.state.addinfo
+  };
+  
+  axios.put('/profilebio/'+this.props.auth.user,userData)
+  .then(res=>this.setState({bio:res.data.bio}))
+  this.setState({addinfo:''});
+  this.setState({showbio:false});
+}
 
 handleGalleryChange = event => {
 
@@ -423,7 +464,7 @@ onSubmitGalleryPhoto = (e) => {
     return (
       <div>    
         <header >
-        <nav id="nav-wrap">
+        <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
         <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
    <li><a className="smoothscroll" href="#about"><Translate content='education'></Translate> </a></li>
@@ -451,19 +492,29 @@ onSubmitGalleryPhoto = (e) => {
             
             <h1 class="responsive-headline"> <Translate content='Im'></Translate>  {this.state.name} </h1>
             <div class="float-container">
-            <div class="float-child">
-            <img key = {this.state.imgHash} src = {this.state.profilePicture} class = "profile_pic" alt = "profilePic"/>
-            
-            
-              </div>
-
-                <div class="float-child">
-                <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
-
-            <button onClick={this.imgUploadHandler}><Translate content='upload'></Translate> </button>
-
+          
                 <h3> <a class="smoothscroll" href="#about" float="left" width="50%"> {this.state.intro}</a></h3>
-             </div>
+                <Button  onClick={this.showintroModal}><Translate content='edit_Intro'></Translate></Button>
+                <Modal show={this.state.showintro}>
+                <Modal.Header closeButton onClick={this.hideintroModal}></Modal.Header>
+                <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Intro'></Translate> </h2>
+                <form onSubmit={this.onSubmitIntro}>
+                  <input onChange={this.onChange}
+                      value={this.state.addintro}
+                      
+                      type="text"
+                      className={("form-control")}
+                      placeholder="Add Intro"
+                      name="addintro"
+                      style={{width: '200px'}}
+                          
+                          required autoFocus 
+                    />
+                  
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
+                  </form>
+                </Modal>
+             
             </div>
             
             <hr />
@@ -473,11 +524,38 @@ onSubmitGalleryPhoto = (e) => {
       </header>
       <section id="about">
       <div className="row">
+      <div className="three columns">
+            <img className="profile-pic"  src={this.state.profilePicture} alt="Profile Pic" />
+            <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
+
+<Button onClick={this.imgUploadHandler}><Translate content='upload'></Translate> </Button>
+         </div>
        
          <div className="nine columns main-col">
             <h2><Translate content='about_me'></Translate> </h2>
 
             <p>{this.state.bio}</p>
+            <Button  onClick={this.showbioModal}><Translate content='edit_Bio'></Translate></Button>
+                <Modal show={this.state.showbio}>
+                <Modal.Header closeButton onClick={this.hidebioModal}></Modal.Header>
+                <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Bio'></Translate> </h2>
+                <form onSubmit={this.onSubmitBio}>
+                  <input onChange={this.onChange}
+                      value={this.state.addinfo}
+                      
+                      type="text"
+                      className={("form-control")}
+                      placeholder="Add Bio"
+                      name="addinfo"
+                      style={{height:'200px' }}
+                      maxLength="100"
+                          
+                          required autoFocus 
+                    />
+                  
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
+                  </form>
+                </Modal>
             <div className="row">
                <div className="columns contact-details">
                   <h2><Translate content='contact_details'></Translate> </h2>
@@ -578,8 +656,24 @@ onSubmitGalleryPhoto = (e) => {
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
       <div>         
-      <p style= {{ fontSize: '25px'}} > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
-  <li key = {index} >{item.subjectname}: {item.subjectdescripition} {item.subjectyear} <Button onClick={()=>{this.deletesubject((this.state.subjects)[index],this.props.auth.user)}}>Delete</Button></li>
+      <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
+   
+  <li key = {index} >
+    <div className="row education">
+         <div className="three columns header-col">
+            <h3 style={{font:'Open Sans Bold' ,borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}><span>{item.subjectname}   </span></h3>
+         </div>
+         <div className="nine columns main-col">
+            <div className="row item">
+               <div className="twelve columns">
+                 <div>
+        <p style={{fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.subjectdescripition} <span>&bull;</span><em className="date">{item.subjectyear}</em></p>
+        </div>
+               </div>
+            </div>
+         </div>
+      
+         </div><Button onClick={()=>{this.deletesubject((this.state.subjects)[index],this.props.auth.user)}}>Delete</Button></li>
     )}</ul> } </p>
       <button style={{alignItems:'center'}} onClick={this.showAddModal}><Translate content='add_subjects'></Translate> </button>
       <Modal show={this.state.showAdd} >
