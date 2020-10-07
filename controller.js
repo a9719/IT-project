@@ -98,6 +98,23 @@ function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
 
+
+var findUserByEmail = function(req, res) {
+
+    var useremail = req.params.email;
+
+    Profile.find({email:useremail}, function(err, user) {
+        if (!err) {
+            console.log("found");
+            const payload = res;
+            res.send(payload);
+        } else {
+            console.log("err");
+            res.sendStatus(404);
+        }
+    })
+}
+
 //Find user by name using fuzzy search
 var FuzzySearchUserName = function(req, res) {
     const regex = new RegExp(escapeRegex(req.params.name), 'gi');
@@ -507,6 +524,7 @@ var findGalleryPicAndDelete= function(req,res){
     })
 };
 
+module.exports.findUserByEmail=findUserByEmail;
 module.exports.FuzzySearchUserName=FuzzySearchUserName;
 
 module.exports.findGalleryPicAndDelete=findGalleryPicAndDelete;
