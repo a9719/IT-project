@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+
 import { Button, Image, Col, Row} from 'react-bootstrap';
 import icon from './loginImage.svg';
-import {Helmet} from 'react-helmet';
-import {Link} from 'react-router-dom';
+
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser, setUserLoading, setUserNotLoading } from "../actions/authActions";
@@ -12,7 +11,7 @@ import NavigationBar from "./NavigationBar";
 
 import Footer from "./Footer"
 
-import ErrorAlert from "../alerts";
+
 
 
 class Login extends Component {
