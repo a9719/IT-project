@@ -2,17 +2,12 @@ import React, { Component } from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {Button, Modal} from 'react-bootstrap';
+import { Modal} from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link } from 'react-scroll';
-import PropTypes from 'prop-types';
-import {  logoutUser } from "./../actions/authActions";
 import Footer from './Footer.js';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
-
-
-
 import "./profile_pic.css";
 import "./css/default.css";
 import "./css/fonts.css";
@@ -22,77 +17,14 @@ import "./css/media-queries.css";
 import en from "./i18n/en";
 import cn from "./i18n/cn";
 import jp from "./i18n/jp";
-
-const Styles = styled.div
-`
-  .navbar { background-color: #365; }
-  a, .navbar-nav, .navbar-light .nav-link {
-    color: #000000;
-    &:hover { color: #365; }
-  }
-  .carousel {
-    padding-bottom: 10em;
-  }
-  
- 
-  .carousel-img {
-    max-width: 1300px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .navbar-brand {
-    font-size: 1.4em;
-    color: #000000;
-    &:hover { color: #365; }
-  }
-  .dropdown-center {
-    position: absolute !important;
-    left: 50%;
-    right: 50%;
-  }
-  .color-nav {
-      background-color : rgb(255,255,255);
-  }
-  .nav.nav-center {
-    display: inline-block;
-    left: 0;
-    right: 0;
-    margin:0;
-    float:none;
-  }
-  .float-container {
-    border: 3px solid #fff;
-    padding: 20px;
-}
-
-.float-child {
-    width: 50%;
-    float: left;
-    padding: 20px;
-    border: 2px solid red;
-} 
-.education1 {
-  padding: 90px 0 72px; background: #fff;
-} 
-`;
-
-
-
-
 function startDownload(url) {
   window.location.href(url)
 }
-
-
 //Translation
 counterpart.registerTranslations('en',en);
 counterpart.registerTranslations('cn',cn);
 counterpart.registerTranslations('jp',jp);
-
 counterpart.setLocale('en');
-
 class PublicProfile extends Component {
   constructor(props) {
     super(props);
@@ -136,10 +68,7 @@ class PublicProfile extends Component {
       showphone:false,
       lang:'en'
     };
-  this.onLogoutClick=this.onLogoutClick.bind(this);
   this.onChange =this.onChange.bind(this);
-  this.onSubmitSubject =this.onSubmitSubject.bind(this);
-
   
 }
 switchtoen = () => {
@@ -163,249 +92,11 @@ this.setState({showlang:true});
 hideLanguage =() => {
   this.setState({showlang:false});
   };
-showAddModal = () => {
-  this.setState({ showAdd: true });
-};
-
-hideAddModal = () => {
-  this.setState({addsubjectname:''});
-  this.setState({addsubjectdescripition:''});
-  this.setState({addsubjectyear:''});
-  this.setState({ showAdd: false });
-};
-showEduModal = () => {
-  this.setState({ showedu: true });
-};
-hideEduModal = () => {
-  this.setState({addschoolname:''});
-  this.setState({addqual:''});
-  this.setState({ showedu: false });
-};
-
-showProjectModal = () => {
-  this.setState({ showproject: true });
-};
-hideProjectModal = () => {
-  this.setState({addprojectname:''});
-  this.setState({addprojectdescripition:''});
-  this.setState({addprojectlink:''});
-  this.setState({ showproject: false });
-};
-
-showWorkModal = () => {
-  this.setState({ showwork: true });
-};
-hideWorkModal = () => {
-  this.setState({addworkplace:''});
-  this.setState({addposition:''});
-  this.setState({addfrom:''});
-  this.setState({addto:''});
-  this.setState({ showwork: false });
-};
-
-showintroModal = () => {
-  this.setState({ showintro: true });
-};
-hideintroModal = () => {
-  this.setState({addintro:''});
-  this.setState({ showintro: false });
-};
 onChange = (e) => {
   
   this.setState({[e.target.name]: e.target.value});
 }
-onSubmitProject =(e) =>
-{
-  e.preventDefault();
-
-  const userData ={
-    projectname:this.state.addprojectname,
-    projectdescription: this.state.addprojectdescripition,
-    projectlink: this.state.addprojectlink
-  }
-  console.log(userData);
-  axios.put('/profileproject/'+this.props.auth.user,userData)
-  .then(res=> this.setState({projects:res.data.projects}))
-  this.setState({addprojectname:''});
-  this.setState({addprojectdescripition:''});
-  this.setState({addprojectlink:''});
-  this.setState({ showproject: false });
-
-}
-onSubmitWork = (e) =>{
-  e.preventDefault();
-
-  const userData ={
-    workplace: this.state.addworkplace,
-    position: this.state.addposition,
-    from: this.state.addfrom,
-    to: this.state.addto
-  }
-  axios.put('/profilework/'+this.props.auth.user,userData)
-  .then(res=> this.setState({work:res.data.work}))
-
-  this.setState({addworkplace:''});
-  this.setState({addposition:''});
-  this.setState({addfrom:''});
-  this.setState({addto:''});
-  this.setState({ showwork: false });
-}
-onSubmitSubject = (e) =>{
-  
-  e.preventDefault();
-
-
-  const userData = {
-    subjectname: this.state.addsubjectname,
-    subjectdesc: this.state.addsubjectdescripition,
-    year: this.state.addsubjectyear
-  };
-
-  console.log(userData);
-
-  axios.put('/profilesub/'+this.props.auth.user,userData)
-  .then(res=>this.setState({subjects:res.data.subjects}))
-
-
-  this.setState({addsubjectname:''});
-  this.setState({addsubjectdescripition:''});
-  this.setState({addsubjectyear:''});
-  this.setState({showAdd:false}); 
-
-
-}
-onSubmitEdu =(e) =>{
-  e.preventDefault();
-  const userData={
-    school:this.state.addschoolname,
-    qual: this.state.addqual
-  }
-  axios.put('/profileedu/'+this.props.auth.user,userData)
-  .then(res=> this.setState({education:res.data.education}))
-  this.setState({addschoolname:''});
-  this.setState({addqual:''});
-  this.setState({ showedu: false });
-}
-onSubmitIntro =(e) =>{
-  e.preventDefault();
-  const userData ={
-    intro:this.state.addintro
-  };
-  
-  axios.put('/profileintro/'+this.props.auth.user,userData)
-  .then(res=>this.setState({intro:res.data.intro}))
-  this.setState({addintro:''});
-  this.setState({showintro:false});
-}
-
-
-
-showbioModal = () => {
-  this.setState({ showbio: true });
-};
-hidebioModal = () => {
-  this.setState({addinfo:''});
-  this.setState({ showbio: false });
-};
-showphoneModal = () => {
-  this.setState({ showphone: true });
-};
-hidephoneModal = () => {
-  this.setState({addinfo:''});
-  this.setState({ showphone: false });
-};
-onSubmitBio =(e) =>{
-  e.preventDefault();
-  const userData ={
-    bio:this.state.addinfo
-  };
-  
-  axios.put('/profilebio/'+this.props.auth.user,userData)
-  .then(res=>this.setState({bio:res.data.bio}))
-  this.setState({addinfo:''});
-  this.setState({showbio:false});
-}
-onSubmitPhone =(e) =>{
-  e.preventDefault();
-  const userData ={
-    bio:this.state.addinfo
-  };
-  
-  axios.put('/profilephone/'+this.props.auth.user,userData)
-  .then(res=>this.setState({phone:res.data.phone}))
-  this.setState({addinfo:''});
-  this.setState({showphone:false});
-}
-showskillsModal = () => {
-  this.setState({ showskills: true });
-};
-hideskillsModal = () => {
-  this.setState({addinfo:''});
-  this.setState({ showskills: false });
-};
-onSubmitSkills =(e) =>{
-  e.preventDefault();
-  const userData ={
-    skill:this.state.addinfo
-  };
-  console.log(userData);
-  axios.put('/profileskills/'+this.props.auth.user,userData)
-  .then(res=>this.setState({skills:res.data.skills}))
-  this.setState({addinfo:''});
-  this.setState({showskills:false});
-}
-
-handleGalleryChange = event => {
-
-  event.preventDefault();
-  
-  this.setState({
-    addgallerydescription: event.target.value
-  })
-}
-
-onSubmitGalleryPhoto = (e) => {
-
-  e.preventDefault();
-
-  const fd = new FormData();
-
-  if (this.state.selectedFile == null) {
-    return (Error);
-  }
-
-  const photoDesc =  this.state.addgallerydescription;
-
-  fd.append('image', this.state.selectedFile);
-
-  axios.post('/img-upload', fd).then((postResponse) => {
-    console.log(postResponse);
-    this.newGP = postResponse.data.imageUrl;
-
-    const galleryPhoto = {
-      imagesource: this.newGP,
-      description: photoDesc
-    };
-
-    console.log(galleryPhoto);
-
-    axios.put('/addtogallery/' + this.props.auth.user, galleryPhoto).then(res => this.setState({gallery:res.data.gallery}))
    
-  }, (err) => {
-    console.log(err);
-  })
-
-
-  this.setState({addgallerydescription:''});
-
-}
-
-
-
-    onLogoutClick = (e) => {
-      e.preventDefault();
-     
-  };
   componentDidMount() {
     axios
         .get('/profile2/'+(this.props.match.params.user))
@@ -430,165 +121,10 @@ onSubmitGalleryPhoto = (e) => {
           })
     
 }
-
-  fileSelectedHandler = event => {
-    event.preventDefault();
-
-    this.setState({
-      selectedFile: event.target.files[0]
-    })
-  }
-
+  
  
-
-  pdfUploadHandler = () => {
-    const fd = new FormData();
-    if (this.state.selectedFile == null) {
-      return (Error);
-    }
-    if (this.state.transcript !== "") {
-      axios.delete('/deletefile', {
-        params: {
-          url: this.state.transcript
-        }
-      }).then(res=> {
-        console.log(res);
-      })
-    }
-
-
-    fd.append('transcript', this.state.selectedFile);
-      try {
-        axios.post('/pdf-upload', fd).then((postResponse) => {
-        this.newTrans = postResponse.data.transcriptUrl;
-       
-      }, (err) => {
-        console.log(err);
-      }).then(() => {
-        //do PUT call
-        const data = {
-          transcript: this.newTrans
-        }
-        
-        axios.put('/addtranscript/' + this.props.auth.user, data).then((putResponse) => {
-          //do PUT stuff with response
-          this.setState({
-            transcript: this.newTrans
-          });
-          
-        })
-      })
-
-    }catch(err) {
-      console.log(err);
-    };
-    this.setState({
-      selectedFile:null
-    });
-  }
-
-
-
-  imgUploadHandler = () => {
-    const fd = new FormData();
-    if (this.state.selectedFile == null) {
-      return (Error);
-    }
-    if (this.state.profilePicture !==  "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/blank-profile.png") {
-      axios.delete('/deletefile', {
-        params: {
-          url: this.state.profilePicture
-        }
-      }).then(res=> {
-        
-      })
-    }
-
-
-    fd.append('image', this.state.selectedFile);
-      try {
-        axios.post('/img-upload', fd).then((postResponse) => {
-        this.newPP = postResponse.data.imageUrl;
-       
-      }, (err) => {
-        console.log(err);
-      }).then(() => {
-        //do PUT call
-        const data = {
-          profilePic: this.newPP
-        }
-        
-        axios.put('/addprofilepic/' + this.props.auth.user, data).then((putResponse) => {
-          //do PUT stuff with response
-          this.setState({
-            profilePicture: this.newPP
-          });
-          
-        })
-      })
-
-    }catch(err) {
-      console.log(err);
-    };
-    this.setState({
-      selectedFile:null
-    });
-  }
-  deletework(index,user){
-    axios.put('/findanddeletwork/'+user,index)
-    .then(res=> this.setState({work:res.data.work}))
-    .catch(error => {
-      console.log("handlesubmit error for blog ", error)
-  })
-}
-  deletesubject(index,user) {
-  axios.put('findanddeletsub/'+user,index)
-      .then(res=> this.setState({subjects:res.data.subjects}))
-      .catch(error => {
-        console.log("handlesubmit error for blog ", error)
-    })
-
-    
-  }
-  deleteproject(index,user){
-    axios.put('/findanddeletproject/'+user,index)
-  .then(res=> this.setState({projects:res.data.projects}))
-  .catch(error => {
-    console.log("handlesubmit error for blog ", error)
-})
-
-
-}
-  deleteedu(index,user) {
-    
-    axios.put('deleteedu/'+user,index)
-        .then(res=> this.setState({education:res.data.education}))
-        .catch(error => {
-          console.log("handlesubmit error for blog ", error)
-      })
   
-      
-    }
-  deleteskills(index,user) {
-    console.log(this.state.skills[index]);
-    axios.put('/findanddeletskill/'+user,{skill:this.state.skills[index]})
-        .then(res=> this.setState({skills:res.data.skills}))
-        .catch(error => {
-          console.log("handlesubmit error for blog ", error)
-      })
-  
-      
-    }
-  //onClick={()=>{this.deletesubject((this.state.subjects)[index],this.props.auth.user)}}
-
-  deletegallerypic(index, user) {
-    axios.put('deletefromgallery/' + user,index).then(res => this.setState({gallery:res.data.gallery}))
-    .catch(err => {
-      console.log("delete error for gallery", err);
-    })
-  }
-  
-
+ 
   
   render() {
     
@@ -599,7 +135,6 @@ onSubmitGalleryPhoto = (e) => {
     this.componentDidMount();
     return null;
   }
-
     
         
     return (
@@ -619,12 +154,10 @@ onSubmitGalleryPhoto = (e) => {
         <button type="button" class="block" onClick={this.switchtoen}>English</button> 
         <button type="button" class="block" onClick={this.switchtocn}>Chinese</button> 
         <button type="button" class="block"onClick={this.switchtojp}>Japanese</button> 
-
       
-
       
     </Modal>
-   <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}><Translate content='logout'></Translate> </a></li>
+   
 </ul>
 </nav>
         
@@ -635,27 +168,7 @@ onSubmitGalleryPhoto = (e) => {
             <div class="float-container">
           
                 <h2 style={{color:'white', fontFamily:'Palatino Linotype'}}>  {this.state.intro}</h2>
-                <Button  onClick={this.showintroModal}><Translate content='edit_Intro'></Translate></Button>
-                <Modal show={this.state.showintro}>
-                <Modal.Header closeButton onClick={this.hideintroModal}></Modal.Header>
-                <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Intro'></Translate> </h2>
-                <form onSubmit={this.onSubmitIntro}>
-                  <input onChange={this.onChange}
-                      value={this.state.addintro}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Intro"
-                      name="addintro"
-                      style={{width: '200px'}}
-                          
-                          required autoFocus 
-                    />
-                  
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
-                  </form>
-                </Modal>
-             
+                
             </div>
             
             <hr />
@@ -667,73 +180,27 @@ onSubmitGalleryPhoto = (e) => {
       <div className="row">
       <div className="three columns">
             <img className="profile-pic"  src={this.state.profilePicture} alt="Profile Pic" />
-            <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
-
-<Button onClick={this.imgUploadHandler}><Translate content='upload'></Translate> </Button>
+            
          </div>
        
          <div className="nine columns main-col">
             <h2><Translate content='about_me'></Translate> </h2>
-
             <p>{this.state.bio}</p>
-            <Button  onClick={this.showbioModal}><Translate content='edit_Bio'></Translate></Button>
-                <Modal show={this.state.showbio}>
-                <Modal.Header closeButton onClick={this.hidebioModal}></Modal.Header>
-                <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Bio'></Translate> </h2>
-                <form onSubmit={this.onSubmitBio}>
-                  <input onChange={this.onChange}
-                      value={this.state.addinfo}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Bio"
-                      name="addinfo"
-                      style={{height:'200px' }}
-                      maxLength="100"
-                          
-                          required autoFocus 
-                    />
-                  
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
-                  </form>
-                </Modal>
             <div className="row">
                <div className="columns contact-details">
                   <h2><Translate content='contact_details'></Translate> </h2>
                   <p className="address">
 						   <span>{this.state.phone}</span><br />
                <div>
-               <Button  onClick={this.showphoneModal}><Translate content='edit_phone'></Translate></Button>
-                <Modal show={this.state.showphone}>
-                <Modal.Header closeButton onClick={this.hidephoneModal}></Modal.Header>
-                <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Bio'></Translate> </h2>
-                <form onSubmit={this.onSubmitPhone}>
-                  <input onChange={this.onChange}
-                      value={this.state.addinfo}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Phone"
-                      name="addinfo"
-              
-                      maxLength="20"
-                          
-                          required autoFocus 
-                    />
-                  
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
-                  </form>
-                </Modal>
-             
+                
       </div>
-
                      <span>{this.state.email}</span>
 					   </p>
                </div>
                <div className="columns download">
                   <p>
-                  <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
-                  <button onClick={this.pdfUploadHandler}>Upload Transcript </button>
+                  
+                  
                   <a href = {this.state.transcript} target = "_blank" rel ="noopener noreferrer" download = "transcript">Click to Download Transcript</a>
                   
                   </p>
@@ -741,7 +208,6 @@ onSubmitGalleryPhoto = (e) => {
             </div>
          </div>
       </div>
-
    </section>
    <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id="education">
@@ -750,59 +216,16 @@ onSubmitGalleryPhoto = (e) => {
       <div>         
     <p   style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
 <li key = {index} > 
-
         <p style={{color:'black', fontFamily:'bookman', fontSize:'25px',  letterSpacing:'1px'}}>{item.school} </p>    
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'20px',  letterSpacing:'1px'}}>{item.qual}</p>
-        <Button onClick={()=>{this.deleteedu((this.state.education)[index],this.props.auth.user)}}>Delete</Button>
         <hr />
       </li>
   )}</ul>} </p>
   
       </div>
-
-
-      <button style={{alignItems:'center'}} onClick={this.showEduModal}><Translate content='add_edu'></Translate> </button>
-      <Modal show={this.state.showedu} >
-        <Modal.Header closeButton onClick={this.hideEduModal}></Modal.Header>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='add_edu'></Translate> </h2>
-      <form onSubmit={this.onSubmitEdu}>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addschoolname}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add School Name"
-                      name="addschoolname"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addqual}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Qualification"
-                      name="addqual"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                 
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
-                  </form>
-
-      
-        </Modal>
-     
-
-
-            
+             
       
       </div>
-
    </section>
    <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id="work">
@@ -820,86 +243,19 @@ onSubmitGalleryPhoto = (e) => {
                <div className="twelve columns">
                  <div>
         <p style={{color:'black', fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.position} </p>
-
         </div>
         <div>
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.from}-{item.to}</p>
-
         </div>
                </div>
             </div>
          </div>
-      <Button onClick={()=>{this.deletework((this.state.work)[index],this.props.auth.user)}}>Delete</Button>
-         </div>
-
+     </div>
         
       </li>
   )}</ul>} </p>
-
     </div>
-
-
-    <button style={{alignItems:'center'}} onClick={this.showWorkModal}><Translate content='add_work'></Translate> </button>
-      <Modal show={this.state.showwork} >
-        <Modal.Header closeButton onClick={this.hideWorkModal}></Modal.Header>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='add_work'></Translate> </h2>
-      <form onSubmit={this.onSubmitWork}>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addworkplace}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Business Name"
-                      name="addworkplace"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addposition}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Position/Role"
-                      name="addposition"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addfrom}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Start Date"
-                      name="addfrom"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addto}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add End Date"
-                      name="addto"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
-                  </form>
-
-      
-        </Modal>
-    </div>
-
-
+</div>
    </section>
   <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id='projects'>
@@ -918,104 +274,29 @@ onSubmitGalleryPhoto = (e) => {
                <div className="twelve columns">
                  <div>
         <p style={{color:'black', fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.projectdescription} </p>
-
         </div>
         <div>
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.projectlink}</p>
         </div>
                </div>
-               <Button onClick={()=>{this.deleteproject((this.state.projects)[index],this.props.auth.user)}}>Delete</Button>
-            </div>
+              </div>
          </div>
       
          </div></li>
     )}</ul> } </p>
     </div>
-    <button style={{alignItems:'center'}} onClick={this.showProjectModal}><Translate content='add_projects'></Translate> </button>
-      <Modal show={this.state.showproject} >
-        <Modal.Header closeButton onClick={this.hideProjectModal}></Modal.Header>
-      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='add_projects'></Translate> </h2>
-      <form onSubmit={this.onSubmitProject}>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addprojectname}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Project Name"
-                      name="addprojectname"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addprojectdescripition}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Project Description"
-                      name="addprojectdescripition"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addorijectlink}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Project Link"
-                      name="addprojectlink"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
-                  </form>
-
-      
-        </Modal>
     </div>
 </section>
-
-
 <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id="skills">
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
       <div>         
       <p style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
-    <li key = {index}><span style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px',borderBottom:'solid #11ABB0'}}>{item}</span> <Button onClick={()=>{this.deleteskills(index,this.props.auth.user)}}>Delete</Button></li>
+    <li key = {index}><span style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px',borderBottom:'solid #11ABB0'}}>{item}</span> </li>
   )}</ul> } </p>
       </div>
-      <button style={{alignItems:'center'}} onClick={this.showskillsModal}><Translate content='add_skills'></Translate> </button>
-      
-      <Modal show={this.state.showskills}>
-                <Modal.Header closeButton onClick={this.hideskillsModal}></Modal.Header>
-                <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='add_skills'></Translate> </h2>
-                <form onSubmit={this.onSubmitSkills}>
-                  <input onChange={this.onChange}
-                      value={this.state.addinfo}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Bio"
-                      name="addinfo"
-                      style={{height:'200px' }}
-                      maxLength="100"
-                          
-                          required autoFocus 
-                    />
-                  
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
-                  </form>
-                </Modal>
-            
-      
-      </div>
-
+       </div>
    </section>
    <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id="subjects">
@@ -1034,72 +315,23 @@ onSubmitGalleryPhoto = (e) => {
                <div className="twelve columns">
                  <div>
         <p style={{color:'black', fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.subjectdescripition} </p>
-
         </div>
         <div>
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.subjectyear}</p>
         </div>
                </div>
-               <Button onClick={()=>{this.deletesubject((this.state.subjects)[index],this.props.auth.user)}}>Delete</Button>
-            </div>
+               </div>
          </div>
       
          </div></li>
     )}</ul> } </p>
-      <button style={{alignItems:'center'}} onClick={this.showAddModal}><Translate content='add_subjects'></Translate> </button>
-      <Modal show={this.state.showAdd} >
-        <Modal.Header closeButton onClick={this.hideAddModal}></Modal.Header>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='add_subjects'></Translate> </h2>
-      <form onSubmit={this.onSubmitSubject}>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addsubjectname}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Subject Name"
-                      name="addsubjectname"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addsubjectdescripition}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Subject Description"
-                      name="addsubjectdescripition"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addsubjectyear}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Subject Year"
-                      name="addsubjectyear"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
-                  </form>
-
       
-        </Modal>
       </div>
             
       
       </div>
-
    </section>
    <hr style={{border: '10px', borderRadius: '5px'}}/>
-
    <section id = "gallery">
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}>Gallery</h2>
@@ -1128,25 +360,13 @@ onSubmitGalleryPhoto = (e) => {
     height: '120px',
     opacity: '0.8'}}>
        <h3> {item.description} </h3>
-       <Button onClick={()=>{this.deletegallerypic((this.state.gallery)[index],this.props.auth.user)}} > Delete Image</Button>
-         
+       
               </Carousel.Caption>
         </Carousel.Item>
       )}
      </Carousel>
    
-
-        <form name="uploadForm" onkeydown="return event.key != 'Enter';">
-          <div>
-            <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
-          </div>
-          <div>
-            <h2> Add Photo Description </h2>
-            <input type = "text" value = {this.state.addgallerydescription} onChange = {this.handleGalleryChange}/>
-          </div>
-          <div><button type="button" onClick={this.onSubmitGalleryPhoto}>Upload Gallery </button></div>
-          </form>
-      
+        
       </div>
     </section>
            <Footer/>
