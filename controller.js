@@ -100,14 +100,14 @@ function escapeRegex(text) {
 
 
 var findUserByEmail = function(req, res) {
-
+    console.log(req.params.email);
     var useremail = req.params.email;
 
     Profile.find({email:useremail}, function(err, user) {
         if (!err) {
             console.log("found");
-            const payload = res;
-            res.send(payload);
+            
+            res.send(user);
         } else {
             console.log("err");
             res.sendStatus(404);

@@ -132,8 +132,9 @@ class PublicProfile extends Component {
         };
 
         componentDidMount() {
+          console.log(this.props.match.params.user);
             axios
-                .get('/profile1/'+(this.props.auth.user))
+                .get('/profile2/'+this.props.match.params.user)
                 .then(res=>{
                   this.setState({email:res.data[0].email,
                                  name:res.data[0].name,
@@ -680,5 +681,6 @@ class PublicProfile extends Component {
                
               )
             }
+            
 
-}
+}export default connect()(PublicProfile);
