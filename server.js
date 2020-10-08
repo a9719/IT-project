@@ -30,9 +30,9 @@ const routes = require('./routes/router.js');
 const fileRoutes = require('./routes/file-upload.js');
 app.use('/', routes);
 app.use('/', fileRoutes);
-app.use(express.static(path.join(__dirname, "client", "build")))
 
 
+app.use('/static', express.static(path.join(__dirname, 'client/build')));
 
 
 app.listen(port, function() {
