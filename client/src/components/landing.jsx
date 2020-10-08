@@ -4,7 +4,7 @@ import TestCard from './TestCard'
 import Cardflip from './Cardflip'
 import CarouselHomepage from './CarouselHomepage'
 import Autosuggest from 'react-autosuggest';
-
+import theme from './theme.css';
 
 class Landing extends Component {
 
@@ -139,7 +139,9 @@ renderSuggestion = suggestion => (
         <div className = "users">
           {this.displayUsers(this.state.users)}
         </div>
+        <div>
         <Autosuggest
+        theme = {theme}
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
@@ -148,6 +150,7 @@ renderSuggestion = suggestion => (
         renderSuggestion={this.renderSuggestion}
         inputProps={inputProps}
       />
+      </div>
       </div>
     )
   }
