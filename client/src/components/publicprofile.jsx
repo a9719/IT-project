@@ -17,9 +17,7 @@ import "./css/media-queries.css";
 import en from "./i18n/en";
 import cn from "./i18n/cn";
 import jp from "./i18n/jp";
-function startDownload(url) {
-  window.location.href(url)
-}
+
 //Translation
 counterpart.registerTranslations('en',en);
 counterpart.registerTranslations('cn',cn);

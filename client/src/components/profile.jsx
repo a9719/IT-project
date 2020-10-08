@@ -3,16 +3,12 @@ import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {Button, Modal} from 'react-bootstrap';
-import styled from 'styled-components';
 import { Link } from 'react-scroll';
 import PropTypes from 'prop-types';
 import {  logoutUser } from "./../actions/authActions";
 import Footer from './Footer.js';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
-
-
-
 import "./profile_pic.css";
 import "./css/default.css";
 import "./css/fonts.css";
@@ -22,77 +18,11 @@ import "./css/media-queries.css";
 import en from "./i18n/en";
 import cn from "./i18n/cn";
 import jp from "./i18n/jp";
-
-const Styles = styled.div
-`
-  .navbar { background-color: #365; }
-  a, .navbar-nav, .navbar-light .nav-link {
-    color: #000000;
-    &:hover { color: #365; }
-  }
-  .carousel {
-    padding-bottom: 10em;
-  }
-  
- 
-  .carousel-img {
-    max-width: 1300px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .navbar-brand {
-    font-size: 1.4em;
-    color: #000000;
-    &:hover { color: #365; }
-  }
-  .dropdown-center {
-    position: absolute !important;
-    left: 50%;
-    right: 50%;
-  }
-  .color-nav {
-      background-color : rgb(255,255,255);
-  }
-  .nav.nav-center {
-    display: inline-block;
-    left: 0;
-    right: 0;
-    margin:0;
-    float:none;
-  }
-  .float-container {
-    border: 3px solid #fff;
-    padding: 20px;
-}
-
-.float-child {
-    width: 50%;
-    float: left;
-    padding: 20px;
-    border: 2px solid red;
-} 
-.education1 {
-  padding: 90px 0 72px; background: #fff;
-} 
-`;
-
-
-
-
-function startDownload(url) {
-  window.location.href(url)
-}
-
-
 //Translation
 counterpart.registerTranslations('en',en);
 counterpart.registerTranslations('cn',cn);
 counterpart.registerTranslations('jp',jp);
-
 counterpart.setLocale('en');
-
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -139,7 +69,6 @@ class Profile extends Component {
   this.onLogoutClick=this.onLogoutClick.bind(this);
   this.onChange =this.onChange.bind(this);
   this.onSubmitSubject =this.onSubmitSubject.bind(this);
-
   
 }
 switchtoen = () => {
@@ -166,7 +95,6 @@ hideLanguage =() => {
 showAddModal = () => {
   this.setState({ showAdd: true });
 };
-
 hideAddModal = () => {
   this.setState({addsubjectname:''});
   this.setState({addsubjectdescripition:''});
@@ -181,7 +109,6 @@ hideEduModal = () => {
   this.setState({addqual:''});
   this.setState({ showedu: false });
 };
-
 showProjectModal = () => {
   this.setState({ showproject: true });
 };
@@ -191,7 +118,6 @@ hideProjectModal = () => {
   this.setState({addprojectlink:''});
   this.setState({ showproject: false });
 };
-
 showWorkModal = () => {
   this.setState({ showwork: true });
 };
@@ -202,7 +128,6 @@ hideWorkModal = () => {
   this.setState({addto:''});
   this.setState({ showwork: false });
 };
-
 showintroModal = () => {
   this.setState({ showintro: true });
 };
@@ -217,7 +142,6 @@ onChange = (e) => {
 onSubmitProject =(e) =>
 {
   e.preventDefault();
-
   const userData ={
     projectname:this.state.addprojectname,
     projectdescription: this.state.addprojectdescripition,
@@ -230,11 +154,9 @@ onSubmitProject =(e) =>
   this.setState({addprojectdescripition:''});
   this.setState({addprojectlink:''});
   this.setState({ showproject: false });
-
 }
 onSubmitWork = (e) =>{
   e.preventDefault();
-
   const userData ={
     workplace: this.state.addworkplace,
     position: this.state.addposition,
@@ -243,7 +165,6 @@ onSubmitWork = (e) =>{
   }
   axios.put('/profilework/'+this.props.auth.user,userData)
   .then(res=> this.setState({work:res.data.work}))
-
   this.setState({addworkplace:''});
   this.setState({addposition:''});
   this.setState({addfrom:''});
@@ -253,26 +174,18 @@ onSubmitWork = (e) =>{
 onSubmitSubject = (e) =>{
   
   e.preventDefault();
-
-
   const userData = {
     subjectname: this.state.addsubjectname,
     subjectdesc: this.state.addsubjectdescripition,
     year: this.state.addsubjectyear
   };
-
   console.log(userData);
-
   axios.put('/profilesub/'+this.props.auth.user,userData)
   .then(res=>this.setState({subjects:res.data.subjects}))
-
-
   this.setState({addsubjectname:''});
   this.setState({addsubjectdescripition:''});
   this.setState({addsubjectyear:''});
   this.setState({showAdd:false}); 
-
-
 }
 onSubmitEdu =(e) =>{
   e.preventDefault();
@@ -297,9 +210,6 @@ onSubmitIntro =(e) =>{
   this.setState({addintro:''});
   this.setState({showintro:false});
 }
-
-
-
 showbioModal = () => {
   this.setState({ showbio: true });
 };
@@ -354,54 +264,36 @@ onSubmitSkills =(e) =>{
   this.setState({addinfo:''});
   this.setState({showskills:false});
 }
-
 handleGalleryChange = event => {
-
   event.preventDefault();
   
   this.setState({
     addgallerydescription: event.target.value
   })
 }
-
 onSubmitGalleryPhoto = (e) => {
-
   e.preventDefault();
-
   const fd = new FormData();
-
   if (this.state.selectedFile == null) {
     return (Error);
   }
-
   const photoDesc =  this.state.addgallerydescription;
-
   fd.append('image', this.state.selectedFile);
-
   axios.post('/img-upload', fd).then((postResponse) => {
     console.log(postResponse);
     this.newGP = postResponse.data.imageUrl;
-
     const galleryPhoto = {
       imagesource: this.newGP,
       description: photoDesc
     };
-
     console.log(galleryPhoto);
-
     axios.put('/addtogallery/' + this.props.auth.user, galleryPhoto).then(res => this.setState({gallery:res.data.gallery}))
    
   }, (err) => {
     console.log(err);
   })
-
-
   this.setState({addgallerydescription:''});
-
 }
-
-
-
     onLogoutClick = (e) => {
       e.preventDefault();
       this.props.logoutUser();
@@ -420,7 +312,6 @@ onSubmitGalleryPhoto = (e) => {
                          projects:res.data[0].projects,
                          subjects:res.data[0].subjects,
                          gallery:res.data[0].gallery,
-                         projects:res.data[0].projects,
                          education:res.data[0].education,
                          website:res.data[0].website,
                          phone:res.data[0].phone,
@@ -431,17 +322,13 @@ onSubmitGalleryPhoto = (e) => {
           })
     
 }
-
   fileSelectedHandler = event => {
     event.preventDefault();
-
     this.setState({
       selectedFile: event.target.files[0]
     })
   }
-
  
-
   pdfUploadHandler = () => {
     const fd = new FormData();
     if (this.state.selectedFile == null) {
@@ -456,8 +343,6 @@ onSubmitGalleryPhoto = (e) => {
         console.log(res);
       })
     }
-
-
     fd.append('transcript', this.state.selectedFile);
       try {
         axios.post('/pdf-upload', fd).then((postResponse) => {
@@ -479,7 +364,6 @@ onSubmitGalleryPhoto = (e) => {
           
         })
       })
-
     }catch(err) {
       console.log(err);
     };
@@ -487,9 +371,6 @@ onSubmitGalleryPhoto = (e) => {
       selectedFile:null
     });
   }
-
-
-
   imgUploadHandler = () => {
     const fd = new FormData();
     if (this.state.selectedFile == null) {
@@ -504,8 +385,6 @@ onSubmitGalleryPhoto = (e) => {
         
       })
     }
-
-
     fd.append('image', this.state.selectedFile);
       try {
         axios.post('/img-upload', fd).then((postResponse) => {
@@ -527,7 +406,6 @@ onSubmitGalleryPhoto = (e) => {
           
         })
       })
-
     }catch(err) {
       console.log(err);
     };
@@ -548,7 +426,6 @@ onSubmitGalleryPhoto = (e) => {
       .catch(error => {
         console.log("handlesubmit error for blog ", error)
     })
-
     
   }
   deleteproject(index,user){
@@ -557,8 +434,6 @@ onSubmitGalleryPhoto = (e) => {
   .catch(error => {
     console.log("handlesubmit error for blog ", error)
 })
-
-
 }
   deleteedu(index,user) {
     
@@ -581,7 +456,6 @@ onSubmitGalleryPhoto = (e) => {
       
     }
   //onClick={()=>{this.deletesubject((this.state.subjects)[index],this.props.auth.user)}}
-
   deletegallerypic(index, user) {
     axios.put('deletefromgallery/' + user,index).then(res => this.setState({gallery:res.data.gallery}))
     .catch(err => {
@@ -589,7 +463,6 @@ onSubmitGalleryPhoto = (e) => {
     })
   }
   
-
   
   render() {
     
@@ -600,7 +473,6 @@ onSubmitGalleryPhoto = (e) => {
     this.componentDidMount();
     return null;
   }
-
     
         
     return (
@@ -620,9 +492,7 @@ onSubmitGalleryPhoto = (e) => {
         <button type="button" class="block" onClick={this.switchtoen}>English</button> 
         <button type="button" class="block" onClick={this.switchtocn}>Chinese</button> 
         <button type="button" class="block"onClick={this.switchtojp}>Japanese</button> 
-
       
-
       
     </Modal>
    <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}><Translate content='logout'></Translate> </a></li>
@@ -664,18 +534,16 @@ onSubmitGalleryPhoto = (e) => {
          </div>
       </div>
       </header>
-      <section id="about">
-      <div className="row">
-      <div className="three columns">
+      <section id="about"  >
+      <div className="row" >
+      <div className="three columns" >
             <img className="profile-pic"  src={this.state.profilePicture} alt="Profile Pic" />
             <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
-
 <Button onClick={this.imgUploadHandler}><Translate content='upload'></Translate> </Button>
          </div>
        
          <div className="nine columns main-col">
             <h2><Translate content='about_me'></Translate> </h2>
-
             <p>{this.state.bio}</p>
             <Button  onClick={this.showbioModal}><Translate content='edit_Bio'></Translate></Button>
                 <Modal show={this.state.showbio}>
@@ -727,7 +595,6 @@ onSubmitGalleryPhoto = (e) => {
                 </Modal>
              
       </div>
-
                      <span>{this.state.email}</span>
 					   </p>
                </div>
@@ -735,14 +602,13 @@ onSubmitGalleryPhoto = (e) => {
                   <p>
                   <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
                   <button onClick={this.pdfUploadHandler}>Upload Transcript </button>
-                  <a href = {this.state.transcript} target = "_blank" rel ="noopener noreferrer" download = "transcript">Click to Download Transcript</a>
+                  <button><Link href = {this.state.transcript} target = "_blank" rel ="noopener noreferrer" download = "transcript">Click to Download Transcript</Link></button>
                   
                   </p>
                </div>
             </div>
          </div>
       </div>
-
    </section>
    <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id="education">
@@ -751,7 +617,6 @@ onSubmitGalleryPhoto = (e) => {
       <div>         
     <p   style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
 <li key = {index} > 
-
         <p style={{color:'black', fontFamily:'bookman', fontSize:'25px',  letterSpacing:'1px'}}>{item.school} </p>    
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'20px',  letterSpacing:'1px'}}>{item.qual}</p>
         <Button onClick={()=>{this.deleteedu((this.state.education)[index],this.props.auth.user)}}>Delete</Button>
@@ -760,8 +625,6 @@ onSubmitGalleryPhoto = (e) => {
   )}</ul>} </p>
   
       </div>
-
-
       <button style={{alignItems:'center'}} onClick={this.showEduModal}><Translate content='add_edu'></Translate> </button>
       <Modal show={this.state.showedu} >
         <Modal.Header closeButton onClick={this.hideEduModal}></Modal.Header>
@@ -794,16 +657,12 @@ onSubmitGalleryPhoto = (e) => {
                  
                   <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
                   </form>
-
       
         </Modal>
      
-
-
             
       
       </div>
-
    </section>
    <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id="work">
@@ -821,26 +680,20 @@ onSubmitGalleryPhoto = (e) => {
                <div className="twelve columns">
                  <div>
         <p style={{color:'black', fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.position} </p>
-
         </div>
         <div>
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.from}-{item.to}</p>
-
         </div>
                </div>
             </div>
          </div>
       <Button onClick={()=>{this.deletework((this.state.work)[index],this.props.auth.user)}}>Delete</Button>
          </div>
-
         
       </li>
   )}</ul>} </p>
-
     </div>
-
-
-    <button style={{alignItems:'center'}} onClick={this.showWorkModal}><Translate content='add_work'></Translate> </button>
+    <button style={{alignItems:'center', marginLeft:'auto'}} onClick={this.showWorkModal}><Translate content='add_work'></Translate> </button>
       <Modal show={this.state.showwork} >
         <Modal.Header closeButton onClick={this.hideWorkModal}></Modal.Header>
       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='add_work'></Translate> </h2>
@@ -895,12 +748,9 @@ onSubmitGalleryPhoto = (e) => {
                   </div>
                   <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
                   </form>
-
       
         </Modal>
     </div>
-
-
    </section>
   <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id='projects'>
@@ -919,7 +769,6 @@ onSubmitGalleryPhoto = (e) => {
                <div className="twelve columns">
                  <div>
         <p style={{color:'black', fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.projectdescription} </p>
-
         </div>
         <div>
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.projectlink}</p>
@@ -975,13 +824,10 @@ onSubmitGalleryPhoto = (e) => {
                   </div>
                   <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
                   </form>
-
       
         </Modal>
     </div>
 </section>
-
-
 <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id="skills">
       <div style={{backgroundColor:'#fff'}}>
@@ -1016,7 +862,6 @@ onSubmitGalleryPhoto = (e) => {
             
       
       </div>
-
    </section>
    <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id="subjects">
@@ -1035,7 +880,6 @@ onSubmitGalleryPhoto = (e) => {
                <div className="twelve columns">
                  <div>
         <p style={{color:'black', fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.subjectdescripition} </p>
-
         </div>
         <div>
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.subjectyear}</p>
@@ -1090,17 +934,14 @@ onSubmitGalleryPhoto = (e) => {
                   </div>
                   <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
                   </form>
-
       
         </Modal>
       </div>
             
       
       </div>
-
    </section>
    <hr style={{border: '10px', borderRadius: '5px'}}/>
-
    <section id = "gallery">
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}>Gallery</h2>
@@ -1136,7 +977,6 @@ onSubmitGalleryPhoto = (e) => {
       )}
      </Carousel>
    
-
         <form name="uploadForm" onkeydown="return event.key != 'Enter';">
           <div>
             <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
