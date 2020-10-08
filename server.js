@@ -1,6 +1,7 @@
 var express = require('express')
 var cors = require('cors')
 var bodyParser = require('body-parser')
+const path = require('path')
 var app = express()
 const mongoose = require('mongoose')
 var port = process.env.PORT || 5000
@@ -27,10 +28,12 @@ require('./models/profile.js');
 
 const routes = require('./routes/router.js');
 const fileRoutes = require('./routes/file-upload.js');
-
-
 app.use('/', routes);
 app.use('/', fileRoutes);
+app.use(express.static(path.join(__dirname, "client", "build")))
+
+
+
 
 app.listen(port, function() {
   console.log('Server is running on port: ' + port)
