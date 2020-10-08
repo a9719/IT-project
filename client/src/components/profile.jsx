@@ -4,7 +4,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {Button, Modal} from 'react-bootstrap';
 import styled from 'styled-components';
-
+import { Link } from 'react-scroll';
 import PropTypes from 'prop-types';
 import {  logoutUser } from "./../actions/authActions";
 import Footer from './Footer.js';
@@ -588,6 +588,7 @@ onSubmitGalleryPhoto = (e) => {
       console.log("delete error for gallery", err);
     })
   }
+  
 
   
   render() {
@@ -607,12 +608,12 @@ onSubmitGalleryPhoto = (e) => {
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
-        <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
-   <li><a className="smoothscroll" href="#about"><Translate content='education'></Translate> </a></li>
-  <li><a className="smoothscroll" href="#skills"><Translate content='skills'></Translate> </a></li>
-   <li><a className="smoothscroll" href="#projects"><Translate content='projects'></Translate> </a></li>
-   <li><a className="smoothscroll" href="#subjects"><Translate content='subjects'></Translate> </a></li>
-   <li><a className="smoothscroll" href="#work"><Translate content='work'></Translate> </a></li>
+        <li className="current"><Link activeClass="active" to="current" spy={true} smooth={true} duration={1000} href="#">Home </Link></li>
+   <li ><Link activeClass="active" to="education" spy={true} smooth={true} duration={1000} href="#"><Translate content='education'></Translate> </Link></li>
+  <li><Link activeClass="active" to="skills" spy={true} smooth={true} duration={1000} href="#"><Translate content='skills'></Translate> </Link></li>
+   <li><Link activeClass="active" to="projects" spy={true} smooth={true} duration={1000} href="#"><Translate content='projects'></Translate>  </Link></li>
+   <li><Link activeClass="active" to="subjects" spy={true} smooth={true} duration={1000} href="#"><Translate content='subjects'></Translate>  </Link></li>
+   <li><Link activeClass="active" to="work" spy={true} smooth={true} duration={1000} href="#"><Translate content='work'></Translate>  </Link></li>
    <li><a className="smoothscroll" href="#" onClick={this.showLanguage}> <Translate content='language'></Translate> </a> </li>
    <Modal show={this.state.showlang} >
         <Modal.Header closeButton onClick={this.hideLanguage}></Modal.Header>
@@ -627,14 +628,14 @@ onSubmitGalleryPhoto = (e) => {
    <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}><Translate content='logout'></Translate> </a></li>
 </ul>
 </nav>
-
+        
         <div class="row banner">
          <div class="banner-text">
             
-            <h1 class="responsive-headline"> <Translate content='Im'></Translate>  {this.state.name} </h1>
+            <h1 className="responsive-headline"> <Translate content='Im'></Translate>  {this.state.name} </h1>
             <div class="float-container">
           
-                <h3> <a class="smoothscroll" href="" float="left" width="50%"> {this.state.intro}</a></h3>
+                <h2 style={{color:'white', fontFamily:'Palatino Linotype'}}>  {this.state.intro}</h2>
                 <Button  onClick={this.showintroModal}><Translate content='edit_Intro'></Translate></Button>
                 <Modal show={this.state.showintro}>
                 <Modal.Header closeButton onClick={this.hideintroModal}></Modal.Header>
@@ -743,13 +744,14 @@ onSubmitGalleryPhoto = (e) => {
       </div>
 
    </section>
-   
+   <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id="education">
       <div style={{backgroundColor:'#fff'}}>
-      <h2 style={{textAlign: 'center', paddingBlock:'20px',fontFamily:'Times New Roman'}}><Translate content='education'></Translate> </h2>
+      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='education'></Translate> </h2>
       <div>         
     <p   style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
 <li key = {index} > 
+
         <p style={{color:'black', fontFamily:'bookman', fontSize:'25px',  letterSpacing:'1px'}}>{item.school} </p>    
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'20px',  letterSpacing:'1px'}}>{item.qual}</p>
         <Button onClick={()=>{this.deleteedu((this.state.education)[index],this.props.auth.user)}}>Delete</Button>
@@ -803,10 +805,10 @@ onSubmitGalleryPhoto = (e) => {
       </div>
 
    </section>
-
+   <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id="work">
    <div style={{backgroundColor:'#fff'}}>
-    <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='work1'></Translate> </h2>
+    <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='work1'></Translate> </h2>
     <div>
     <p     >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.work).sort((a,b)=>b.from -a.from)).map( (item, index) =>
 <li key = {index} > 
@@ -900,10 +902,10 @@ onSubmitGalleryPhoto = (e) => {
 
 
    </section>
-
+  <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id='projects'>
    <div style={{backgroundColor:'#fff'}}>
-      <h2 style={{fontSize:'55px', textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='projects'></Translate> </h2>
+      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='projects'></Translate> </h2>
       <div>         
       <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.projects).map( (item, index) =>
    
@@ -933,7 +935,7 @@ onSubmitGalleryPhoto = (e) => {
     <button style={{alignItems:'center'}} onClick={this.showProjectModal}><Translate content='add_projects'></Translate> </button>
       <Modal show={this.state.showproject} >
         <Modal.Header closeButton onClick={this.hideProjectModal}></Modal.Header>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='add_projects'></Translate> </h2>
+      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='add_projects'></Translate> </h2>
       <form onSubmit={this.onSubmitProject}>
                   <div className="form-group">
                     <input onChange={this.onChange}
@@ -980,10 +982,10 @@ onSubmitGalleryPhoto = (e) => {
 </section>
 
 
-
+<hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id="skills">
       <div style={{backgroundColor:'#fff'}}>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='skills'></Translate> </h2>
+      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
       <div>         
       <p style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
     <li key = {index}><span style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px',borderBottom:'solid #11ABB0'}}>{item}</span> <Button onClick={()=>{this.deleteskills(index,this.props.auth.user)}}>Delete</Button></li>
@@ -1016,9 +1018,10 @@ onSubmitGalleryPhoto = (e) => {
       </div>
 
    </section>
+   <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id="subjects">
       <div style={{backgroundColor:'#fff'}}>
-      <h2 style={{fontSize:'55px', textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
+      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='subjects'></Translate> </h2>
       <div>         
       <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
    
@@ -1096,10 +1099,11 @@ onSubmitGalleryPhoto = (e) => {
       </div>
 
    </section>
+   <hr style={{border: '10px', borderRadius: '5px'}}/>
 
    <section id = "gallery">
    <div style={{backgroundColor:'#fff'}}>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}>Gallery</h2>
+      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}>Gallery</h2>
      
         <Carousel>
       {(this.state.gallery).map( (item, index) =>
