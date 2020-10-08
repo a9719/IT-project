@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
-import {Helmet} from 'react-helmet';
+
 import { Button, Image, Row} from 'react-bootstrap';
 import icon from './registerImage.svg';
 import NavigationBar from "./NavigationBar"

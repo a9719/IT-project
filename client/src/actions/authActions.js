@@ -2,7 +2,7 @@
 // It uses axios to make HTTPrequests within a certain action and then dispatches them to our reducers
 
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+
 import setAuthToken from "../utils/setAuthToken"
 
 import {
