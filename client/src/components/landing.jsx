@@ -58,6 +58,13 @@ renderSuggestion = suggestion => (
     });
   };
 
+  onSuggestionSelected = (suggestion, suggestionValue) => {
+    console.log(suggestionValue.suggestion.email);
+    const useremail = suggestionValue.suggestion.email;
+
+    window.location.href = ("/public/" + useremail);
+  }
+
   getUserDetails = () => {
     axios.get('/users')
       .then((response) => {
@@ -65,7 +72,8 @@ renderSuggestion = suggestion => (
         this.setState({users : data});
         const names = data.map((item) => {
           return {
-            name: item.name
+            name: item.name,
+            email: item.email
           }
         });
         console.log(names);
@@ -135,6 +143,7 @@ renderSuggestion = suggestion => (
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        onSuggestionSelected={this.onSuggestionSelected}
         getSuggestionValue={this.getSuggestionValue}
         renderSuggestion={this.renderSuggestion}
         inputProps={inputProps}
