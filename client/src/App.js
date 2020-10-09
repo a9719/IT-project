@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
-
-
+import { Container, Row, Col } from 'reactstrap';
+import {Helmet} from 'react-helmet';
 import PropTypes from "prop-types";
 import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import "./App.css"
 import NavigationBar from "./components/NavigationBar"
-
 import Footer from "./components/Footer"
-
+import Card from "./components/cardtest"
 
 import Register from './components/register';
 import Login from './components/login';

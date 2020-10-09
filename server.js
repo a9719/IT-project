@@ -31,7 +31,7 @@ const fileRoutes = require('./routes/file-upload.js');
 app.use('/', routes);
 app.use('/', fileRoutes);
 
-
+app.use(express.static(__dirname + '/public'));
 app.use('/static', express.static(path.join(__dirname, 'client/build')));
 
 
