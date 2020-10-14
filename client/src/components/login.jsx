@@ -6,12 +6,49 @@ import icon from './loginImage.svg';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser, setUserLoading, setUserNotLoading } from "../actions/authActions";
+
+
 import classnames from "classnames";
+import { Nav, Navbar, Dropdown} from 'react-bootstrap';
+import styled from 'styled-components';
+import logo from './logo.svg';
 import NavigationBar from "./NavigationBar";
-
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
 import Footer from "./Footer"
+import en from "./i18n/en";
+import cn from "./i18n/cn";
+import jp from "./i18n/jp";
+import "./Footer.css";
+
+//Translation
+counterpart.registerTranslations('en',en);
+counterpart.registerTranslations('cn',cn);
+counterpart.registerTranslations('jp',jp);
+counterpart.setLocale('en');
 
 
+const Styles = styled.div
+`
+  .navbar { background-color: #365; }
+  a, .navbar-nav, .navbar-light .nav-link {
+    color: #000000;
+    &:hover { color: #365; }
+  }
+  .navbar-brand {
+    font-size: 1.4em;
+    color: #000000;
+    &:hover { color: #365; }
+  }
+  .dropdown-center {
+    position: absolute !important;
+    left: 50%;
+    right: 50%;
+  }
+  .color-nav {
+      background-color : rgb(255,255,255);
+  }
+`;
 
 
 class Login extends Component {
@@ -20,12 +57,28 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      errors: {}
+      errors: {},
+      
     };
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange =this.onChange.bind(this);
   }
+  switchtoen = () => {
+  
+    counterpart.setLocale('en')
+ 
+  };
+  switchtocn = () => {
+    
+    counterpart.setLocale('cn');
+
+  };
+  switchtojp= () => {
+    
+    counterpart.setLocale('jp')
+
+  };
 
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
@@ -69,12 +122,42 @@ onSubmit = (e) => {
     return (
       
       <div className="login">
-        <NavigationBar/>
+        <Styles>  
+    <Navbar className = "color-nav" expand="lg" bg="light" variant="light">
+      <Navbar.Brand href="/">
+        <img
+          src={logo}
+          width="80"
+          height="80"
+          className="d-inline-block align-top"
+          alt=""
+        />
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto">
+          <Nav.Item><Nav.Link href="/register"><Translate content='register'></Translate></Nav.Link></Nav.Item> 
+          <Nav.Item><Nav.Link href="/login"><Translate content='login'></Translate></Nav.Link></Nav.Item>
+          <Dropdown className = "dropdown-center">
+                <Dropdown.Toggle variant = "outline-info" id = "dropdown-basic">
+                    Language Options
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    <Dropdown.Item href="" onClick={this.switchtoen}>English</Dropdown.Item>
+                    <Dropdown.Item href="" onClick={this.switchtocn}>Chinese</Dropdown.Item>
+                    <Dropdown.Item href="" onClick={this.switchtojp}>Japanese</Dropdown.Item>
+                </Dropdown.Menu>
+          </Dropdown>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  </Styles>
         <div className="container-fluid bg-light mt-5 pb-5 pt-5 rounded">
         
           <div className = "row">
             
-            <h1 className="display-4 mx-auto">Welcome Back</h1>
+            <h1 className="display-4 mx-auto"><Translate content='welcome'></Translate> </h1>
           </div>
           <div className="row mt-5 align-self-center">
           <div className="col align-self-center d-none d-lg-block">
@@ -85,7 +168,7 @@ onSubmit = (e) => {
             <div className="col align-self-center">
               <div className="col-md-12 m-auto">
                 <p className="lead text-center">
-                  Login with
+                <Translate content='login'></Translate>
                 </p>
 
                   <form onSubmit={this.onSubmit}>
@@ -124,12 +207,12 @@ onSubmit = (e) => {
                   <Row>
                       <Col>
                         <Button variant="info" type="submit" size="lg" block>
-                          Login
+                        <Translate content='login'></Translate>
                         </Button>  
                       </Col>
                       <Col>
                         <Button href="/register" variant="outline-info" type="submit" size="lg" block>
-                          Sign up
+                        <Translate content='register'></Translate>
                         </Button>
                       </Col>
                     </Row>
@@ -142,7 +225,35 @@ onSubmit = (e) => {
           </div>
           
         </div>
-        <Footer/>
+        <div className = "main-footer">
+    <div className = "container">
+      <div className = "row">
+        <div className = "col">
+          <h4>Swat Kats</h4>
+          <p>
+          <Translate content='info'></Translate>
+          </p>
+        </div>
+
+        <div className = "col">
+          <h4><Translate content='createdby'></Translate></h4>
+          <ul className = "list-unstyled">
+            <li>Aneesh Chattaraj</li>
+            <li>Dylan Stewart</li>
+            <li>Ian Teh Jing Wen</li>
+            <li>Ragav Narayanan</li>
+            <li>Zhi Jie Siow</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className = "row">
+        <p className = "col-sm">
+          &copy;{new Date().getFullYear()} Swat Kats | All rights reserved
+        </p>
+      </div>
+    </div>
+  </div>
       </div>
     )
   }

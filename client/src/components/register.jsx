@@ -4,8 +4,52 @@ import classnames from 'classnames';
 
 import { Button, Image, Row} from 'react-bootstrap';
 import icon from './registerImage.svg';
-import NavigationBar from "./NavigationBar"
+
+
+
+import { Nav, Navbar, Dropdown} from 'react-bootstrap';
+import styled from 'styled-components';
+import logo from './logo.svg';
+import NavigationBar from "./NavigationBar";
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
 import Footer from "./Footer"
+import en from "./i18n/en";
+import cn from "./i18n/cn";
+import jp from "./i18n/jp";
+import "./Footer.css";
+
+//Translation
+counterpart.registerTranslations('en',en);
+counterpart.registerTranslations('cn',cn);
+counterpart.registerTranslations('jp',jp);
+counterpart.setLocale('en');
+
+
+const Styles = styled.div
+`
+  .navbar { background-color: #365; }
+  a, .navbar-nav, .navbar-light .nav-link {
+    color: #000000;
+    &:hover { color: #365; }
+  }
+  .navbar-brand {
+    font-size: 1.4em;
+    color: #000000;
+    &:hover { color: #365; }
+  }
+  .dropdown-center {
+    position: absolute !important;
+    left: 50%;
+    right: 50%;
+  }
+  .color-nav {
+      background-color : rgb(255,255,255);
+  }
+`;
+
+
+
 
 class Register extends Component {
   constructor() {
@@ -46,15 +90,62 @@ class Register extends Component {
     this.props.history.push("/login");
   }
 
+  switchtoen = () => {
+  
+    counterpart.setLocale('en')
+ 
+  };
+  switchtocn = () => {
+    
+    counterpart.setLocale('cn');
+
+  };
+  switchtojp= () => {
+    
+    counterpart.setLocale('jp')
+
+  };
+
+
   render() {
     const { errors } = this.state;
 
     return (
       <div className="register">
-        <NavigationBar></NavigationBar>
+        <Styles>  
+    <Navbar className = "color-nav" expand="lg" bg="light" variant="light">
+      <Navbar.Brand href="/">
+        <img
+          src={logo}
+          width="80"
+          height="80"
+          className="d-inline-block align-top"
+          alt=""
+        />
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto">
+          <Nav.Item><Nav.Link href="/register"><Translate content='register'></Translate></Nav.Link></Nav.Item> 
+          <Nav.Item><Nav.Link href="/login"><Translate content='login'></Translate></Nav.Link></Nav.Item>
+          <Dropdown className = "dropdown-center">
+                <Dropdown.Toggle variant = "outline-info" id = "dropdown-basic">
+                    Language Options
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    <Dropdown.Item href="" onClick={this.switchtoen}>English</Dropdown.Item>
+                    <Dropdown.Item href="" onClick={this.switchtocn}>Chinese</Dropdown.Item>
+                    <Dropdown.Item href="" onClick={this.switchtojp}>Japanese</Dropdown.Item>
+                </Dropdown.Menu>
+          </Dropdown>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  </Styles>
         <div className="container-fluid bg-light mt-5 pb-5 pt-5 rounded">
           <div className = "row">
-            <h1 className="display-4 mx-auto mt-3">Create Account</h1>
+            <h1 className="display-4 mx-auto mt-3"><Translate content='Createacc'></Translate></h1>
             </div>
           <div className="row align-self-center nr-1">
             <div className="col align-self-center d-none d-lg-block">
@@ -64,9 +155,7 @@ class Register extends Component {
             </div>
             <div className="col align-self-center nl-1">
               <div className="col-md-12 m-auto">
-                <p className="lead text-center">
-                  Sign up with
-                </p>
+                
                 <form noValidate onSubmit={this.onSubmit}>
                   <div className="form-group">
                     <input
@@ -130,12 +219,12 @@ class Register extends Component {
                     )}
                   </div>
                   <Button variant="info" type="submit" size="lg" block>
-                    Submit
+                  <Translate content='submit'></Translate>
                     </Button>
                     
                     <Row>
                       <a href="/login" className="small mx-auto mt-2">
-                        Already have an account?
+                      <Translate content='registerfa'></Translate>
                       </a>
                     </Row>
                   
@@ -145,7 +234,35 @@ class Register extends Component {
           </div>
           
         </div>
-        <Footer></Footer>
+        <div className = "main-footer">
+    <div className = "container">
+      <div className = "row">
+        <div className = "col">
+          <h4>Swat Kats</h4>
+          <p>
+          <Translate content='info'></Translate>
+          </p>
+        </div>
+
+        <div className = "col">
+          <h4><Translate content='createdby'></Translate></h4>
+          <ul className = "list-unstyled">
+            <li>Aneesh Chattaraj</li>
+            <li>Dylan Stewart</li>
+            <li>Ian Teh Jing Wen</li>
+            <li>Ragav Narayanan</li>
+            <li>Zhi Jie Siow</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className = "row">
+        <p className = "col-sm">
+          &copy;{new Date().getFullYear()} Swat Kats | All rights reserved
+        </p>
+      </div>
+    </div>
+  </div>
       </div>
     );
   }
