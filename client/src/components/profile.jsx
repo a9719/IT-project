@@ -486,6 +486,7 @@ onSubmitGalleryPhoto = (e) => {
    <li><Link activeClass="active" to="projects" spy={true} smooth={true} duration={1000} href="#"><Translate content='projects'></Translate>  </Link></li>
    <li><Link activeClass="active" to="subjects" spy={true} smooth={true} duration={1000} href="#"><Translate content='subjects'></Translate>  </Link></li>
    <li><Link activeClass="active" to="work" spy={true} smooth={true} duration={1000} href="#"><Translate content='work'></Translate>  </Link></li>
+   <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#"><Translate content='gallery'></Translate>  </Link></li>
    <li><a className="smoothscroll" href="#" onClick={this.showLanguage}> <Translate content='language'></Translate> </a> </li>
    <Modal show={this.state.showlang} >
         <Modal.Header closeButton onClick={this.hideLanguage}></Modal.Header>
@@ -601,8 +602,8 @@ onSubmitGalleryPhoto = (e) => {
                <div className="columns download">
                   <p>
                   <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
-                  <button onClick={this.pdfUploadHandler}>Upload Transcript </button>
-                  <button><Link href = {this.state.transcript} target = "_blank" rel ="noopener noreferrer" download = "transcript">Click to Download Transcript</Link></button>
+                  <button onClick={this.pdfUploadHandler}><Translate content='upload_transcript'></Translate> </button>
+                  <button><Link href = {this.state.transcript} target = "_blank" rel ="noopener noreferrer" download = "transcript"><Translate content='download'></Translate></Link></button>
                   
                   </p>
                </div>
@@ -944,7 +945,7 @@ onSubmitGalleryPhoto = (e) => {
    <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id = "gallery">
    <div style={{backgroundColor:'#fff'}}>
-      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}>Gallery</h2>
+      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='gallery'></Translate></h2>
      
         <Carousel>
       {(this.state.gallery).map( (item, index) =>
@@ -982,10 +983,10 @@ onSubmitGalleryPhoto = (e) => {
             <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
           </div>
           <div>
-            <h2> Add Photo Description </h2>
+            <h2> <Translate content='add_photodesc'></Translate> </h2>
             <input type = "text" value = {this.state.addgallerydescription} onChange = {this.handleGalleryChange}/>
           </div>
-          <div><button type="button" onClick={this.onSubmitGalleryPhoto}>Upload Gallery </button></div>
+          <div><button type="button" onClick={this.onSubmitGalleryPhoto}><Translate content='add_photo'></Translate> </button></div>
           </form>
       
       </div>

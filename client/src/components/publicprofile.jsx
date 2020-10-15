@@ -140,12 +140,13 @@ onChange = (e) => {
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
-        <li className="current"><Link activeClass="active" to="current" spy={true} smooth={true} duration={1000} href="#">Home </Link></li>
+        <li className="current"><Link activeClass="active" to="current" spy={true} smooth={true} duration={1000} href="#"><Translate content='home'></Translate> </Link></li>
    <li ><Link activeClass="active" to="education" spy={true} smooth={true} duration={1000} href="#"><Translate content='education'></Translate> </Link></li>
   <li><Link activeClass="active" to="skills" spy={true} smooth={true} duration={1000} href="#"><Translate content='skills'></Translate> </Link></li>
    <li><Link activeClass="active" to="projects" spy={true} smooth={true} duration={1000} href="#"><Translate content='projects'></Translate>  </Link></li>
    <li><Link activeClass="active" to="subjects" spy={true} smooth={true} duration={1000} href="#"><Translate content='subjects'></Translate>  </Link></li>
    <li><Link activeClass="active" to="work" spy={true} smooth={true} duration={1000} href="#"><Translate content='work'></Translate>  </Link></li>
+   <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#"><Translate content='gallery'></Translate>  </Link></li>
    <li><a className="smoothscroll" href="#" onClick={this.showLanguage}> <Translate content='language'></Translate> </a> </li>
    <Modal show={this.state.showlang} >
         <Modal.Header closeButton onClick={this.hideLanguage}></Modal.Header>
@@ -197,10 +198,8 @@ onChange = (e) => {
                </div>
                <div className="columns download">
                   <p>
-                  
-                  
-                  <a href = {this.state.transcript} target = "_blank" rel ="noopener noreferrer" download = "transcript">Click to Download Transcript</a>
-                  
+              
+                  <button><Link href = {this.state.transcript} target = "_blank" rel ="noopener noreferrer" download = "transcript"><Translate content='download'></Translate></Link></button>
                   </p>
                </div>
             </div>
@@ -332,7 +331,7 @@ onChange = (e) => {
    <hr style={{border: '10px', borderRadius: '5px'}}/>
    <section id = "gallery">
    <div style={{backgroundColor:'#fff'}}>
-      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}>Gallery</h2>
+      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='gallery'></Translate> </h2>
      
         <Carousel>
       {(this.state.gallery).map( (item, index) =>
