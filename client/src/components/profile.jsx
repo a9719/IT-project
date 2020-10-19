@@ -9,6 +9,7 @@ import {  logoutUser } from "./../actions/authActions";
 import Footer from './Footer.js';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
+import logo from './logo.svg'
 import "./profile_pic.css";
 import "./css/default.css";
 import "./css/fonts.css";
@@ -479,6 +480,15 @@ onSubmitGalleryPhoto = (e) => {
       <div>    
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
+        <a href = "/">
+        <img
+          src={logo}
+          width="80"
+          height="80"
+          className="d-inline-block align-top"
+          alt=""
+        />
+        </a>
         <ul id="nav" className="nav">
         <li className="current"><Link activeClass="active" to="current" spy={true} smooth={true} duration={1000} href="#">Home </Link></li>
    <li ><Link activeClass="active" to="education" spy={true} smooth={true} duration={1000} href="#"><Translate content='education'></Translate> </Link></li>
