@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios';
+import logo from './logo.svg';
 import {connect} from 'react-redux';
 import { Modal} from 'react-bootstrap';
 import styled from 'styled-components';
@@ -140,6 +141,16 @@ onChange = (e) => {
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
+        <a href = "/">
+        <img
+          src={logo}
+          width="65"
+          height="65"
+          className="d-inline-block align-top"
+          style= {{padding: 10}}
+          alt=""
+        />
+        </a>
         <li className="current"><Link activeClass="active" to="current" spy={true} smooth={true} duration={1000} href="#"><Translate content='home'></Translate> </Link></li>
    <li ><Link activeClass="active" to="education" spy={true} smooth={true} duration={1000} href="#"><Translate content='education'></Translate> </Link></li>
   <li><Link activeClass="active" to="skills" spy={true} smooth={true} duration={1000} href="#"><Translate content='skills'></Translate> </Link></li>

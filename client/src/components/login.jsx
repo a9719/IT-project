@@ -12,10 +12,8 @@ import classnames from "classnames";
 import { Nav, Navbar, Dropdown} from 'react-bootstrap';
 import styled from 'styled-components';
 import logo from './logo.svg';
-import NavigationBar from "./NavigationBar";
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
-import Footer from "./Footer"
 import en from "./i18n/en";
 import cn from "./i18n/cn";
 import jp from "./i18n/jp";

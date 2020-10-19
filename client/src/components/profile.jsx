@@ -480,16 +480,17 @@ onSubmitGalleryPhoto = (e) => {
       <div>    
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
+        <ul id="nav" className="nav">
         <a href = "/">
         <img
           src={logo}
-          width="80"
-          height="80"
+          width="65"
+          height="65"
           className="d-inline-block align-top"
+          style= {{padding: 10}}
           alt=""
         />
         </a>
-        <ul id="nav" className="nav">
         <li className="current"><Link activeClass="active" to="current" spy={true} smooth={true} duration={1000} href="#">Home </Link></li>
    <li ><Link activeClass="active" to="education" spy={true} smooth={true} duration={1000} href="#"><Translate content='education'></Translate> </Link></li>
   <li><Link activeClass="active" to="skills" spy={true} smooth={true} duration={1000} href="#"><Translate content='skills'></Translate> </Link></li>

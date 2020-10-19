@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
-import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -13,7 +12,6 @@ import { Provider } from "react-redux";
 // Import our React components
 import App from './App';
 
-import Landing from './components/landing'
 import store from "./store";
 import Register from './components/register'
 import Login from './components/login'
