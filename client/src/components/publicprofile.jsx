@@ -6,6 +6,7 @@ import { Modal} from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link } from 'react-scroll';
 import Footer from './Footer.js';
+import logo from './logo.svg';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 import "./profile_pic.css";
@@ -140,6 +141,15 @@ onChange = (e) => {
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
+        <a href = "/">
+        <img
+          src={logo}
+          width="80"
+          height="80"
+          className="d-inline-block align-top"
+          alt=""
+        />
+        </a>
         <li className="current"><Link activeClass="active" to="current" spy={true} smooth={true} duration={1000} href="#"><Translate content='home'></Translate> </Link></li>
    <li ><Link activeClass="active" to="education" spy={true} smooth={true} duration={1000} href="#"><Translate content='education'></Translate> </Link></li>
   <li><Link activeClass="active" to="skills" spy={true} smooth={true} duration={1000} href="#"><Translate content='skills'></Translate> </Link></li>
