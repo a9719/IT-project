@@ -137,7 +137,9 @@ onChange = (e) => {
     
         
     return (
-      <div className = "top">    
+
+      <div className = "top" style={{backgroundColor:'#fff'}}>    
+
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
@@ -177,7 +179,7 @@ onChange = (e) => {
          </div>
       </div>
       </header>
-      <section id="about">
+      <section id="about" >
       <div className="row">
       <div className="three columns">
             <img className="profile-pic"  src={this.state.profilePicture} alt="Profile Pic" />
@@ -185,11 +187,11 @@ onChange = (e) => {
          </div>
        
          <div className="nine columns main-col">
-            <h2><Translate content='about_me'></Translate> </h2>
+            <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
             <p>{this.state.bio}</p>
             <div className="row">
                <div className="columns contact-details">
-                  <h2><Translate content='contact_details'></Translate> </h2>
+                  <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='contact_details'></Translate> </h2>
                   <p className="address">
 						   <span>{this.state.phone}</span><br />
                <div>
@@ -208,7 +210,7 @@ onChange = (e) => {
          </div>
       </div>
    </section>
-   <hr style={{border: '10px', borderRadius: '5px'}}/>
+
    <section id="education">
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='education'></Translate> </h2>
@@ -226,7 +228,7 @@ onChange = (e) => {
       
       </div>
    </section>
-   <hr style={{border: '10px', borderRadius: '5px'}}/>
+
    <section id="work">
    <div style={{backgroundColor:'#fff'}}>
     <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='work1'></Translate> </h2>
@@ -235,7 +237,7 @@ onChange = (e) => {
 <li key = {index} > 
 <div className="row education">
          <div className="three columns header-col">
-            <h3 ><span style={{font:'Open Sans Bold' ,borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}>{item.workplace}   </span></h3>
+            <h3 ><span style={{fontFamily:'librebaskerville-italic' ,borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}>{item.workplace}   </span></h3>
          </div>
          <div className="nine columns main-col">
             <div className="row item">
@@ -256,7 +258,7 @@ onChange = (e) => {
     </div>
 </div>
    </section>
-  <hr style={{border: '10px', borderRadius: '5px'}}/>
+
    <section id='projects'>
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='projects'></Translate> </h2>
@@ -266,7 +268,7 @@ onChange = (e) => {
   <li key = {index} >
     <div className="row education">
          <div className="three columns header-col">
-            <h3 ><span style={{font:'Open Sans Bold' ,borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}>{item.projectname}   </span></h3>
+            <h3 ><span style={{fontFamily:'librebaskerville-italic',borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}>{item.projectname}   </span></h3>
          </div>
          <div className="nine columns main-col">
             <div className="row item">
@@ -286,7 +288,8 @@ onChange = (e) => {
     </div>
     </div>
 </section>
-<hr style={{border: '10px', borderRadius: '5px'}}/>
+
+
    <section id="skills">
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
@@ -297,7 +300,7 @@ onChange = (e) => {
       </div>
        </div>
    </section>
-   <hr style={{border: '10px', borderRadius: '5px'}}/>
+
    <section id="subjects">
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='subjects'></Translate> </h2>
@@ -307,7 +310,7 @@ onChange = (e) => {
   <li key = {index} >
     <div className="row education">
          <div className="three columns header-col">
-            <h3 ><span style={{font:'Open Sans Bold' ,borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}>{item.subjectname}   </span></h3>
+            <h3 ><span style={{fontFamily:'librebaskerville-italic' ,borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}>{item.subjectname}   </span></h3>
          </div>
          <div className="nine columns main-col">
             <div className="row item">
@@ -330,7 +333,7 @@ onChange = (e) => {
       
       </div>
    </section>
-   <hr style={{border: '10px', borderRadius: '5px'}}/>
+
    <section id = "gallery">
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='gallery'></Translate> </h2>

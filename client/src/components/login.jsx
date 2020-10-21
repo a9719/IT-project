@@ -136,10 +136,12 @@ onSubmit = (e) => {
       <Navbar.Toggle aria-controls="basic-navbar-nav"/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Item><Nav.Link href="/register"><Translate content='register'></Translate></Nav.Link></Nav.Item> 
-          <Nav.Item><Nav.Link href="/login"><Translate content='login'></Translate></Nav.Link></Nav.Item>
-          <Dropdown className = "dropdown-center">
-                <Dropdown.Toggle variant = "outline-info" id = "dropdown-basic">
+          <Nav.Item style={{paddingRight:"4px"}}><Nav.Link href="/register" style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", color:"#17a2b8"}}><Translate content='register'></Translate></Nav.Link></Nav.Item>
+ 
+          <Nav.Item style={{paddingRight:"4px"}}><Nav.Link href="/login" style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", color:"#17a2b8"}}><Translate content='login'></Translate></Nav.Link></Nav.Item>
+          <Nav.Item>
+          <Dropdown style={{size:"50px"}}>
+                <Dropdown.Toggle variant = "outline-info" id = "dropdown-basic"  style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", }}>
                     Language Options
                 </Dropdown.Toggle>
 
@@ -149,14 +151,14 @@ onSubmit = (e) => {
                     <Dropdown.Item href="" onClick={this.switchtojp}>Japanese</Dropdown.Item>
                 </Dropdown.Menu>
           </Dropdown>
+          </Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
   </Styles>
-        <div className="container-fluid bg-light mt-5 pb-5 pt-5 rounded">
+        <div style={{backgroundColor:"#fff", padding:"10px"}}>
         
           <div className = "row">
-            
             <h1 className="display-4 mx-auto"><Translate content='welcome'></Translate> </h1>
           </div>
           <div className="row mt-5 align-self-center">
@@ -210,11 +212,7 @@ onSubmit = (e) => {
                         <Translate content='login'></Translate>
                         </Button>  
                       </Col>
-                      <Col>
-                        <Button href="/register" variant="outline-info" type="submit" size="lg" block>
-                        <Translate content='register'></Translate>
-                        </Button>
-                      </Col>
+                    
                     </Row>
                   </form>
 
