@@ -126,19 +126,22 @@ class Register extends Component {
       <Navbar.Toggle aria-controls="basic-navbar-nav"/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Item><Nav.Link href="/register"><Translate content='register'></Translate></Nav.Link></Nav.Item> 
-          <Nav.Item><Nav.Link href="/login"><Translate content='login'></Translate></Nav.Link></Nav.Item>
-          <Dropdown className = "dropdown-center">
-                <Dropdown.Toggle variant = "outline-info" id = "dropdown-basic">
-                    Language Options
-                </Dropdown.Toggle>
+        <Nav.Item style={{paddingRight:"4px"}}><Nav.Link href="/register" style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", color:"#17a2b8"}}><Translate content='register'></Translate></Nav.Link></Nav.Item>
+ 
+ <Nav.Item style={{paddingRight:"4px"}}><Nav.Link href="/login" style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", color:"#17a2b8"}}><Translate content='login'></Translate></Nav.Link></Nav.Item>
+ <Nav.Item>
+ <Dropdown style={{size:"50px"}}>
+       <Dropdown.Toggle variant = "outline-info" id = "dropdown-basic"  style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", }}>
+           Language Options
+       </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                    <Dropdown.Item href="" onClick={this.switchtoen}>English</Dropdown.Item>
-                    <Dropdown.Item href="" onClick={this.switchtocn}>Chinese</Dropdown.Item>
-                    <Dropdown.Item href="" onClick={this.switchtojp}>Japanese</Dropdown.Item>
-                </Dropdown.Menu>
-          </Dropdown>
+       <Dropdown.Menu>
+           <Dropdown.Item href="" onClick={this.switchtoen}>English</Dropdown.Item>
+           <Dropdown.Item href="" onClick={this.switchtocn}>Chinese</Dropdown.Item>
+           <Dropdown.Item href="" onClick={this.switchtojp}>Japanese</Dropdown.Item>
+       </Dropdown.Menu>
+ </Dropdown>
+ </Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
