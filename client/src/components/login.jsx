@@ -156,10 +156,9 @@ onSubmit = (e) => {
       </Navbar.Collapse>
     </Navbar>
   </Styles>
-        <div className="container-fluid bg-light mt-5 pb-5 pt-5 rounded">
+        <div style={{backgroundColor:"#fff", padding:"10px"}}>
         
           <div className = "row">
-            
             <h1 className="display-4 mx-auto"><Translate content='welcome'></Translate> </h1>
           </div>
           <div className="row mt-5 align-self-center">
@@ -213,11 +212,7 @@ onSubmit = (e) => {
                         <Translate content='login'></Translate>
                         </Button>  
                       </Col>
-                      <Col>
-                        <Button href="/register" variant="outline-info" type="submit" size="lg" block>
-                        <Translate content='register'></Translate>
-                        </Button>
-                      </Col>
+                    
                     </Row>
                   </form>
 

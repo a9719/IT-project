@@ -146,7 +146,7 @@ class Register extends Component {
       </Navbar.Collapse>
     </Navbar>
   </Styles>
-        <div className="container-fluid bg-light mt-5 pb-5 pt-5 rounded">
+        <div style={{backgroundColor:"#fff", padding:"10px"}}>
           <div className = "row">
             <h1 className="display-4 mx-auto mt-3"><Translate content='Createacc'></Translate></h1>
             </div>
