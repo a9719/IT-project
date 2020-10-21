@@ -463,6 +463,10 @@ onSubmitGalleryPhoto = (e) => {
       console.log("delete error for gallery", err);
     })
   }
+
+  scrollUp() {
+    window.scroll(0,0);
+  }
   
   
   render() {
@@ -477,7 +481,9 @@ onSubmitGalleryPhoto = (e) => {
     
         
     return (
-      <div style={{backgroundColor:'#fff'}}>    
+
+      <div className = "top" style={{backgroundColor:'#fff'}}>    
+
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
@@ -497,7 +503,9 @@ onSubmitGalleryPhoto = (e) => {
       
       
     </Modal>
+    <li><Link activeClass="active" to="top" spy={true} smooth={true} duration={1000} href="#" style = {{right:0}}>To the Top! </Link></li>
    <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}><Translate content='logout'></Translate> </a></li>
+
 </ul>
 </nav>
         
