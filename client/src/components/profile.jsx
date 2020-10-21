@@ -477,7 +477,7 @@ onSubmitGalleryPhoto = (e) => {
     
         
     return (
-      <div>    
+      <div style={{backgroundColor:'#fff'}}>    
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
@@ -667,7 +667,7 @@ onSubmitGalleryPhoto = (e) => {
       </div>
    </section>
 
-   <section id="work">
+   <section id="work" >
    <div style={{backgroundColor:'#fff'}}>
     <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='work1'></Translate> </h2>
     <div>

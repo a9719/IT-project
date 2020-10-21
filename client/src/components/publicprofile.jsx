@@ -137,7 +137,7 @@ onChange = (e) => {
     
         
     return (
-      <div>    
+      <div style={{backgroundColor:'#fff'}}>    
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
