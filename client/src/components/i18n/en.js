@@ -34,11 +34,4 @@ export default{
     gallery:"Gallery",
     add_photodesc:"Add Photo Description",
     add_photo:"Upload Photo"
-
-
-
-
-
-
-  
   }

@@ -13,9 +13,27 @@ export default{
     about_me:"关于我",
     contact_details:"联系方式",
     add_subjects:"添加主题",
-    delete:"删除"
-    
-
+    delete:"删除",
+    edit_Intro:"编辑介绍",
+    work1: "工作经验",
+    add_work:"增加工作经验",
+    welcome:"欢迎",
+    login:"注册",
+    register:"注册",
+    createdby:"创建",
+    Createacc:"创建帐号",
+    registerfa:"已经有一个帐户？",
+    submit:"递交",
+    edit_Bio:"编辑生物",
+    edit_phone:"编辑电话号码",
+    upload_transcript:"上传成绩单",
+    download:"点击下载成绩单",
+    add_edu:"增加教育",
+    add_projects:"添加项目",
+    add_skills:"增加技能",
+    gallery:"画廊",
+    add_photodesc:"添加照片说明",
+    add_photo:"上传图片"
 
 
   
