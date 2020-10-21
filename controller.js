@@ -19,13 +19,13 @@ var createUser = function(req, res) {
 
     User.findOne({email:user.email}, function(err, user1) {
         if (user1) {
-            console.log("User exists!");
+           
      
             
         } else {
            
             user.save(function (err, newUser) {
-                console.log(newUser);
+                
                 if (!err) {
                     var profile =new Profile({
                         user: newUser,
@@ -84,11 +84,11 @@ var findUserByName = function(req, res) {
     
     User.findOne({name:userName}, function(err, user) {
         if (!err) {
-            console.log("errrr")
+            
             res.send(user);
         } else {
             res.sendStatus(404);
-            console.log("errrr1")
+            
         }
     });
 };
@@ -100,16 +100,15 @@ function escapeRegex(text) {
 
 
 var findUserByEmail = function(req, res) {
-    console.log(req.params.email);
+    
     var useremail = req.params.email;
 
     Profile.find({email:useremail}, function(err, user) {
         if (!err) {
-            console.log("found");
-            
+           
             res.send(user);
         } else {
-            console.log("err");
+            
             res.sendStatus(404);
         }
     })
@@ -120,7 +119,7 @@ var FuzzySearchUserName = function(req, res) {
     const regex = new RegExp(escapeRegex(req.params.name), 'gi');
     Profile.find({ "name": regex }, function(err, foundusers) {
         if(err) {
-            console.log(err);
+            
         } else {
             res.send(foundusers);
         }
@@ -146,11 +145,11 @@ var deleteUserById = function(req, res) {
 var loginUser = function(req, res) {
     
     const user = req.body;
-    console.log(user);
+   
     //check for existing user
     User.findOne({email:user.email,password:user.password}, function(err, user1) {
         if (user1) {
-            console.log("Successful login ");
+            
             const payload = {
                 _id: user1._id,
                 name: user1.name,
@@ -164,7 +163,8 @@ var loginUser = function(req, res) {
             
         }
         else{
-            return res.status(400).json("Incorrect Email or Password")
+            
+            return res.status(401).json("Incorrect Email or Password")
         }
 
       // Validate password
@@ -321,7 +321,7 @@ var addWork= function(req,res){
     
     const work1= req.body;
 
-    console.log(work1);
+    
     Profile.findOneAndUpdate({user:user1},{$push: {work:{workplace:work1.workplace, position:work1.position,from:work1.from,to:work1.to}}},{new: true},function(err,user2){
         if(err){
             
@@ -355,7 +355,7 @@ var addproject= function(req,res){
     
     const work1= req.body;
 
-    console.log(work1);
+    
     Profile.findOneAndUpdate({user:user1},{$push: {projects:{projectname:work1.projectname, projectdescription:work1.projectdescription,projectlink:work1.projectlink}}},{new: true},function(err,user2){
         if(err){
             
@@ -372,7 +372,7 @@ var findProjectAndDelete= function(req,res){
     
     const work1= req.body;
     
-    console.log(work1);
+    
     Profile.findOneAndUpdate({user:user1},{$pull:{projects:{projectname:work1.projectname, projectdescription:work1.projectdescription,projectlink:work1.projectlink}}},{new: true},function(err,user2){
         if(err){
             
@@ -440,7 +440,7 @@ var findSubjectsAndDelete= function(req,res){
     var user1=req.params.user;
     
     const edu= req.body;
-    console.log(req.body);
+   
     
     Profile.findOneAndUpdate({user:user1},{$pull:{subjects:{subjectname:edu.subjectname,subjectdescripition:edu.subjectdescripition,subjectyear:edu.subjectyear}}},{new: true},function(err,user2){
         if(err){
@@ -478,11 +478,11 @@ var addTranscript = function(req, res) {
 
     Profile.findOneAndUpdate({user:user1},{$set:{transcript:transcript}},{new: true},function(err,user2){
         if(err){
-            console.log(user2);
+           
             res.send("wrong");
             
         }else{
-            console.log(user2);
+        
            res.send(user2);
         }
     })
@@ -510,7 +510,7 @@ var findGalleryPicAndDelete= function(req,res){
     var user1=req.params.user;
     
     const gPic = req.body;
-    console.log(req.body);
+   
     
     Profile.findOneAndUpdate({user:user1},{$pull:{gallery:{imagesource:gPic.imagesource,description:gPic.description}}},{new: true},function(err,user2){
         if(err){

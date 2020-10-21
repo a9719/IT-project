@@ -6,7 +6,7 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken"
 
 import {
-    GET_ERRORS,
+    SHOW_ERROR,
     SET_CURRENT_USER,
     USER_LOADING,
     USER_NOT_LOADING
@@ -28,8 +28,8 @@ export const loginUser = user => dispatch => {
         
       })
       .catch(err => dispatch({
-        type: GET_ERRORS,
-        payload: err.res.data
+        type: SHOW_ERROR,
+        payload: err.response.data
     })
     );
   };
