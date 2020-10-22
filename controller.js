@@ -20,6 +20,8 @@ var createUser = function(req, res) {
     User.findOne({email:user.email}, function(err, user1) {
         if (user1) {
            
+            return res.status(401).json("Email already registered");
+           
      
             
         } else {
@@ -45,8 +47,8 @@ var createUser = function(req, res) {
                         bio:'',
                         date:''});
                     
-                    console.log(profile.save());
-                    console.log("registered");
+                    profile.save();
+                    return res.send("User created");
                 } else {
                     res.sendStatus(400);
                 }
