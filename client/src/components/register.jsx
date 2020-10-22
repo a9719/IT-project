@@ -60,7 +60,7 @@ class Register extends Component {
       image:null,
       password: '',
       password2: '',
-      errors: {}
+      errors: ''
     };
 
     this.onChange = this.onChange.bind(this);
@@ -87,7 +87,7 @@ class Register extends Component {
       .then(res => {this.props.history.push("/login");})
       .catch(err => this.setState({ errors: err.response.data }));
     
-    this.props.history.push("/login");
+ 
   }
 
   switchtoen = () => {
@@ -108,7 +108,7 @@ class Register extends Component {
 
 
   render() {
-    const { errors } = this.state;
+    
 
     return (
       <div className="register">
@@ -150,6 +150,9 @@ class Register extends Component {
           <div className = "row">
             <h1 className="display-4 mx-auto mt-3"><Translate content='Createacc'></Translate></h1>
             </div>
+            <div>
+              <h1>{this.state.errors}</h1>
+            </div>
           <div className="row align-self-center nr-1">
             <div className="col align-self-center d-none d-lg-block">
               <div className="col-md-10 m-auto">
@@ -163,63 +166,47 @@ class Register extends Component {
                   <div className="form-group">
                     <input
                       type="text"
-                      className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.name
-                      })}
+                      className={classnames('form-control form-control-lg')}
                       placeholder="Name"
                       name="name"
                       value={this.state.name}
                       onChange={this.onChange}
                     />
-                    {errors.name && (
-                      <div className="invalid-feedback">{errors.name}</div>
-                    )}
+                    
                   </div>
                   <div className="form-group">
                     <input
                       type="email"
-                      className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.email
-                      })}
+                      className={classnames('form-control form-control-lg')}
                       placeholder="Email Address"
                       name="email"
                       value={this.state.email}
                       onChange={this.onChange}
                     />
-                    {errors.email && (
-                      <div className="invalid-feedback">{errors.email}</div>
-                    )}
+                   
 
                   </div>
                   <div className="form-group">
                     <input
                       type="password"
-                      className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.password
-                      })}
+                      className={classnames('form-control form-control-lg')}
                       placeholder="Password"
                       name="password"
                       value={this.state.password}
                       onChange={this.onChange}
                     />
-                    {errors.password && (
-                      <div className="invalid-feedback">{errors.password}</div>
-                    )}
+                   
                   </div>
                   <div className="form-group">
                     <input
                       type="password"
-                      className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.password2
-                      })}
+                      className={classnames('form-control form-control-lg')}
                       placeholder="Confirm Password"
                       name="password2"
                       value={this.state.password2}
                       onChange={this.onChange}
                     />
-                    {errors.password2 && (
-                      <div className="invalid-feedback">{errors.password2}</div>
-                    )}
+                    
                   </div>
                   <Button variant="info" type="submit" size="lg" block>
                   <Translate content='submit'></Translate>

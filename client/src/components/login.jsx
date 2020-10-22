@@ -57,7 +57,7 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      errors: {},
+      errors: ''
       
     };
 
@@ -93,11 +93,12 @@ componentDidUpdate(prevProps) {
       this.props.setUserNotLoading();
   }
 
-  if (this.props.errors !== prevProps.errors) {
-      this.props.setUserNotLoading();
+  if (this.props.auth.errors === "Incorrect Email or Password") {
+      console.log(this.props.auth.errors);
       this.setState({
-          errors: this.props.errors
+          errors: this.props.auth.errors
       });
+      this.props.auth.errors="";
   }
 }
 
@@ -118,7 +119,7 @@ onSubmit = (e) => {
   this.props.setUserLoading();
 };
   render() {
-    const { errors } = this.state;
+   
     return (
       
       <div className="login">
@@ -160,7 +161,12 @@ onSubmit = (e) => {
         
           <div className = "row">
             <h1 className="display-4 mx-auto"><Translate content='welcome'></Translate> </h1>
+
           </div>
+          <div className="row">
+            <h1 className="display-4 mx-auto">{this.state.errors}</h1>
+          </div>
+
           <div className="row mt-5 align-self-center">
           <div className="col align-self-center d-none d-lg-block">
               <div className="col-md-8 m-auto">
@@ -177,11 +183,9 @@ onSubmit = (e) => {
                   <div className="form-group">
                     <input onChange={this.onChange}
                       value={this.state.email}
-                      error={errors.email}
+                     
                       type="email"
-                      className={classnames("form-control", {
-                        invalid: errors.email || errors.emailnotfound
-                    })}
+                      className={classnames("form-control")}
                       placeholder="Email Address"
                       name="email"
                           
@@ -192,11 +196,9 @@ onSubmit = (e) => {
                     <input
                     onChange={this.onChange}
                     value={this.state.password}
-                    error={errors.password}
+                  
                     type="password"
-                    className={classnames("form-control", {
-                      invalid: errors.password || errors.passwordincorrect
-                  })}
+                    className={classnames("form-control")}
                       placeholder="Password"
                       name="password"
                       required
