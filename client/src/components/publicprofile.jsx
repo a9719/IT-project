@@ -138,17 +138,19 @@ onChange = (e) => {
         
     return (
 
-      <div className = "top" style={{backgroundColor:'#fff'}}>    
+      <div className = "top" style={{backgroundColor:'grey'}}>    
 
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
         <li className="current"><a href="/"><Translate content='home'></Translate> </a></li>
+        <li><Link activeClass="active" to="top" spy={true} smooth={true} duration={1000} href="#" style = {{right:0}}><Translate content='intro'></Translate> </Link></li>
    <li ><Link activeClass="active" to="education" spy={true} smooth={true} duration={1000} href="#"><Translate content='education'></Translate> </Link></li>
-  <li><Link activeClass="active" to="skills" spy={true} smooth={true} duration={1000} href="#"><Translate content='skills'></Translate> </Link></li>
-   <li><Link activeClass="active" to="projects" spy={true} smooth={true} duration={1000} href="#"><Translate content='projects'></Translate>  </Link></li>
-   <li><Link activeClass="active" to="subjects" spy={true} smooth={true} duration={1000} href="#"><Translate content='subjects'></Translate>  </Link></li>
    <li><Link activeClass="active" to="work" spy={true} smooth={true} duration={1000} href="#"><Translate content='work'></Translate>  </Link></li>
+   <li><Link activeClass="active" to="projects" spy={true} smooth={true} duration={1000} href="#"><Translate content='projects'></Translate>  </Link></li>
+   <li><Link activeClass="active" to="skills" spy={true} smooth={true} duration={1000} href="#"><Translate content='skills'></Translate> </Link></li>
+   <li><Link activeClass="active" to="subjects" spy={true} smooth={true} duration={1000} href="#"><Translate content='subjects'></Translate>  </Link></li>
+   
    <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#"><Translate content='gallery'></Translate>  </Link></li>
    <li><a className="smoothscroll" href="#" onClick={this.showLanguage}> <Translate content='language'></Translate> </a> </li>
    <Modal show={this.state.showlang} >
@@ -159,7 +161,7 @@ onChange = (e) => {
       
       
     </Modal>
-    <li><Link activeClass="active" to="top" spy={true} smooth={true} duration={1000} href="#" style = {{right:0}}>To the Top! </Link></li>
+    
    
 </ul>
 </nav>
@@ -236,10 +238,10 @@ onChange = (e) => {
     <p     >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.work).sort((a,b)=>b.from -a.from)).map( (item, index) =>
 <li key = {index} > 
 <div className="row education">
-         <div className="three columns header-col">
+         <div style={{width:"40%", float:"right"}}>
             <h3 ><span style={{fontFamily:'librebaskerville-italic' ,borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}>{item.workplace}   </span></h3>
          </div>
-         <div className="nine columns main-col">
+         <div style={{width:"60%", float:"left"}}>
             <div className="row item">
                <div className="twelve columns">
                  <div>
@@ -267,10 +269,10 @@ onChange = (e) => {
    
   <li key = {index} >
     <div className="row education">
-         <div className="three columns header-col">
+         <div style={{width:"40%", float:"right"}}>
             <h3 ><span style={{fontFamily:'librebaskerville-italic',borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}>{item.projectname}   </span></h3>
          </div>
-         <div className="nine columns main-col">
+         <div style={{width:"60%", float:"left"}}>
             <div className="row item">
                <div className="twelve columns">
                  <div>
@@ -295,7 +297,7 @@ onChange = (e) => {
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
       <div>         
       <p style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
-    <li key = {index}><span style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px',borderBottom:'solid #11ABB0'}}>{item}</span> </li>
+    <li key = {index} style={{paddingBottom:"20px"}}><span style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px',borderBottom:'solid #11ABB0'}}>{item}</span> </li>
   )}</ul> } </p>
       </div>
        </div>
@@ -309,10 +311,10 @@ onChange = (e) => {
    
   <li key = {index} >
     <div className="row education">
-         <div className="three columns header-col">
+         <div style={{width:"40%", float:"right"}}>
             <h3 ><span style={{fontFamily:'librebaskerville-italic' ,borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}>{item.subjectname}   </span></h3>
          </div>
-         <div className="nine columns main-col">
+         <div style={{width:"60%", float:"left"}}>
             <div className="row item">
                <div className="twelve columns">
                  <div>

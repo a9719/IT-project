@@ -33,7 +33,9 @@ export default{
     add_skills:"Add Skills",
     gallery:"Gallery",
     add_photodesc:"Add Photo Description",
-    add_photo:"Upload Photo"
+    add_photo:"Upload Photo",
+
+    intro:"Intro"
 
 
 
