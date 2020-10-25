@@ -558,7 +558,9 @@ onSubmitGalleryPhoto = (e) => {
        
          <div className="nine columns main-col">
             <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
+            <div style={{columnWidth:"1000px"}}>
             <p>{this.state.bio}</p>
+            </div>
             <Button  onClick={this.showbioModal}><Translate content='edit_Bio'></Translate></Button>
                 <Modal show={this.state.showbio}>
                 <Modal.Header closeButton onClick={this.hidebioModal}></Modal.Header>
@@ -569,10 +571,10 @@ onSubmitGalleryPhoto = (e) => {
                       
                       type="text"
                       className={("form-control")}
-                      placeholder="Add Bio"
+                      placeholder="Add Bio, max length 1000 characters"
                       name="addinfo"
                       style={{height:'200px' }}
-                      maxLength="100"
+                      maxLength="1000"
                           
                           required autoFocus 
                     />
@@ -962,7 +964,7 @@ onSubmitGalleryPhoto = (e) => {
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='gallery'></Translate></h2>
      
-        <Carousel>
+        <Carousel style={{backgroundColor:"grey"}}>
       {(this.state.gallery).map( (item, index) =>
        <Carousel.Item>
        <img
@@ -986,9 +988,10 @@ onSubmitGalleryPhoto = (e) => {
     height: '120px',
     opacity: '0.8'}}>
        <h3> {item.description} </h3>
-       <Button onClick={()=>{this.deletegallerypic((this.state.gallery)[index],this.props.auth.user)}} > Delete Image</Button>
+       
          
               </Carousel.Caption>
+              <Button onClick={()=>{this.deletegallerypic((this.state.gallery)[index],this.props.auth.user)}} > Delete Image</Button>
         </Carousel.Item>
       )}
      </Carousel>

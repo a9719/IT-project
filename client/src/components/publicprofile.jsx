@@ -190,7 +190,9 @@ onChange = (e) => {
        
          <div className="nine columns main-col">
             <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
+            <div style={{columnWidth:"1000px"}}>
             <p>{this.state.bio}</p>
+            </div>
             <div className="row">
                <div className="columns contact-details">
                   <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='contact_details'></Translate> </h2>
@@ -340,7 +342,7 @@ onChange = (e) => {
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='gallery'></Translate> </h2>
      
-        <Carousel>
+        <Carousel style={{backgroundColor:"grey"}}>
       {(this.state.gallery).map( (item, index) =>
        <Carousel.Item>
        <img
