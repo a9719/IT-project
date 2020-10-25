@@ -964,14 +964,14 @@ onSubmitGalleryPhoto = (e) => {
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='gallery'></Translate></h2>
      
-        <Carousel style={{backgroundColor:"grey"}}>
+        <Carousel style={{backgroundColor:"grey", paddingBottom:"35px"}}>
       {(this.state.gallery).map( (item, index) =>
        <Carousel.Item>
        <img
        className="carousel-img"
        key={index} src={item.imagesource}
        alt="First slide" style={{ width: '45%',
-        height: '15%',
+        height: '20%',
         display: 'block',
         margin: 'auto'
        }}
@@ -985,13 +985,16 @@ onSubmitGalleryPhoto = (e) => {
     borderradius: 'auto',
     textAlign: 'center',
     alignItems: 'center',
-    height: '120px',
+    height: '220px',
     opacity: '0.8'}}>
+      <div >
        <h3> {item.description} </h3>
-       
-         
+       </div>
+       <div>
+       <Button onClick={()=>{this.deletegallerypic((this.state.gallery)[index],this.props.auth.user)}} > Delete Image</Button>
+       </div>
               </Carousel.Caption>
-              <Button onClick={()=>{this.deletegallerypic((this.state.gallery)[index],this.props.auth.user)}} > Delete Image</Button>
+              
         </Carousel.Item>
       )}
      </Carousel>
