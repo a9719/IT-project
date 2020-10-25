@@ -363,7 +363,7 @@ onChange = (e) => {
     borderradius: 'auto',
     textAlign: 'center',
     alignItems: 'center',
-    height: '120px',
+    height: '220px',
     opacity: '0.8'}}>
        <h3> {item.description} </h3>
        
