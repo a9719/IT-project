@@ -537,7 +537,7 @@ onSubmitGalleryPhoto = (e) => {
                           required autoFocus 
                     />
                   
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
                   </form>
                 </Modal>
              
@@ -579,7 +579,7 @@ onSubmitGalleryPhoto = (e) => {
                           required autoFocus 
                     />
                   
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}><Translate content='submit'></Translate></button>
                   </form>
                 </Modal>
             <div className="row">
@@ -606,7 +606,7 @@ onSubmitGalleryPhoto = (e) => {
                           required autoFocus 
                     />
                   
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
                   </form>
                 </Modal>
              
@@ -635,7 +635,7 @@ onSubmitGalleryPhoto = (e) => {
 <li key = {index} > 
         <p style={{color:'black', fontFamily:'bookman', fontSize:'25px',  letterSpacing:'1px'}}>{item.school} </p>    
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'20px',  letterSpacing:'1px'}}>{item.qual}</p>
-        <Button onClick={()=>{this.deleteedu((this.state.education)[index],this.props.auth.user)}}>Delete</Button>
+        <Button onClick={()=>{this.deleteedu((this.state.education)[index],this.props.auth.user)}}><Translate content='delete'></Translate></Button>
         <hr />
       </li>
   )} <button style={{alignItems:'center'}} onClick={this.showEduModal}><Translate content='add_edu'></Translate> </button></ul>} </p>
@@ -671,7 +671,7 @@ onSubmitGalleryPhoto = (e) => {
                     />
                   </div>
                  
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}><Translate content='submit'></Translate></button>
                   </form>
       
         </Modal>
@@ -701,7 +701,7 @@ onSubmitGalleryPhoto = (e) => {
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.from}-{item.to}</p>
         </div>
                </div>
-               <Button onClick={()=>{this.deletework((this.state.work)[index],this.props.auth.user)}}>Delete</Button>
+               <Button onClick={()=>{this.deletework((this.state.work)[index],this.props.auth.user)}}><Translate content='delete'></Translate></Button>
             </div>
             
          </div>
@@ -764,7 +764,7 @@ onSubmitGalleryPhoto = (e) => {
                           required autoFocus 
                     />
                   </div>
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
                   </form>
       
         </Modal>
@@ -792,7 +792,7 @@ onSubmitGalleryPhoto = (e) => {
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.projectlink}</p>
         </div>
                </div>
-               <Button onClick={()=>{this.deleteproject((this.state.projects)[index],this.props.auth.user)}}>Delete</Button>
+               <Button onClick={()=>{this.deleteproject((this.state.projects)[index],this.props.auth.user)}}><Translate content='delete'></Translate></Button>
             </div>
          </div>
       
@@ -840,7 +840,7 @@ onSubmitGalleryPhoto = (e) => {
                           required autoFocus 
                     />
                   </div>
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
                   </form>
       
         </Modal>
@@ -852,7 +852,7 @@ onSubmitGalleryPhoto = (e) => {
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
       <div>         
       <p style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
-    <li key = {index} style={{paddingBottom:"20px"}}><span style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px',borderBottom:'solid #11ABB0'}}>{item}</span> <Button onClick={()=>{this.deleteskills(index,this.props.auth.user)}}>Delete</Button></li>
+    <li key = {index} style={{paddingBottom:"20px"}}><span style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px',borderBottom:'solid #11ABB0'}}>{item}</span> <Button onClick={()=>{this.deleteskills(index,this.props.auth.user)}}><Translate content='delete'></Translate></Button></li>
   )}<button style={{alignItems:'center'}} onClick={this.showskillsModal}><Translate content='add_skills'></Translate> </button></ul> } </p>
       </div>
       
@@ -874,7 +874,7 @@ onSubmitGalleryPhoto = (e) => {
                           required autoFocus 
                     />
                   
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}><Translate content='submit'></Translate></button>
                   </form>
                 </Modal>
             
@@ -903,7 +903,7 @@ onSubmitGalleryPhoto = (e) => {
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.subjectyear}</p>
         </div>
                </div>
-               <Button onClick={()=>{this.deletesubject((this.state.subjects)[index],this.props.auth.user)}}>Delete</Button>
+               <Button onClick={()=>{this.deletesubject((this.state.subjects)[index],this.props.auth.user)}}><Translate content='delete'></Translate></Button>
             </div>
          </div>
       
@@ -950,7 +950,7 @@ onSubmitGalleryPhoto = (e) => {
                           required autoFocus 
                     />
                   </div>
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> Submit</button>
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}><Translate content='submit'></Translate></button>
                   </form>
       
         </Modal>
@@ -991,7 +991,7 @@ onSubmitGalleryPhoto = (e) => {
        <h3> {item.description} </h3>
        </div>
        <div>
-       <Button onClick={()=>{this.deletegallerypic((this.state.gallery)[index],this.props.auth.user)}} > Delete Image</Button>
+       <Button onClick={()=>{this.deletegallerypic((this.state.gallery)[index],this.props.auth.user)}} > <Translate content='delete'></Translate></Button>
        </div>
               </Carousel.Caption>
               

@@ -33,5 +33,7 @@ export default{
   add_skills:"腕前を追加",
   gallery:"ギャラリー",
   add_photodesc:"写真の説明を追加",
-  add_photo:"写真をアップロード"
+  add_photo:"写真をアップロード",
+
+  intro:"イントロダクション"
 }
