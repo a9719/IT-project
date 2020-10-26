@@ -1,9 +1,9 @@
 export default{
     Im:"我是",
-    home:"家",
-    education:"教育",
+    home:"在住于",
+    education:"学历",
     skills:"技能专长",
-    projects:"专案",
+    projects:"",
     subjects:"科目",
     work:"工作",
     contact:"联系",
@@ -12,11 +12,6 @@ export default{
     upload:"上载",
     about_me:"关于我",
     contact_details:"联系方式",
-    add_subjects:"添加主题",
+    add_subjects:"添加科目",
     delete:"删除"
-    
-
-
-
-  
-  }
+}

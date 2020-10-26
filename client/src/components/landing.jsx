@@ -4,7 +4,10 @@ import TestCard from './TestCard'
 import Cardflip from './Cardflip'
 import CarouselHomepage from './CarouselHomepage'
 import Autosuggest from 'react-autosuggest';
-
+import { CarouselCard } from 'react-rainbow-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandshake, faLanguage, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import './landing.css';
 
 class Landing extends Component {
 
@@ -92,7 +95,7 @@ renderSuggestion = suggestion => (
   }
 
   cardchoice(props){
-    if(props.num % 2 == 0){
+    if(props.num % 2 === 0){
       return <TestCard name  = {props.name} bio = {props.bio}/>
     }
     return <Cardflip name  = {props.name} bio = {props.bio}/>
@@ -131,23 +134,84 @@ renderSuggestion = suggestion => (
 
 
 
-    return (
-      // <p>Welcome to Swat Kats!</p>
-      
-      <div>
-        <CarouselHomepage/>
+    return (      
+      <div className = "page-wrapper">
+        <CarouselCard/>
+
         <div className = "users">
           {this.displayUsers(this.state.users)}
+          <br/>
         </div>
-        <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        onSuggestionSelected={this.onSuggestionSelected}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={this.renderSuggestion}
-        inputProps={inputProps}
-      />
+
+        <div className ="searchbar">
+            <h2 className = "searchH2">
+              Find a user on the site
+            </h2>
+            
+            <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            onSuggestionSelected={this.onSuggestionSelected}
+            getSuggestionValue={this.getSuggestionValue}
+            renderSuggestion={this.renderSuggestion}
+            inputProps={inputProps}
+          />
+        </div>
+
+          <div className = "expln">
+              <h2 className = "explH2">
+                  Get yourself closer to your dream job!
+              </h2>
+
+              <div className = "cards">
+                  <p>
+                  <div class="homecard">
+                      <div class="container">
+                          <FontAwesomeIcon icon = {faHandshake} size = "4x" className = "cimg" />
+                          <h4><b>Find jobs easily</b></h4>
+                          <br/>
+                          <p>
+                              Swat Kats allows you to present your professional image to the world,
+                              through your academic achievements and other skills. Employers watch
+                              this site too, you never know what opportunities lie around the corner!
+                          </p>
+                      </div>
+                  </div>
+                  </p>        
+
+                  <p>
+                  <div class="homecard">
+                      <div class="container">
+                          <FontAwesomeIcon icon = {faUserPlus} size = "4x" className = "cimg" />
+                          <h4><b>Personalise your image</b></h4>
+                          <br/>
+                          <p>
+                              On Swat Kats, we don't just care about your results in school, we want you to
+                              show off your holistic accomplishments as well. Upload images to your gallery
+                              and show us what you get up to in your free time!
+                          </p>
+                      </div>
+                  </div>
+                  </p>
+                  
+
+                  <p>
+                  <div class="homecard"> 
+                      <div class="container">
+                          <FontAwesomeIcon icon = {faLanguage} size = "4x" className = "cimg" />
+                          <h4><b>Support for different languages</b></h4>
+                          <br/>
+                          <p>
+                              We understand that we all come from different cultural backgrounds
+                              and speak different languages. To accommodate this, we have translations
+                              supported for Mandarin and Japanese - click the "Language Options" button above!
+                          </p>
+                      </div>
+                  </div>
+                  </p>
+              </div>
+            </div>
       </div>
     )
   }
