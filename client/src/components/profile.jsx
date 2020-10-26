@@ -618,7 +618,7 @@ onSubmitGalleryPhoto = (e) => {
                   <p>
                   <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
                   <button onClick={this.pdfUploadHandler}><Translate content='upload_transcript'></Translate> </button>
-                  <button><Link href = {this.state.transcript} target = "_blank" rel ="noopener noreferrer" download = "transcript"><Translate content='download'></Translate></Link></button>
+                  <button><a href = {this.state.transcript} target = "_blank"  download = "transcript"><Translate content='download'></Translate></a></button>
                   
                   </p>
                </div>
