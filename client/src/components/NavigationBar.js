@@ -50,7 +50,7 @@ export const NavigationBar = () => (
 
                 <Dropdown.Menu>
                     <Dropdown.Item href="#/action-1">English</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Chinese</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Mandarin Chinese</Dropdown.Item>
                     <Dropdown.Item href="#/action-3">Japanese</Dropdown.Item>
                 </Dropdown.Menu>
           </Dropdown>

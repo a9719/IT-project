@@ -6,7 +6,7 @@ import CarouselHomepage from './CarouselHomepage'
 import Autosuggest from 'react-autosuggest';
 import { CarouselCard } from 'react-rainbow-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHandshake, faLanguage, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faAlignCenter, faHandshake, faLanguage, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import './landing.css';
 
 class Landing extends Component {
@@ -143,21 +143,24 @@ renderSuggestion = suggestion => (
           <br/>
         </div>
 
-        <div className ="searchbar">
-            <h2 className = "searchH2">
-              Find a user on the site
-            </h2>
-            
+        <div className ="searchbar" >
+          <h2 className = "searchH2">
+            Find a user on the site
+          </h2>
+          
             <Autosuggest
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            onSuggestionSelected={this.onSuggestionSelected}
-            getSuggestionValue={this.getSuggestionValue}
-            renderSuggestion={this.renderSuggestion}
-            inputProps={inputProps}
-          />
+              suggestions={suggestions}
+              onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+              onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+              onSuggestionSelected={this.onSuggestionSelected}
+              getSuggestionValue={this.getSuggestionValue}
+              renderSuggestion={this.renderSuggestion}
+              inputProps={inputProps}
+            />
+          
+            
         </div>
+        
 
           <div className = "expln">
               <h2 className = "explH2">
@@ -205,7 +208,7 @@ renderSuggestion = suggestion => (
                           <p>
                               We understand that we all come from different cultural backgrounds
                               and speak different languages. To accommodate this, we have translations
-                              supported for Mandarin and Japanese - click the "Language Options" button above!
+                              supported for Mandarin Chinese and Japanese - click the "Language Options" button above!
                           </p>
                       </div>
                   </div>

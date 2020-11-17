@@ -156,7 +156,7 @@ onChange = (e) => {
    <Modal show={this.state.showlang} >
         <Modal.Header closeButton onClick={this.hideLanguage}></Modal.Header>
         <button type="button" class="block" onClick={this.switchtoen}>English</button> 
-        <button type="button" class="block" onClick={this.switchtocn}>Chinese</button> 
+        <button type="button" class="block" onClick={this.switchtocn}>Mandarin Chinese</button> 
         <button type="button" class="block"onClick={this.switchtojp}>Japanese</button> 
       
       

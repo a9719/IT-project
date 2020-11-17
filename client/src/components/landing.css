@@ -8,6 +8,13 @@
     background-color: #fff8cd;
     padding-top: 50px;
     padding-bottom: 50px;
+    text-align: center;
+    vertical-align: middle;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+
+
 }
 
 .users {
@@ -18,14 +25,18 @@
 .expln {
     padding-top: 50px;
     text-align: center;
-    padding-bottom: 400px;
+    padding-bottom: 300px;
     background-color: #ffebcd;
 }
 
+.explH2 {
+    padding-bottom: 50px;
+}
+
 .cards {
-    padding-top: 50px;
     padding-bottom: 100px;
     margin-left:150px;
+    background-color: #ffebcd;
 }
 
 .homecard {
@@ -45,7 +56,7 @@
 
 .container {
     padding: 2px 16px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Noto Sans TC", sans-serif;
 }
 
 .card {

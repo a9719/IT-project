@@ -137,7 +137,7 @@ class Register extends Component {
 
        <Dropdown.Menu>
            <Dropdown.Item href="" onClick={this.switchtoen}>English</Dropdown.Item>
-           <Dropdown.Item href="" onClick={this.switchtocn}>Chinese</Dropdown.Item>
+           <Dropdown.Item href="" onClick={this.switchtocn}>Mandarin Chinese</Dropdown.Item>
            <Dropdown.Item href="" onClick={this.switchtojp}>Japanese</Dropdown.Item>
        </Dropdown.Menu>
  </Dropdown>
