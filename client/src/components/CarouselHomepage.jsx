@@ -47,9 +47,12 @@ export const CarouselHomepage = () => (
             src={resume}
             alt="First slide"
             />
-          <Carousel.Caption className = "caption">
+          <Carousel.Caption className = "caption" style={{position: 'absolute',
+    
+    backgroundColor: 'whitesmoke',
+   opacity:"0.8"}}>
               <h3>Swat Kats, an online E-Portfolio hosting service.</h3>
-              <p>Choose from multiple stunning templates to showcase your results and skills in an E-Portfolio format.</p>
+              <p style={{color:"grey"}}>Choose from multiple stunning templates to showcase your results and skills in an E-Portfolio format.</p>
           </Carousel.Caption>
         </Carousel.Item>
 
@@ -60,9 +63,12 @@ export const CarouselHomepage = () => (
             alt="Third slide"
             />
 
-          <Carousel.Caption className = "caption">
+          <Carousel.Caption className = "caption" style={{position: 'absolute',
+    
+    backgroundColor: 'whitesmoke',
+   opacity:"0.8"}}>
               <h3>Dazzle the world with your results</h3>
-              <p>You've worked hard and achieved a lot during your studies. Now's the chance to present them to the world - and future employers.</p>
+              <p style={{color:"grey"}}> You've worked hard and achieved a lot during your studies. Now's the chance to present them to the world - and future employers.</p>
           </Carousel.Caption>
         </Carousel.Item>
 
@@ -73,9 +79,12 @@ export const CarouselHomepage = () => (
                 alt="Third slide"
             />
 
-          <Carousel.Caption className = "caption">
+          <Carousel.Caption className = "caption" style={{position: 'absolute',
+    
+    backgroundColor: 'whitesmoke',
+   opacity:"0.8"}}>
               <h3>Get yourself closer to your dream job</h3>
-              <p>Swat Kats makes it easier for employers to view prospective employees' credentials. Don't miss the chance to secure your dream position.</p>
+              <p style={{color:"grey"}}>Swat Kats makes it easier for employers to view prospective employees' credentials. Don't miss the chance to secure your dream position.</p>
           </Carousel.Caption>
         </Carousel.Item>
         </Carousel>

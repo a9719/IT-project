@@ -248,10 +248,7 @@ renderSuggestion = suggestion => (
       <div className = "page-wrapper">
         <CarouselHomepage/>
 
-        <div className = "users">
-          {this.displayUsers(this.state.users)}
-          <br/>
-        </div>
+      
 
         
 
