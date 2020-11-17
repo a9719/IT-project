@@ -138,11 +138,6 @@ renderSuggestion = suggestion => (
       <div className = "page-wrapper">
         <CarouselHomepage/>
 
-        <div className = "users">
-          {this.displayUsers(this.state.users)}
-          <br/>
-        </div>
-
         <div className ="searchbar" >
           <h2 className = "searchH2">
             Find a user on the site
