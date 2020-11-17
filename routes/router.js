@@ -2,13 +2,15 @@ var express = require('express');
 var router = express.Router();
 var controller = require('../controller.js');
 
-
+//Routes for all backend acccess
 
 router.post('/register', controller.createUser);
 router.post('/login', controller.loginUser);
+//profile1 is to send user data on login
+//profile2 is to look up users in search
 router.get('/profile1/:user',controller.getProfile);
 router.get('/profile2/:email', controller.findUserByEmail);
-
+//routes for editing user deets
 router.put('/profilebio/:user',controller.addBio);
 router.put('/profilework/:user',controller.addWork);
 router.put('/profilephone/:user',controller.addPhone);

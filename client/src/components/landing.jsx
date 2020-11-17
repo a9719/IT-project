@@ -2,12 +2,52 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import TestCard from './TestCard'
 import Cardflip from './Cardflip'
+import { Container, Row, Col } from 'reactstrap';
+
 import CarouselHomepage from './CarouselHomepage'
 import Autosuggest from 'react-autosuggest';
+import { Nav, Navbar, Dropdown} from 'react-bootstrap';
 import { CarouselCard } from 'react-rainbow-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandshake, faLanguage, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import './landing.css';
+import counterpart from 'counterpart';
+import Translate from 'react-translate-component';
+import en from "./i18n/en";
+import cn from "./i18n/cn";
+import jp from "./i18n/jp";
+import styled from 'styled-components';
+import logo from './logo.svg';
+//Translation
+counterpart.registerTranslations('en',en);
+counterpart.registerTranslations('cn',cn);
+counterpart.registerTranslations('jp',jp);
+counterpart.setLocale('en');
+
+
+const Styles = styled.div
+`
+  .navbar { background-color: #365; }
+  a, .navbar-nav, .navbar-light .nav-link {
+    color: #000000;
+    &:hover { color: #365; }
+  }
+  .navbar-brand {
+    font-size: 1.4em;
+    color: #000000;
+    &:hover { color: #365; }
+  }
+  .dropdown-center {
+    position: absolute !important;
+    left: 50%;
+    right: 50%;
+  }
+  .color-nav {
+      background-color : rgb(255,255,255);
+  }
+`;
+
+
 
 class Landing extends Component {
 
@@ -67,6 +107,21 @@ renderSuggestion = suggestion => (
 
     window.location.href = ("/public/" + useremail);
   }
+  switchtoen = () => {
+  
+    counterpart.setLocale('en')
+ 
+  };
+  switchtocn = () => {
+    
+    counterpart.setLocale('cn');
+
+  };
+  switchtojp= () => {
+    
+    counterpart.setLocale('jp')
+
+  };
 
   getUserDetails = () => {
     axios.get('/users')
@@ -76,7 +131,9 @@ renderSuggestion = suggestion => (
         const names = data.map((item) => {
           return {
             name: item.name,
-            email: item.email
+            email: item.email,
+            image: item.profile_picture
+
           }
         });
         console.log(names);
@@ -134,20 +191,47 @@ renderSuggestion = suggestion => (
 
 
 
-    return (      
-      <div className = "page-wrapper">
-        <CarouselHomepage/>
+    return (   
+      
+      <div className="login">
+        <Styles>  
+    <Navbar className = "color-nav" expand="lg" bg="light" variant="light">
+      <Navbar.Brand href="/">
+        <img
+          src={logo}
+          width="80"
+          height="80"
+          className="d-inline-block align-top"
+          alt=""
+        />
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto">
+          <Nav.Item style={{paddingRight:"4px"}}><Nav.Link href="/register" style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", color:"#17a2b8"}}><Translate content='register'></Translate></Nav.Link></Nav.Item>
+ 
+          <Nav.Item style={{paddingRight:"4px"}}><Nav.Link href="/login" style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", color:"#17a2b8"}}><Translate content='login'></Translate></Nav.Link></Nav.Item>
+          <Nav.Item>
+          <Dropdown style={{size:"50px"}}>
+                <Dropdown.Toggle variant = "outline-info" id = "dropdown-basic"  style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", }}>
+                    Language Options
+                </Dropdown.Toggle>
 
-        <div className = "users">
-          {this.displayUsers(this.state.users)}
-          <br/>
-        </div>
-
-        <div className ="searchbar">
-            <h2 className = "searchH2">
-              Find a user on the site
-            </h2>
-            
+                <Dropdown.Menu>
+                    <Dropdown.Item href="" onClick={this.switchtoen}>English</Dropdown.Item>
+                    <Dropdown.Item href="" onClick={this.switchtocn}>Chinese</Dropdown.Item>
+                    <Dropdown.Item href="" onClick={this.switchtojp}>Japanese</Dropdown.Item>
+                </Dropdown.Menu>
+          </Dropdown>
+          </Nav.Item>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  </Styles>
+  <div className ="searchbar" style={{backgroundColor:"#99ceff"}}>
+            <h2 className = "searchH2" >
+              <Translate content="landing1"></Translate>
+           
             <Autosuggest
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -157,61 +241,76 @@ renderSuggestion = suggestion => (
             renderSuggestion={this.renderSuggestion}
             inputProps={inputProps}
           />
+          </h2>
+          <h3  className = "searchH3">Directly hit via email:https://it-project-eportfolio.herokuapp.com/public/useremail</h3>
+            
+        </div>
+      <div className = "page-wrapper">
+        <CarouselHomepage/>
+
+        <div className = "users">
+          {this.displayUsers(this.state.users)}
+          <br/>
         </div>
 
-          <div className = "expln">
-              <h2 className = "explH2">
-                  Get yourself closer to your dream job!
+        
+
+          <div style={{backgroundColor:"#99ceff"}}>
+              <h2 className = "explH2" style={{margin:"auto"}}>
+              <Translate content="landing2"></Translate>
               </h2>
 
-              <div className = "cards">
-                  <p>
-                  <div class="homecard">
+              <div className = "cards" style={{marginLeft:"-80px"}} >
+                  <Container >
+                    <Row>
+                    <Col>
+                  
+                  <div style={{backgroundColor:"#f2f2f2"}}>
                       <div class="container">
                           <FontAwesomeIcon icon = {faHandshake} size = "4x" className = "cimg" />
-                          <h4><b>Find jobs easily</b></h4>
+                          <h4 style={{color:"Black"}}><b><Translate content="landing3"></Translate></b></h4>
                           <br/>
                           <p>
-                              Swat Kats allows you to present your professional image to the world,
-                              through your academic achievements and other skills. Employers watch
-                              this site too, you never know what opportunities lie around the corner!
+                          <Translate content="landing4"></Translate>
                           </p>
                       </div>
                   </div>
-                  </p>        
-
-                  <p>
-                  <div class="homecard">
+                     
+                  </Col>
+                  <Col>
+                
+                  <div style={{backgroundColor:"#f2f2f2"}} >
                       <div class="container">
                           <FontAwesomeIcon icon = {faUserPlus} size = "4x" className = "cimg" />
-                          <h4><b>Personalise your image</b></h4>
+                          <h4 style={{color:"Black"}}><b><Translate content="landing5"></Translate></b></h4>
                           <br/>
                           <p>
-                              On Swat Kats, we don't just care about your results in school, we want you to
-                              show off your holistic accomplishments as well. Upload images to your gallery
-                              and show us what you get up to in your free time!
+                          <Translate content="landing6"></Translate>
                           </p>
                       </div>
                   </div>
-                  </p>
+                
+                  </Col>
+                  <Col>
                   
-
-                  <p>
-                  <div class="homecard"> 
+                  <div style={{backgroundColor:"#f2f2f2"}}> 
                       <div class="container">
                           <FontAwesomeIcon icon = {faLanguage} size = "4x" className = "cimg" />
-                          <h4><b>Support for different languages</b></h4>
+                          <h4 style={{color:"Black"}}><b><Translate content="landing7"></Translate></b></h4>
                           <br/>
                           <p>
-                              We understand that we all come from different cultural backgrounds
-                              and speak different languages. To accommodate this, we have translations
-                              supported for Mandarin and Japanese - click the "Language Options" button above!
+                          <Translate content="landing8"></Translate>
                           </p>
+
                       </div>
                   </div>
-                  </p>
+                 
+                  </Col>
+                  </Row>
+                  </Container>
               </div>
             </div>
+      </div>
       </div>
     )
   }

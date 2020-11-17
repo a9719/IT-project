@@ -20,8 +20,8 @@ class App extends Component {
   render() {
     return (
         <div className = "page-container">
-          <NavigationBar/>
-          <div className = "content-wrap">
+          
+         
             <Router>
               <div className="App">
                 <Route exact path="/" component={Landing} />
@@ -31,7 +31,7 @@ class App extends Component {
                 </div>
               </div>
             </Router>
-          </div>
+       
           
           <Footer/>
         </div>
