@@ -1,5 +1,10 @@
-# IT-project
-Repository for code in IT project
+# IT Project COMP30022
+
+## :computer: E-portfolio system! :student:
+
+
+To create a functional, easy to use and visually appealing Eportfolio based upon client specifications
+
 Documentation here: https://swatkats.atlassian.net/wiki/spaces/IPD/overview?homepageId=32968
 
 ## Routes
