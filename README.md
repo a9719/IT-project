@@ -7,6 +7,8 @@ To create a functional, easy to use and visually appealing Eportfolio based upon
 
 Documentation here: https://swatkats.atlassian.net/wiki/spaces/IPD/overview?homepageId=32968
 
+Heroku link: https://it-project-eportfolio-2.herokuapp.com/
+
 ## Routes
 
 REGISTER USER: router.post('/register', controller.createUser);
