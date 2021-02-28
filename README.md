@@ -1,4 +1,4 @@
-# IT Project COMP30022
+# IT Project COMP30022 (NOT MAINTAINED)
 
 ## :computer: E-portfolio system! :student:
 
